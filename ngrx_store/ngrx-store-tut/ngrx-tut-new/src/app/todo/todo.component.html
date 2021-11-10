@@ -1,0 +1,35 @@
+<div class="todos">
+
+  <div>
+   <form [formGroup]="todoForm" (ngSubmit)="onAddTodo()">
+     <input class="textfield" formControlName="newTodo" />
+     <button  type="submit" [disabled]="!todoForm.valid">Add Todo</button>
+     <div
+     *ngIf="todoForm.get('newTodo').touched && !todoForm.get('newTodo').valid"
+   >
+     <div *ngIf="todoForm.get('newTodo').errors.required" style="color: red;">
+       List name required !
+     </div>
+   </div>
+
+  </form>
+  </div>
+
+  <br>
+  <h3>List Name: </h3>
+
+ <div *ngIf="todoList | async as todoListData">
+  <ul class="list-group" *ngFor="let todo of todoListData">
+      <li class="list-group-item">
+        {{ todo.name }}
+        <!-- <input type="checkbox" class="checkbox" [(ngModel)]="todo.completed" /> -->
+      <span class="delete-icon" (click)="onDeleteTodo(todo.id)">&nbsp;[X]</span>
+        </li>
+    </ul>
+  </div>
+
+    <!-- <div class="mtop20">
+  <button>Delete Selected</button>
+  </div> -->
+
+</div>
