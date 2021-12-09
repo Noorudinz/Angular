@@ -23,6 +23,9 @@ import { CompanyComponent } from './company/company.component';
 import { AgmCoreModule } from '@agm/core';
 import { OsmViewComponent } from './osm-view/osm-view.component';
 import { AngularOpenlayersModule } from 'ngx-openlayers';
+import { BuildingsEffects } from './building-master/store/building.effects';
+import { environment } from 'src/environments/environment';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 
 @NgModule({
@@ -46,7 +49,11 @@ import { AngularOpenlayersModule } from 'ngx-openlayers';
     HttpClientModule,
     AppRoutingModule,
     StoreModule.forRoot(fromApp.appReducer),
-    EffectsModule.forRoot([AuthEffects, UserEffects]),
+    EffectsModule.forRoot([AuthEffects, UserEffects, BuildingsEffects]),
+    StoreDevtoolsModule.instrument({
+      logOnly: environment.production,
+    }),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     SharedModule,
     CoreModule,
     AgmCoreModule.forRoot({

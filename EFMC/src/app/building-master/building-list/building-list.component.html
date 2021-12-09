@@ -32,7 +32,7 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body table-responsive p-0">
-          <table class="table table-hover">
+          <table class="table table-hover"  *ngIf="buildings | async as buildingsData">
             <thead>
               <tr>
                 <th>S.NO</th>
@@ -45,7 +45,7 @@
                 <th>Actions</th>
               </tr>
             </thead>
-            <tbody  *ngFor="let building of buildingList; let i = index">
+            <tbody  *ngFor="let building of buildingsData; let i = index">
               <tr>
                <td>{{ i+1 }}</td>
                <td>{{ building.buildingName }}</td>

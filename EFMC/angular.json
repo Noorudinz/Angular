@@ -19,7 +19,8 @@
           "options": {
             "allowedCommonJsDependencies": [
               "rxjs-compat",
-              "crypto-js"
+              "crypto-js",
+              "ngx-openlayers"
            ],
             "outputPath": "dist/adminLTE",
             "index": "src/index.html",

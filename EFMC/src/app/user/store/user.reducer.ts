@@ -100,8 +100,7 @@ const _userRegisterReducer = createReducer(initialUserState,
 
   on(UserActions.getUserByIdResponse, (state, action) => {
     let userRegister = { ...action.userRegisters };
-    console.log('reducer :'+state);
-    return {
+      return {
       ...state,
       users: [...state.userRegisters, userRegister],
     };
