@@ -1,0 +1,10 @@
+.employee-detail-img {
+  width: 150px;
+  height: auto;
+}
+
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+

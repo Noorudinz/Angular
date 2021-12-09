@@ -1,0 +1,192 @@
+
+
+ <!-- Content Header (Page header) -->
+ <section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Company profile</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active">Company profile</li>
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+
+
+<section class="content">
+  <div class="container">
+    <div class="card card-solid">
+
+      <div class="col-12 row">
+          <div class="col-2">
+              <img src="../../assets/img/elite.png" class="img-responsive rounded-circle employee-detail-img" />
+          </div>
+          <div class="col-10 row">
+              <div class="col-xs-12 col-sm-8">
+
+
+                  <div class="form-group row" *ngIf="editMode">
+                      <div class="col-sm-4 col-form-label">
+                          <button class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-company" >Edit</button>
+                      </div>
+                  </div>
+
+                   <div class="form-group row">
+                      <label class="col-sm-4 col-form-label">Org code</label>
+                      <div class="col-sm-8">
+                          <label type="text" readonly class="form-control-plaintext">
+                            {{fetchCompany?.OrgCode}}
+                          </label>
+                      </div>
+                  </div>
+
+                  <div class="form-group row">
+                      <label class="col-sm-4 col-form-label">Org name</label>
+                      <div class="col-sm-8">
+                          <label type="text" readonly class="form-control-plaintext">
+                            {{fetchCompany?.OrgName}}
+                          </label>
+                      </div>
+                  </div>
+
+                  <div class="form-group row">
+                      <label class="col-sm-4 col-form-label">Address</label>
+                      <div class="col-sm-8">
+                          <label type="text" readonly class="form-control-plaintext">
+                            {{fetchCompany?.OrgAddress}}
+                          </label>
+                      </div>
+                  </div>
+
+                  <div class="form-group row">
+                      <label class="col-sm-4 col-form-label">Email</label>
+                      <div class="col-sm-8">
+                          <label type="text" readonly class="form-control-plaintext">
+                            {{fetchCompany?.OrgEmail}}
+                          </label>
+                      </div>
+                  </div>
+
+                  <div class="form-group row">
+                      <label class="col-sm-4 col-form-label">Phone</label>
+                      <div class="col-sm-8">
+                          <label type="text" readonly class="form-control-plaintext">
+                            {{fetchCompany?.OrgPhone}}
+                          </label>
+                      </div>
+                  </div>
+
+                  <div class="form-group row">
+                      <label class="col-sm-4 col-form-label">Remarks</label>
+                      <div class="col-sm-8">
+                          <label type="text" readonly class="form-control-plaintext">
+                            {{fetchCompany?.Remarks}}
+                          </label>
+                      </div>
+                  </div>
+
+                  <div class="form-group row">
+                      <label class="col-sm-4 col-form-label">Website</label>
+                      <div class="col-sm-8">
+                          <label type="text" readonly class="form-control-plaintext">
+                            {{fetchCompany?.Website}}
+                          </label>
+                      </div>
+                  </div>
+
+                  <div class="form-group row">
+                      <label class="col-sm-4 col-form-label">Zip number</label>
+                      <div class="col-sm-8">
+                          <label type="text" readonly class="form-control-plaintext">
+                            {{fetchCompany?.Zipnumber}}
+                          </label>
+                      </div>
+                  </div>
+
+              </div>
+          </div>
+      </div>
+
+      <div class="col-12 row">
+            <vo-ui-osm-view style="width: 100%; height: 100%;">
+            </vo-ui-osm-view>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<div class="modal fade" id="modal-company">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Update Compnay</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="companyForm" (ngSubmit)="onUpdate()">
+          <input formControlName="orgId" [hidden]="true" >
+          <input formControlName="userId" [hidden]="true" >
+          <div class="card-body">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Org Code</label>
+              <input type="text" class="form-control" id="org_Code"
+              formControlName="org_Code" placeholder="Org code">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Org Name</label>
+              <input type="text" class="form-control" id="org_Name"
+              formControlName="org_Name" placeholder="Org name">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Org Address</label>
+              <input type="text" class="form-control" id="org_Address"
+              formControlName="org_Address" placeholder="Org Address">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Org Zip</label>
+              <input type="text" class="form-control" id="org_Zip"
+              formControlName="org_Zip" placeholder="Org zip">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Org Phone</label>
+              <input type="text" class="form-control" id="org_Phone"
+              formControlName="org_Phone" placeholder="Org phone">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Org Email</label>
+              <input type="text" class="form-control" id="org_Email"
+              formControlName="org_Email" placeholder="Org email">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Org Remarks</label>
+              <input type="text" class="form-control" id="org_Remarks"
+              formControlName="org_Remarks" placeholder="Org remarks">
+            </div>
+
+            <div class="form-group">
+              <label for="exampleInputPassword1">Org Website</label>
+              <input type="text" class="form-control" id="org_Website"
+              formControlName="org_Website" placeholder="Org website">
+            </div>
+          </div>
+
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="closeBtn">Close</button>
+        <button type="submit" class="btn btn-success" [disabled]="!companyForm.valid">Update changes</button>
+      </div>
+    </form>
+  </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+

@@ -1,0 +1,60 @@
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { AppRoutingModule } from './app-routing.module';
+import { SharedModule } from './shared/shared.module';
+import { AppComponent } from './app.component';
+
+import { AuthComponent } from './auth/auth.component';
+import { HeaderComponent } from './header/header.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import * as fromApp from './store/app.reducer';
+import { HttpClientModule } from '@angular/common/http';
+import { AuthEffects } from './auth/store/auth.effects';
+import { CoreModule } from './core.module';
+import { UserEffects } from './user/store/user.effects';
+import { CommonModule } from '@angular/common';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { CompanyComponent } from './company/company.component';
+import { AgmCoreModule } from '@agm/core';
+import { OsmViewComponent } from './osm-view/osm-view.component';
+import { AngularOpenlayersModule } from 'ngx-openlayers';
+
+
+@NgModule({
+  schemas:  [ CUSTOM_ELEMENTS_SCHEMA ],
+  declarations: [
+    AppComponent,
+    AuthComponent,
+    HeaderComponent,
+    SidebarComponent,
+    DashboardComponent,
+    UserProfileComponent,
+    ChangePasswordComponent,
+    CompanyComponent,
+    OsmViewComponent
+  ],
+  imports: [
+    BrowserModule,
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule,
+    AppRoutingModule,
+    StoreModule.forRoot(fromApp.appReducer),
+    EffectsModule.forRoot([AuthEffects, UserEffects]),
+    SharedModule,
+    CoreModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyADGS9mCRZGa5TmtQqX1ZIU_spB-aGZKpI'
+    }),
+    AngularOpenlayersModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }

@@ -1,0 +1,96 @@
+<ng-template appPlaceholder></ng-template>
+
+<div *ngIf="isLoading" style="text-align: center;">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+
+<div class="hold-transition login-page" *ngIf="!isLoading">
+  <div class="login-box">
+    <div class="login-logo">
+      <a href="#"><b>Admin</b>LTE</a>
+    </div>
+    <!-- login mode-->
+    <div class="card" *ngIf="isLoginMode">
+      <div class="card-body login-card-body">
+        <p class="login-box-msg">Sign in to start your session</p>
+
+        <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
+          <div class="input-group mb-3">
+            <input class="form-control" placeholder="Email" type="text" id="email" ngModel name="email"
+            required email />
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-envelope"></span>
+              </div>
+            </div>
+          </div>
+          <div class="input-group mb-3">
+            <input type="password" placeholder="Password" type="password" id="password" class="form-control" ngModel name="password" required
+            minlength="6" />
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-8">
+              <div class="icheck-primary">
+                <input type="checkbox" id="remember">
+                <label for="remember">
+                  Remember Me
+                </label>
+              </div>
+            </div>
+            <!-- /.col -->
+            <div class="col-4">
+              <button type="submit" class="btn btn-primary btn-block" [disabled]="!authForm.valid">Sign In</button>
+            </div>
+            <!-- /.col -->
+          </div>
+        </form>
+
+        <!-- /.social-auth-links -->
+
+        <p class="mb-1">
+          <a style="cursor: pointer; color: blue;" (click)="onSwitchMode()">I forgot my password</a>
+        </p>
+
+      </div>
+      <!-- /.login-card-body -->
+    </div>
+
+     <!-- forgot password mode -->
+    <div class="card" *ngIf="!isLoginMode">
+      <div class="card-body login-card-body">
+        <p class="login-box-msg">You forgot your password? Here you can easily retrieve a new password.</p>
+
+        <form #forgotPasswordForm="ngForm" (ngSubmit)="onSubmitForgot(forgotPasswordForm)">
+          <div class="input-group mb-3">
+            <input type="forgotEmail" class="form-control" placeholder="Email" ngModel name="forgotEmail"
+            required forgotEmail>
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-envelope"></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary btn-block"
+              [disabled]="!forgotPasswordForm.valid" >Request new password</button>
+            </div>
+            <!-- /.col -->
+          </div>
+        </form>
+
+        <p class="mt-3 mb-1">
+          <a style="cursor: pointer; color: blue;"  (click)="onSwitchMode()">Login</a>
+        </p>
+      </div>
+      <!-- /.login-card-body -->
+    </div>
+
+  </div>
+</div>
+

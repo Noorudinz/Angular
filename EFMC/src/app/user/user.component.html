@@ -1,0 +1,193 @@
+
+<ng-template appPlaceholder></ng-template>
+
+<div *ngIf="isLoading" style="text-align: center;">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+
+<!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h2 class="m-0 text-dark">Users List</h2>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">Users List</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+
+  <div class="container" *ngIf="!isLoading">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <button type="button" class="btn btn-default" data-toggle="modal"
+            [attr.data-target]="callModal"
+                   (click)="onUserAddOrEdit('')">
+              Add User
+            </button>
+
+            <!-- <button type="button" class="btn btn-danger swalDefaultError" (click)="showAlert()">
+              Launch Error Toast
+            </button> -->
+
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body table-responsive p-0">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>S.NO</th>
+                  <th>UserName</th>
+                  <th>Email</th>
+                  <th>Roles</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody  *ngFor="let user of userList; let i = index">
+                <tr>
+                 <td>{{ i+1 }}</td>
+                 <td>{{ user.userName }}</td>
+                 <td>{{ user.email }}</td>
+                 <td>{{ user.roles }}</td>
+
+                 <td><a style="cursor: pointer; color: blue;"
+                  [hidden]="user.userName === 'nooradmin'? true : null"
+                   data-toggle="modal" [attr.data-target]="callModal"
+                   (click)="onUserAddOrEdit(user.id)">
+                   <i class="fas fa-user-edit"></i></a> &nbsp; &nbsp;
+
+                  <a style="cursor: pointer; color: red;"
+                   [hidden]="user.userName === 'nooradmin'? true : null"
+                  data-toggle="modal"  [attr.data-target]="callModal"
+                  (click)="onDeletePopup(user.id)">
+                  <i class="fas fa-trash"></i></a></td>
+
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+    </div>
+
+     <!-- USER ADD MODAL -->
+    <div class="modal fade" id="modal-user">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Add User</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+
+            <form [formGroup]="userRegister" (ngSubmit)="onSubmit()" role="form">
+              <input formControlName="userId" [hidden]="true" >
+              <div class="card-body">
+                <div class="form-group">
+                  <label for="username">User Name</label>
+                  <input type="text" class="form-control" id="username" placeholder="Enter name"
+                  formControlName="userName">
+                </div>
+                <div class="form-group">
+                  <label for="useremail">Email address</label>
+                  <input type="email" class="form-control" id="useremail" placeholder="Enter email"
+                   formControlName="userEmail">
+                </div>
+                <div *ngIf="!editMode">
+                  <div class="form-group">
+                    <label for="userpassword">Password</label>
+                    <input type="password" class="form-control" id="userpassword" placeholder="Password"
+                    autocomplete="new-userPassword"
+                     formControlName="userPassword">
+                  </div>
+                  <div class="form-group">
+                    <label for="userconfirmpassword">Confirm Password</label>
+                    <input type="password" class="form-control" id="userconfirmpassword" placeholder="Confirm Password"
+                     formControlName="userConfirmPassword">
+                     <div *ngIf="passmsg != '' && !userRegister.controls?.confPass?.errors?.required">
+                      <p class="errorMsg" [ngStyle]="{'color': passmsg === 'Password matched'? 'green' : 'red'}">*{{passmsg}}</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div [formArrayName]="'items'" class="form-group">
+                  <div class="row">
+                    <div class="col-sm-2">
+                      <label for="exampleInputPassword1">Roles:</label>
+                    </div>
+                    <div class="col-sm-10">
+                      <div style="color: red;"
+                  [class.invalid]="!userRegister.controls.selectedItems.valid" *ngIf="!userRegister.controls.selectedItems.valid">
+                  At least one role must be selected!
+                  </div>
+                    </div>
+                  </div>
+
+                  <div *ngFor="let control of userRegister['controls'].items['controls']; let i = index;" [formGroup]="control">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox"
+                      [attr.disabled]="control.controls.text.value === 'admin'? true : null"
+                       formControlName="checkbox" id="{{ control.controls.text.value }}">
+                      <label class="form-check-label" attr.for="{{ control.controls.text.value }}">
+                        {{ control.controls.text.value | uppercase }}</label>
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+              <!-- /.card-body -->
+           <div class="modal-footer justify-content-between">
+            <button type="button" class="btn btn-primary" data-dismiss="modal" #closeUserModal>Close</button>
+            <button type="submit" class="btn btn-success" [disabled]="!userRegister.valid">
+              {{editMode ? 'Update changes':'Save changes'}}</button>
+          </div>
+        </form>
+      </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!-- USER ADD MODAL ENDS-->
+
+    <!-- USER DELETE MODAL -->
+    <div class="modal fade" id="modal-userdelete">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <p class="modal-title">Are you sure to delete user ?</p>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p *ngIf="!fetchUserData">{{ fetchUserData?.userId }}</p>
+            <p style="color: red;">User Name : {{ fetchUserData?.userName }}</p>
+            <p style="color: red;">User Email : {{ fetchUserData?.userEmail }}</p>
+          </div>
+          <div class="modal-footer justify-content-between">
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="closeBtn">Close</button>
+            <button type="button" class="btn btn-danger" (click)="onConfirmDelete()">Delete</button>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!-- USER DELETE MODAL ENDS -->
+
+  </div>
+

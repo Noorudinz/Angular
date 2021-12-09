@@ -1,0 +1,51 @@
+
+<div>
+  <div class="wrapper">
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+      <!-- Left navbar links -->
+
+
+      <!-- SEARCH FORM -->
+      <!-- <form class="form-inline ml-3">
+        <div class="input-group input-group-sm">
+          <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+          <div class="input-group-append">
+            <button class="btn btn-navbar" type="submit">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </div>
+      </form> -->
+
+      <!-- Right navbar links -->
+      <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item dropdown">
+          <a class="nav-link" data-toggle="dropdown" href="#">
+            <i class="fas fa-user-cog"></i>
+          </a>
+          <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+            <span class="dropdown-item dropdown-header">My Profile</span>
+            <div class="dropdown-divider"></div>
+            <a style="cursor: pointer;" routerLink="/profile" class="dropdown-item">
+              <i class="fas fa-id-card"></i>&nbsp; View Profile
+            </a>
+            <div class="dropdown-divider"></div>
+            <a style="cursor: pointer;" routerLink="/changePassword" class="dropdown-item">
+              <i class="fas fa-key"></i>&nbsp; Change Password
+            </a>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link" data-toggle="dropdown" href="#" (click)="onLogout()">
+            Logout
+            <i class="fas fa-sign-out-alt"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+

@@ -1,0 +1,72 @@
+<div>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add building</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="buildingForm" (ngSubmit)="onSubmit()">
+          <input formControlName="userId" [hidden]="true" >
+          <input formControlName="buildingId" [hidden]="true" >
+          <div class="card-body">
+            <div class="form-group">
+              <label for="buildingname">Building Name</label>
+              <input type="text" class="form-control" id="buildingname"
+              formControlName="buildingName" placeholder="Enter Building Name">
+            </div>
+            <div class="form-group">
+              <label for="buildingcode">Building Code</label>
+              <input type="text" class="form-control" id="buildingcode"
+              formControlName="buildingCode"  placeholder="Enter Building Code">
+            </div>
+            <div class="form-group">
+              <label for="incharge">Incharge</label>
+              <input type="text" class="form-control" id="incharge"
+              formControlName="buildingIncharge" placeholder="Enter Building Incharge">
+            </div>
+            <div class="form-group">
+              <label for="floors">Floors</label>
+              <input type="number" class="form-control" id="floors"
+              formControlName="floors"  placeholder="Enter floors">
+            </div>
+            <div class="form-group">
+              <label for="erf">ERF</label>
+              <input type="number" class="form-control" id="erf"
+              formControlName="erf" placeholder="Enter ERF">
+            </div>
+            <div class="form-group">
+              <label for="arf">ARF</label>
+              <input type="number" class="form-control" id="arf"
+              formControlName="arf" placeholder="Enter ARF">
+            </div>
+            <div class="form-group">
+              <label for="wrf">WRF</label>
+              <input type="number" class="form-control" id="wrf"
+              formControlName="wrf"  placeholder="Enter WRF">
+            </div>
+            <div class="form-group">
+              <label for="remarks">Remarks</label>
+              <input type="text" class="form-control" id="remarks"
+              formControlName="remarks" placeholder="Enter Remarks">
+            </div>
+          </div>
+          <!-- /.card-body -->
+
+          <div class="card-footer">
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" id="close" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-success"
+              [disabled]="!buildingForm.valid">Save changes</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>

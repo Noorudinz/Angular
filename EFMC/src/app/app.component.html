@@ -1,0 +1,30 @@
+
+
+ <app-auth *ngIf="!isAuthenticate"></app-auth>
+
+ <!-- <app-forgot-password></app-forgot-password> -->
+
+
+ <div class="wrapper" *ngIf="isAuthenticate">
+
+  <!-- Navbar -->
+  <app-header></app-header>
+
+  <!-- Main Sidebar Container -->
+  <app-sidebar></app-sidebar>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+  <router-outlet></router-outlet>
+  </div>
+
+  <!-- footer -->
+  <footer class="main-footer">
+    <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
+    All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+      <b>Version</b> 3.0.5
+    </div>
+  </footer>
+
+</div>
