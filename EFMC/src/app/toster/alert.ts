@@ -13,4 +13,6 @@ export function tosterAlert(message: string, type: string){
   });
 }
 
-
+export function hi(){
+  return "hi"
+}
