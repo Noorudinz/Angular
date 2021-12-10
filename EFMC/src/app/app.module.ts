@@ -26,6 +26,7 @@ import { AngularOpenlayersModule } from 'ngx-openlayers';
 import { BuildingsEffects } from './building-master/store/building.effects';
 import { environment } from 'src/environments/environment';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { BuildingModule } from './building-master/building.module';
 
 
 @NgModule({
@@ -59,7 +60,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyADGS9mCRZGa5TmtQqX1ZIU_spB-aGZKpI'
     }),
-    AngularOpenlayersModule
+    AngularOpenlayersModule,
+    BuildingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

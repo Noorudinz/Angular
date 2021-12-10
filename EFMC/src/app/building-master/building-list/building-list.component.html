@@ -26,7 +26,8 @@
     <div class="col-12">
       <div class="card">
         <div class="card-header">
-          <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-building">
+          <button type="button" class="btn btn-default" data-toggle="modal"
+          data-target="#modal-addbuilding">
             Add Building
           </button>
         </div>
@@ -55,10 +56,14 @@
                <td>{{ building.arf }}</td>
                <td>{{ building.wrf }}</td>
 
-               <td><a style="cursor: pointer; color: blue;" (click)="addBuilding()">
+               <td><a style="cursor: pointer; color: blue;"
+                data-toggle="modal" [attr.data-target]="callModal"
+                (click)="editBuilding(building.buildingId)">
                  <i class="fas fa-user-edit"></i></a> &nbsp; &nbsp;
 
-                <a style="cursor: pointer; color: red;">
+                <a style="cursor: pointer; color: red;"
+                data-toggle="modal" data-target="#modal-delete-building"
+                (click)="deleteBuilding(building.buildingId)">
                 <i class="fas fa-trash"></i></a></td>
 
               </tr>
@@ -71,6 +76,14 @@
     </div>
   </div>
 
-  <app-building-add class="modal fade" id="modal-building"></app-building-add>
+  <app-building-edit class="modal fade" id="modal-editbuilding"
+  [building]="buildingEdit" (triggerBuildingList)="loadBuilding()"></app-building-edit>
+
+  <app-building-add class="modal fade" id="modal-addbuilding"
+   (triggerBuildingList)="loadBuilding()"></app-building-add>
+
+  <app-building-delete class="modal fade" id="modal-delete-building"
+  [building]="buildingDelete" (triggerBuildingList)="loadBuilding()"></app-building-delete>
 
 </div>
+

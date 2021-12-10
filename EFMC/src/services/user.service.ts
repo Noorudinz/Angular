@@ -9,20 +9,6 @@ import { Injectable } from '@angular/core';
 export class UserService {
   constructor(private http: HttpClient) {}
 
-  // getPosts(): Observable<Post[]> {
-  //   return this.http
-  //     .get<Post[]>(`https://noorangulartutorial-default-rtdb.firebaseio.com/posts.json`)
-  //     .pipe(
-  //       map((data) => {
-  //         const posts: Post[] = [];
-  //         for (let key in data) {
-  //           posts.push({ ...data[key], id: key });
-  //         }
-  //         return posts;
-  //       })
-  //     );
-  // }
-
   addUserRegister(userRegister: UserRegister): Observable<{isRegistered: boolean, message: string}> {
     return this.http.post<{isRegistered: boolean, message: string}>(
       `https://localhost:44357/api/AuthManagement/Register`,

@@ -1,33 +1,47 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { BuildingService } from 'src/services/building.service';
 import * as fromApp from  '../../store/app.reducer';
 import * as Alert from '../../toster/alert';
+import { Building } from '../building.model';
+
+
 
 @Component({
-  selector: 'app-building-add',
-  templateUrl: './building-add.component.html',
-  styleUrls: ['./building-add.component.css']
+  selector: 'app-building-edit',
+  templateUrl: './building-edit.component.html',
+  styleUrls: ['./building-edit.component.css']
 })
-export class BuildingAddComponent implements OnInit {
+export class BuildingEditComponent implements OnInit {
 
+  @Input() building: any;
+  callModal: string;
   private userSub: Subscription;
   buildingForm: FormGroup;
   userId: string;
+
   @Output() triggerBuildingList: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
   constructor(private store: Store<fromApp.AppState>,
-    private buildingService: BuildingService) { }
+    private buildingService: BuildingService,
+    private route: Router) { }
 
   ngOnInit(): void {
-    this.userSub = this.store.select('auth')
-    .subscribe(user => {
-      this.userId = user.user.id;
-    });
 
-    this.initBuildingForm();
+    this.userSub = this.store.select('auth')
+      .subscribe(user => {
+        this.userId = user.user.id;
+      });
+
+      this.initBuildingForm();
+  }
+
+  onClose(){
+   this.buildingForm.reset();
   }
 
   public initBuildingForm()
@@ -66,7 +80,7 @@ export class BuildingAddComponent implements OnInit {
     const addorUpdate = {
       created_ByUserId: this.userId,
       updated_ByUserId: this.userId,
-      buildingId: 0,
+      buildingId: this.buildingForm.value.buildingId,
       BuildingName: this.buildingForm.value.buildingName,
       buildingCode: this.buildingForm.value.buildingCode,
       buildingIncharge: this.buildingForm.value.buildingIncharge,
@@ -78,9 +92,11 @@ export class BuildingAddComponent implements OnInit {
       timeStamp: null
     }
 
+    //console.log(addorUpdate)
+
     this.buildingService.addOrUpdateBuilding(addorUpdate).subscribe(data => {
       if(data.isUpdated){
-        document.getElementById('close').click();
+        document.getElementById('closeEdit').click();
         Alert.tosterAlert(data.message, 'success');
         this.triggerBuildingList.emit();
       }
@@ -96,14 +112,6 @@ export class BuildingAddComponent implements OnInit {
 
   }
 
-  onClose(){
-    this.buildingForm.reset();
-   }
-
-   ngOnDestroy(): void {
-    if(this.userSub){
-      this.userSub.unsubscribe();
-    }
-  }
-
 }
+
+

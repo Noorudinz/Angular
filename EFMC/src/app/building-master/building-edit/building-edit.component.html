@@ -4,56 +4,64 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Add building</h4>
+        <h4 class="modal-title">Edit building</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"
         (click)="onClose()">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <!-- <p>{{building?.buildingId === null? 0 : building?.buildingId}}</p> -->
-      <div class="modal-body">
+      <div class="modal-body" *ngIf="building">
         <form [formGroup]="buildingForm" (ngSubmit)="onSubmit()">
           <input formControlName="userId" [hidden]="true" >
-          <input formControlName="buildingId" [hidden]="true" >
+          <input [(ngModel)]="building.buildingId" formControlName="buildingId" [hidden]="true" >
           <div class="card-body">
             <div class="form-group">
               <label for="buildingname">Building Name</label>
               <input type="text" class="form-control" id="buildingname"
+              [(ngModel)]="building.buildingName"
               formControlName="buildingName" placeholder="Enter Building Name">
             </div>
             <div class="form-group">
               <label for="buildingcode">Building Code</label>
               <input type="text" class="form-control" id="buildingcode"
+              [(ngModel)]="building.buildingCode"
               formControlName="buildingCode"  placeholder="Enter Building Code">
             </div>
             <div class="form-group">
               <label for="incharge">Incharge</label>
               <input type="text" class="form-control" id="incharge"
+              [(ngModel)]="building.buildingIncharge"
               formControlName="buildingIncharge" placeholder="Enter Building Incharge">
             </div>
             <div class="form-group">
               <label for="floors">Floors</label>
               <input type="number" class="form-control" id="floors"
+              [(ngModel)]="building.floors"
               formControlName="floors"  placeholder="Enter floors">
             </div>
             <div class="form-group">
               <label for="erf">ERF</label>
               <input type="number" class="form-control" id="erf"
+              [(ngModel)]="building.erf"
               formControlName="erf" placeholder="Enter ERF">
             </div>
             <div class="form-group">
               <label for="arf">ARF</label>
               <input type="number" class="form-control" id="arf"
+              [(ngModel)]="building.arf"
               formControlName="arf" placeholder="Enter ARF">
             </div>
             <div class="form-group">
               <label for="wrf">WRF</label>
               <input type="number" class="form-control" id="wrf"
+              [(ngModel)]="building.wrf"
               formControlName="wrf"  placeholder="Enter WRF">
             </div>
             <div class="form-group">
               <label for="remarks">Remarks</label>
               <input type="text" class="form-control" id="remarks"
+              [(ngModel)]="building.remarks"
               formControlName="remarks" placeholder="Enter Remarks">
             </div>
           </div>
@@ -61,10 +69,10 @@
 
           <div class="card-footer">
             <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-default" id="close" data-dismiss="modal"
+              <button type="button" class="btn btn-default" id="closeEdit" data-dismiss="modal"
               (click)="onClose()">Close</button>
               <button type="submit" class="btn btn-success"
-              [disabled]="!buildingForm.valid">Save changes</button>
+              [disabled]="!buildingForm.valid">Update changes</button>
             </div>
           </div>
         </form>
@@ -75,4 +83,3 @@
   </div>
   <!-- /.modal-dialog -->
 </div>
-

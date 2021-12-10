@@ -1,8 +1,9 @@
 import { Observable, throwError } from 'rxjs';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Building } from 'src/app/building-master/building.model';
 import { catchError, map } from 'rxjs/operators';
+import { collectExternalReferences } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root',
@@ -45,6 +46,13 @@ export class BuildingService {
    return this.http.post<{ message: string, isUpdated: boolean }>(
       `https://localhost:44357/api/Buildings/AddOrUpdateBuilding`,
       building
+    );
+  }
+
+
+  deleteBuilding(id: number, code: string): Observable<{id: string, message: string, isDeleted: boolean}>  {
+    return this.http.delete<{id: string, message: string, isDeleted: boolean}>(
+      `https://localhost:44357/api/Buildings/DeleteBuilding/`+id +`/`+code
     );
   }
 
