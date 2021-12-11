@@ -1,0 +1,124 @@
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Email settings</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">Email settings</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">SMTP Email Settings</h3>
+
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Primary Email</th>
+                    <th>Host Name</th>
+                    <th>Water Factor</th>
+                    <th>Port</th>
+                    <th>CC</th>
+                    <th>Updated date</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td>{{ emailSetting?.emailAddress }}</td>
+                  <td>{{ emailSetting?.password }}</td>
+                  <td>{{ emailSetting?.host }}</td>
+                  <td>{{ emailSetting?.port }}</td>
+                  <td>{{ emailSetting?.cc }}</td>
+                  <td>{{ emailSetting?.updated_Date | date: 'dd/MMM/yyyy hh:mm'}}</td>
+                  <td><a style="cursor: pointer; color: blue;"
+                     data-toggle="modal" data-target="#modal-edit-email-setting"
+                     (click)="onEditEmail()">
+                     <i class="fas fa-user-edit"></i></a></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+
+
+  <div class="modal fade" id="modal-edit-email-setting">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Edit Email settings</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="emailSettingForm" (ngSubmit)="onSubmit()">
+            <div class="card-body">
+              <div class="form-group">
+                <label for="emailaddress">Primary Email address</label>
+                <input type="text" class="form-control" id="emailaddress"
+                placeholder="Primary Email address" formControlName="emailAddress">
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password"
+                placeholder="Enter password" formControlName="password">
+              </div>
+              <div class="form-group">
+                <label for="host">Host name</label>
+                <input type="text" class="form-control" id="host"
+                placeholder="Enter host" formControlName="host">
+              </div>
+              <div class="form-group">
+                <label for="port">Port</label>
+                <input type="text" class="form-control" id="port"
+                placeholder="Enter port" formControlName="port">
+              </div>
+              <div class="form-group">
+                <label for="carboncopy">CC</label>
+                <input type="text" class="form-control" id="carboncopy"
+                 placeholder="Enter CC" formControlName="cc">
+              </div>
+            </div>
+            <!-- /.card-body -->
+
+            <div class="card-footer">
+              <div class="modal-footer justify-content-between">
+                <button type="button" id="closeBtn" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-success" [disabled]="!emailSettingForm.valid">Update changes</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+
+

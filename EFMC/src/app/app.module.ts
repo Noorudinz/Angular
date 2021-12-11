@@ -27,6 +27,8 @@ import { BuildingsEffects } from './building-master/store/building.effects';
 import { environment } from 'src/environments/environment';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { BuildingModule } from './building-master/building.module';
+import { PriceFactorComponent } from './price-factor/price-factor.component';
+import { EmailSettingComponent } from './email-setting/email-setting.component';
 
 
 @NgModule({
@@ -40,7 +42,9 @@ import { BuildingModule } from './building-master/building.module';
     UserProfileComponent,
     ChangePasswordComponent,
     CompanyComponent,
-    OsmViewComponent
+    OsmViewComponent,
+    PriceFactorComponent,
+    EmailSettingComponent
   ],
   imports: [
     BrowserModule,
