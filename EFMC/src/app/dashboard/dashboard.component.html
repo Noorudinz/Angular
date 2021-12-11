@@ -8,7 +8,7 @@
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Dashboard v1</li>
+            <li class="breadcrumb-item active">Dashboard</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
@@ -25,12 +25,12 @@
           <!-- small box -->
           <div class="small-box bg-info">
             <div class="inner">
-              <h3>150</h3>
+              <h3>{{dashboard?.flatOwnersCount}}</h3>
 
-              <p>New Orders</p>
+              <p>Total flat owners</p>
             </div>
             <div class="icon">
-              <i class="ion ion-bag"></i>
+              <i class="fas fa-users"></i>
             </div>
             <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           </div>
@@ -40,12 +40,13 @@
           <!-- small box -->
           <div class="small-box bg-success">
             <div class="inner">
-              <h3>53<sup style="font-size: 20px">%</sup></h3>
+              <!-- <h3>53<sup style="font-size: 20px">%</sup></h3> -->
+              <h3>{{dashboard?.totalOutstandingPayments}}</h3>
 
-              <p>Bounce Rate</p>
+              <p>Total outstanding Payments</p>
             </div>
             <div class="icon">
-              <i class="ion ion-stats-bars"></i>
+              <i class="fas fa-money-check-alt"></i>
             </div>
             <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           </div>
@@ -57,10 +58,10 @@
             <div class="inner">
               <h3>44</h3>
 
-              <p>User Registrations</p>
+              <p>Last month revenue</p>
             </div>
             <div class="icon">
-              <i class="ion ion-person-add"></i>
+              <i class="fas fa-tag"></i>
             </div>
             <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           </div>
@@ -72,7 +73,7 @@
             <div class="inner">
               <h3>65</h3>
 
-              <p>Unique Visitors</p>
+              <p>Current month revenue</p>
             </div>
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
@@ -85,7 +86,37 @@
       <!-- /.row -->
       <!-- Main row -->
       <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Top five outstanding payments</h3>
 
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>S.no</th>
+                    <th>Flat No</th>
+                    <th>Flat owner</th>
+                    <th>Amount</th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let topFiveOP of dashboard?.topFiveOP; let i = index">
+                <tr>
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ topFiveOP.flatNo }}</td>
+                  <td>{{ topFiveOP.name }}</td>
+                  <td>{{ topFiveOP.amount }}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
       </div>
       <!-- /.row (main row) -->
     </div><!-- /.container-fluid -->

@@ -48,12 +48,57 @@
           </a>
         </li>
         <li class="nav-item" *ngIf="isAuthenticate">
-          <a routerLink="/building" routerLinkActive="active" class="nav-link">
-            <i class="nav-icon fas fa-building"></i>
+          <a routerLink="/" routerLinkActive="" class="nav-link">
+            <i class="nav-icon fas fa-tag"></i>
             <p>
-              Flat Owner
+             Price factor settings
             </p>
           </a>
+        </li>
+        <li class="nav-item" *ngIf="isAuthenticate">
+          <a routerLink="/" routerLinkActive="" class="nav-link">
+            <i class="nav-icon fas fa-users"></i>
+            <p>
+              Flat owners master
+            </p>
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="isAuthenticate">
+          <a routerLink="/" routerLinkActive="" class="nav-link">
+            <i class="nav-icon fas fa-at"></i>
+            <p>
+              Email smtp settings
+            </p>
+          </a>
+        </li>
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-file-upload"></i>
+            <p>
+              Import files
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="../../index.html" class="nav-link">
+                <i class="fas fa-temperature-low nav-icon"></i>
+                <p>BTU</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="../../index2.html" class="nav-link">
+                <i class="nav-icon fas fa-water"></i>
+                <p>Water</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="../../index3.html" class="nav-link">
+                <i class="fas fa-bolt nav-icon"></i>
+                <p>Electricity</p>
+              </a>
+            </li>
+          </ul>
         </li>
       </ul>
     </nav>
