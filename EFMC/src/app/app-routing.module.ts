@@ -3,6 +3,8 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { CompanyComponent } from './company/company.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { EmailSettingComponent } from './email-setting/email-setting.component';
+import { PriceFactorComponent } from './price-factor/price-factor.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 
 const routes: Routes = [
@@ -34,6 +36,14 @@ const routes: Routes = [
   {
     path: 'company',
     component: CompanyComponent
+  },
+  {
+    path: 'price-factor',
+    component: PriceFactorComponent
+  },
+  {
+    path: 'email-setting',
+    component: EmailSettingComponent
   },
 ];
 

@@ -1,0 +1,125 @@
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Price factor</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">Price factor</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Price factor charges as per utility</h3>
+
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>BTU Factor</th>
+                    <th>Electricity Factor</th>
+                    <th>Water Factor</th>
+                    <th>Service Charges</th>
+                    <th>Other Cahrges</th>
+                    <th>Created date</th>
+                    <th>Updated date</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let factor of priceFactor;">
+                <tr>
+                  <td>{{ factor?.btuFactor }}</td>
+                  <td>{{ factor?.electricityFactor }}</td>
+                  <td>{{ factor?.waterFactor }}</td>
+                  <td>{{ factor?.serviceCharge }}</td>
+                  <td>{{ factor?.otherCharges }}</td>
+                  <td>{{ factor?.created_date | date: 'dd/MMM/yyyy hh:mm'}}</td>
+                  <td>{{ factor?.updated_date | date: 'dd/MMM/yyyy hh:mm'}}</td>
+                  <td><a style="cursor: pointer; color: blue;"
+                     data-toggle="modal" data-target="#modal-edit-price-factor"
+                     (click)="onEditPriceFactor()">
+                     <i class="fas fa-user-edit"></i></a></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+
+
+  <div class="modal fade" id="modal-edit-price-factor">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Edit Price Factor</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="priceFactorForm" (ngSubmit)="onSubmit()">
+            <div class="card-body">
+              <div class="form-group">
+                <label for="btufactor">BTU Factor</label>
+                <input type="number" class="form-control" id="btufactor"
+                placeholder="Enter BTU Factor" formControlName="btuFactor">
+              </div>
+              <div class="form-group">
+                <label for="electricityfactor">Electricity Factor</label>
+                <input type="number" class="form-control" id="electricityfactor"
+                placeholder="Enter Electricity Factor" formControlName="electricityFactor">
+              </div>
+              <div class="form-group">
+                <label for="waterfactor">Water Factor</label>
+                <input type="number" class="form-control" id="waterfactor"
+                placeholder="Enter Water Factor" formControlName="waterFactor">
+              </div>
+              <div class="form-group">
+                <label for="servicecharge">Service charge</label>
+                <input type="number" class="form-control" id="servicecharge"
+                placeholder="Enter Service charge" formControlName="serviceCharge">
+              </div>
+              <div class="form-group">
+                <label for="otherfactor">Other Factor</label>
+                <input type="number" class="form-control" id="otherfactor"
+                 placeholder="Enter Other Factor" formControlName="otherCharges">
+              </div>
+            </div>
+            <!-- /.card-body -->
+
+            <div class="card-footer">
+              <div class="modal-footer justify-content-between">
+                <button type="button" id="closeBtn" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-success" [disabled]="!priceFactorForm.valid">Update changes</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+
