@@ -22,6 +22,10 @@ const routes: Routes = [
     loadChildren: () => import('./building-master/building.module').then(m => m.BuildingModule)
   },
   {
+    path: 'flat-owners',
+    loadChildren: () => import('./flat-owners/flat-owners.module').then(m => m.FlatOwnerModule)
+  },
+  {
     path: 'dashboard',
     component: DashboardComponent
   },
