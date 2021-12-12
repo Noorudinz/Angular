@@ -1,21 +1,41 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 import { EmailSettingService } from 'src/services/email-setting.service';
 import * as Alert from '../toster/alert';
+import * as fromApp from  '../store/app.reducer';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-email-setting',
   templateUrl: './email-setting.component.html',
   styleUrls: ['./email-setting.component.css']
 })
-export class EmailSettingComponent implements OnInit {
+export class EmailSettingComponent implements OnInit, OnDestroy {
 
+  private userSub: Subscription;
   emailSettingForm: FormGroup;
   emailSetting: any;
 
-  constructor(private emailService: EmailSettingService) { }
+  constructor(private emailService: EmailSettingService,
+    private store: Store<fromApp.AppState>,
+    private route: Router) { }
 
   ngOnInit(): void {
+    this.userSub = this.store.select('auth')
+    .subscribe(user => {
+
+      if(user.user !== null){
+        for(var r in user.user._roles){
+          if(user.user._roles[r] !== 'admin'){
+           this.route.navigate(['/dashboard']);
+           Alert.tosterAlert('Access denied !', 'error');
+          }
+        }
+      }
+    });
+
    this.loadEmail();
    this.initEmailForm();
   }
@@ -81,6 +101,12 @@ export class EmailSettingComponent implements OnInit {
         Alert.tosterAlert(data.message, 'error');
        }
      });
+  }
+
+  ngOnDestroy(): void {
+      if(this.userSub){
+        this.userSub.unsubscribe();
+      }
   }
 
 }

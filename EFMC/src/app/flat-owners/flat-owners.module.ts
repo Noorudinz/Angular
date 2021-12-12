@@ -10,6 +10,7 @@ import { FlatOwnersListComponent } from "./flat-owners-list/flat-owners-list.com
 import { FlatOwnersRoutingModule } from "./flat-owners-routing.module";
 import { DataTablesModule } from "angular-datatables";
 import { FlatOwnerDetailComponent } from './flat-owner-detail/flat-owner-detail.component';
+import { FlatOwnerAddComponent } from './flat-owner-add/flat-owner-add.component';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { FlatOwnerDetailComponent } from './flat-owner-detail/flat-owner-detail.
     FlatOwnersComponent,
     FlatOwnersListComponent,
     FlatOwnerDetailComponent,
+    FlatOwnerAddComponent,
   ],
   imports: [
     CommonModule,

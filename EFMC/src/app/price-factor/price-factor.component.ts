@@ -1,21 +1,40 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { PriceFactorService } from 'src/services/price-factor.service';
+import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
+import { PriceFactorService } from '../../services/price-factor.service';
 import * as Alert from '../toster/alert';
+import * as fromApp from  '../store/app.reducer';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-price-factor',
   templateUrl: './price-factor.component.html',
   styleUrls: ['./price-factor.component.css']
 })
-export class PriceFactorComponent implements OnInit {
+export class PriceFactorComponent implements OnInit, OnDestroy {
 
+  private userSub: Subscription;
   priceFactor: any;
   priceFactorForm: FormGroup;
 
-  constructor(private priceFactorService: PriceFactorService) { }
+  constructor(private priceFactorService: PriceFactorService,
+    private store: Store<fromApp.AppState>,
+    private route: Router) { }
 
   ngOnInit(): void {
+    this.userSub = this.store.select('auth')
+    .subscribe(user => {
+      if(user.user !== null){
+        for(var r in user.user._roles){
+          if(user.user._roles[r] !== 'admin'){
+           this.route.navigate(['/dashboard']);
+           Alert.tosterAlert('Access denied !', 'error');
+          }
+        }
+      }
+    });
+
     this.loadPriceFactor();
     this.initPriceFactorForm();
   }
@@ -83,6 +102,12 @@ export class PriceFactorComponent implements OnInit {
        }
      });
   }
+
+  ngOnDestroy(): void {
+    if(this.userSub){
+      this.userSub.unsubscribe();
+    }
+}
 
 }
 

@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Building } from 'src/app/building-master/building.model';
-import { FlatOwners } from 'src/app/flat-owners/flat-owners.model';
+import { FlatList, FlatOwners } from 'src/app/flat-owners/flat-owners.model';
 
 
 @Injectable({
@@ -13,8 +13,14 @@ export class FlatOwnersService {
 
 
   getFlatOwners(){
-   return this.http.get<FlatOwners>(
+   return this.http.get<FlatList[]>(
       `https://localhost:44357/api/FlatOwner/GetFlatOwners`
+    );
+  }
+
+  getFlatOwnersByFlatNo(flatNo: string){
+    return this.http.get(
+      `https://localhost:44357/api/FlatOwner/GetFlatOwnerByFlatNo/`+ flatNo
     );
   }
 

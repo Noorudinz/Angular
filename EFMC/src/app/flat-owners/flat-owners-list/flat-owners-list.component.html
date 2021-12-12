@@ -1,3 +1,4 @@
+
   <!-- Content Header (Page header) -->
   <div class="content-header">
     <div class="container-fluid">
@@ -19,7 +20,7 @@
 
   <div class="card">
     <div class="card-header">
-      <button class="btn btn-default">Add</button>
+      <button class="btn btn-default"  [routerLink]="['add']">Add</button>
     </div>
     <!-- /.card-header -->
     <div class="card-body">
@@ -43,7 +44,7 @@
           <td>{{ flat.possesionDate | date: 'dd/MM/yyyy' }}</td>
           <td>
               <a style="cursor: pointer; color: black;"
-              data-toggle="modal" data-target="#modal-edit-email-setting">
+              [routerLink]="['details', flat.flatNo]">
               <i class="fas fa-info-circle"></i>
               </a>
             |

@@ -1,1 +1,180 @@
-<p>flat-owner-detail works!</p>
+
+
+
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Flat Owner Detail</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">Flat owner</li>
+          </ol>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+
+
+    <!-- Main content -->
+    <section class="content">
+
+      <!-- Default box -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Flat owner</h3>
+
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+              <i class="fas fa-minus"></i></button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+              <i class="fas fa-times"></i></button>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
+              <div class="row">
+                <div class="col-12 col-sm-4">
+                  <div class="info-box bg-light">
+                    <div class="info-box-content">
+                      <span class="info-box-text text-center text-muted">Flat No</span>
+                      <span class="info-box-number text-center text-muted mb-0">{{ flatOwnerDetails?.flatNo }}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-4">
+                  <div class="info-box bg-light">
+                    <div class="info-box-content">
+                      <span class="info-box-text text-center text-muted">Building Type</span>
+                      <span class="info-box-number text-center text-muted mb-0">{{ flatOwnerDetails?.buildingType }}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-4">
+                  <div class="info-box bg-light">
+                    <div class="info-box-content">
+                      <span class="info-box-text text-center text-muted">Floor No</span>
+                      <span class="info-box-number text-center text-muted mb-0">{{ flatOwnerDetails?.floorNo }}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-4">
+                  <div class="info-box bg-light">
+                    <div class="info-box-content">
+                      <span class="info-box-text text-center text-muted">Area</span>
+                      <span class="info-box-number text-center text-muted mb-0">{{ flatOwnerDetails?.area }}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-4">
+                  <div class="info-box bg-light">
+                    <div class="info-box-content">
+                      <span class="info-box-text text-center text-muted">Possession Date</span>
+                      <span class="info-box-number text-center text-muted mb-0">{{ flatOwnerDetails?.possesionDate | date: 'dd/MMM/yyyy' }}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-4">
+                  <div class="info-box bg-light">
+                    <div class="info-box-content">
+                      <span class="info-box-text text-center text-muted">Bed Rooms</span>
+                      <span class="info-box-number text-center text-muted mb-0">{{ flatOwnerDetails?.bedRooms }}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-4">
+                  <div class="info-box bg-light">
+                    <div class="info-box-content">
+                      <span class="info-box-text text-center text-muted">Family name</span>
+                      <span class="info-box-number text-center text-muted mb-0">{{ flatOwnerDetails?.familyName }}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-4">
+                  <div class="info-box bg-light">
+                    <div class="info-box-content">
+                      <span class="info-box-text text-center text-muted">Car no</span>
+                      <span class="info-box-number text-center text-muted mb-0">{{ flatOwnerDetails?.carNo }}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-4">
+                  <div class="info-box bg-light">
+                    <div class="info-box-content">
+                      <span class="info-box-text text-center text-muted">Car parking no</span>
+                      <span class="info-box-number text-center text-muted mb-0">{{ flatOwnerDetails?.carParkNos }}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-4">
+                  <div class="info-box bg-light">
+                    <div class="info-box-content">
+                      <span class="info-box-text text-center text-muted">Email-1</span>
+                      <span class="info-box-number text-center text-muted mb-0">{{ flatOwnerDetails?.email1 }}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-4">
+                  <div class="info-box bg-light">
+                    <div class="info-box-content">
+                      <span class="info-box-text text-center text-muted">Email-2</span>
+                      <span class="info-box-number text-center text-muted mb-0">{{ flatOwnerDetails?.email2 }}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-4">
+                  <div class="info-box bg-light">
+                    <div class="info-box-content">
+                      <span class="info-box-text text-center text-muted">Created date</span>
+                      <span class="info-box-number text-center text-muted mb-0">{{ flatOwnerDetails?.created_date | date: 'dd/MM/yyyy hh:mm:a' }}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-4">
+                  <div class="info-box bg-light">
+                    <div class="info-box-content">
+                      <span class="info-box-text text-center text-muted">Updated date</span>
+                      <span class="info-box-number text-center text-muted mb-0">{{ flatOwnerDetails?.updated_date | date: 'dd/MM/yyy hh:mm:a' }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
+              <h3 class="text-primary"><i class="fas fa-user"></i> {{ flatOwnerDetails?.firstName }}</h3>
+              <p class="text-muted">{{ flatOwnerDetails?.address }}</p>
+              <br>
+              <div class="text-muted">
+                <p class="text-sm">Mobile Number
+                  <b class="d-block">{{ flatOwnerDetails?.mobileNumber }}</b>
+                </p>
+                <p class="text-sm">Tel number
+                  <b class="d-block">{{ flatOwnerDetails?.telNumber }}</b>
+                </p>
+                <p class="text-sm">Status
+                  <b class="d-block"
+                  [ngStyle]="{'color': flatOwnerDetails?.status === 'Active'? 'green' : 'red'}">
+                  {{ flatOwnerDetails?.status }}</b>
+                </p>
+                <div class="text-sm">
+                  <a routerLink="/flat-owners" class="btn btn-sm btn-primary">Back</a>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+
+
+
+

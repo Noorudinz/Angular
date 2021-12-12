@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { FlatOwnersService } from 'src/services/flat-owners.service';
 import { FlatList } from '../flat-owners.model';
 declare var $;
@@ -21,36 +21,39 @@ class DataTablesResponse {
 export class FlatOwnersListComponent implements OnInit, OnDestroy {
 
   dtOptions: DataTables.Settings = {};
+  private userSub: Subscription;
   flatOwnersList: any;
   flats: FlatList[] = [];
   dtTrigger: Subject<any> = new Subject<any>();
+  isLoading = false;
 
-  constructor(private http: HttpClient) { }
+  constructor(private flatOwnerService: FlatOwnersService) { }
 
   ngOnInit(): void {
     this.initDataTable();
-    // this.flatOwnerService.getFlatOwners().subscribe(data => {
-    //   if(data !== null){
-    //     this.flatOwnersList = data;
-    //     console.log(data);
-    //   }
-    // });
   }
 
   private initDataTable(){
+
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 10,
+      pageLength: 10
     };
-    this.http.get<FlatList[]>('https://localhost:44357/api/FlatOwner/GetFlatOwners')
-      .subscribe(data => {
+
+    this.userSub = this.flatOwnerService.getFlatOwners().subscribe(data => {
+      if(data !== null){
         this.flats = (data as any).data;
         this.dtTrigger.next();
-      });
+      }
+    });
+
   }
 
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
+    if(this.userSub){
+      this.userSub.unsubscribe();
+    }
   }
 
 }
