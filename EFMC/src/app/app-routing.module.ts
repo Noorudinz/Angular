@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './auth/auth.gaurd';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { CompanyComponent } from './company/company.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EmailSettingComponent } from './email-setting/email-setting.component';
+import { FlatOwnerDetailComponent } from './flat-owners/flat-owner-detail/flat-owner-detail.component';
 import { PriceFactorComponent } from './price-factor/price-factor.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 
@@ -21,6 +23,15 @@ const routes: Routes = [
     path: 'building',
     loadChildren: () => import('./building-master/building.module').then(m => m.BuildingModule)
   },
+  {
+    path: 'flat-owners',
+    loadChildren: () => import('./flat-owners/flat-owners.module').then(m => m.FlatOwnerModule),
+    canActivate: [AuthGuard]
+  },
+  // {
+  //   path: 'flat-owners/details/:id',
+  //   component: FlatOwnerDetailComponent
+  // },
   {
     path: 'dashboard',
     component: DashboardComponent

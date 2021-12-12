@@ -65,7 +65,7 @@ import { EmailSettingComponent } from './email-setting/email-setting.component';
       apiKey: 'AIzaSyADGS9mCRZGa5TmtQqX1ZIU_spB-aGZKpI'
     }),
     AngularOpenlayersModule,
-    BuildingModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
