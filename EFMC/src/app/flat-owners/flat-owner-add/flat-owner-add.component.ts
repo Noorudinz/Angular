@@ -10,6 +10,7 @@ export class FlatOwnerAddComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
 }
