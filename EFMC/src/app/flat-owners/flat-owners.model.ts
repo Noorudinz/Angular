@@ -21,7 +21,7 @@ export class FlatOwners {
 
 
 export interface FlatList {
-  flatNo: number;
+  flatNo: string;
   buildingType: string;
   firstName: string;
   mobileNumber: string;

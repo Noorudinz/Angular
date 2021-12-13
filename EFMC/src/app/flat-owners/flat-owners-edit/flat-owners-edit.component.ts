@@ -1,6 +1,7 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Building } from 'src/app/building-master/building.model';
@@ -11,22 +12,59 @@ import { FlatOwnersService } from 'src/services/flat-owners.service';
 import * as Alert from '../../toster/alert';
 
 @Component({
-  selector: 'app-flat-owner-add',
-  templateUrl: './flat-owner-add.component.html',
-  styleUrls: ['./flat-owner-add.component.css']
+  selector: 'app-flat-owners-edit',
+  templateUrl: './flat-owners-edit.component.html',
+  styleUrls: ['./flat-owners-edit.component.css']
 })
-export class FlatOwnerAddComponent implements OnInit {
+export class FlatOwnersEditComponent implements OnInit {
 
   flatOwnerForm: FormGroup;
   buildingList:  Observable<Building[]>;
+  flatNo: any;
+  flatOwnerDetails: any;
 
   constructor(private store: Store<AppState>,
     private flatOwnerService: FlatOwnersService,
-    private route: Router) { }
+    private route: Router,
+    private router: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.initFlatOwnerForm();
     this.loadBuilding();
+    this.flatNo = this.router.snapshot.paramMap.get('id');
+    this.fetchFlatOwner(this.flatNo);
+  }
+
+  private fetchFlatOwner(flatNo: string){
+    this.flatOwnerService.getFlatOwnersByFlatNo(flatNo).subscribe(data => {
+      if(data['isUpdated']){
+        let mydate = new Date((data['flatOwners'][0].flatOwner.possesionDate));
+        this.flatOwnerDetails = {
+          flatNo: data['flatOwners'][0].flatOwner.flatNo,
+          buildingType: data['flatOwners'][0].buildingType.buildingId,
+          floorNo: data['flatOwners'][0].flatOwner.floorNo,
+          area: data['flatOwners'][0].flatOwner.area,
+          possesionDate: formatDate((data['flatOwners'][0].flatOwner.possesionDate), 'yyyy-MM-dd', 'en_US'),
+          bedRooms: data['flatOwners'][0].flatOwner.bedRooms,
+          carParks: data['flatOwners'][0].flatOwner.carParks,
+          familyName: data['flatOwners'][0].flatOwner.familyName,
+          firstName: data['flatOwners'][0].flatOwner.firstName,
+          mobileNumber: data['flatOwners'][0].flatOwner.mobileNumber,
+          telNumber: data['flatOwners'][0].flatOwner.telNumber,
+          email1: data['flatOwners'][0].flatOwner.email1,
+          email2: data['flatOwners'][0].flatOwner.email2,
+          address: data['flatOwners'][0].flatOwner.address,
+          carNo: data['flatOwners'][0].flatOwner.carNo,
+          carParkNos: data['flatOwners'][0].flatOwner.carParkNos
+        }
+        console.log(this.flatOwnerDetails)
+        this.flatOwnerForm.patchValue(this.flatOwnerDetails);
+      }
+      else {
+        this.route.navigate(['/flat-owners']);
+        Alert.tosterAlert('Data not found !', 'warning')
+      }
+    });
   }
 
   private loadBuilding(){
@@ -35,6 +73,7 @@ export class FlatOwnerAddComponent implements OnInit {
   }
 
   private initFlatOwnerForm(){
+    let flatId = '';
     let flatNo = '';
     let buildingType = 0;
     let floorNo = '';
@@ -53,6 +92,7 @@ export class FlatOwnerAddComponent implements OnInit {
     let address = '';
     const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     this.flatOwnerForm = new FormGroup({
+      'flatId': new FormControl(flatId),
       'flatNo': new FormControl(flatNo, [Validators.required]),
       'buildingType': new FormControl(buildingType, [Validators.required]),
       'floorNo': new FormControl(floorNo, [Validators.required]),
@@ -78,6 +118,7 @@ export class FlatOwnerAddComponent implements OnInit {
     }
 
     const addFlatOwner = {
+     flatId: this.flatOwnerForm.value.flatId,
      flatNo: this.flatOwnerForm.value.flatNo,
      buildingId: this.flatOwnerForm.value.buildingType,
      floorNo: this.flatOwnerForm.value.floorNo.toString(),
@@ -86,7 +127,7 @@ export class FlatOwnerAddComponent implements OnInit {
      bedRooms: this.flatOwnerForm.value.bedRooms.toString(),
      carParks: this.flatOwnerForm.value.carParks.toString(),
      telNumber: this.flatOwnerForm.value.telNumber,
-     carParkNos: this.flatOwnerForm.value.carParkNos,
+     carParksNos: this.flatOwnerForm.value.carParksNos,
      familyName: this.flatOwnerForm.value.familyName,
      firstName: this.flatOwnerForm.value.firstName,
      mobileNumber: this.flatOwnerForm.value.mobileNumber,
@@ -112,3 +153,4 @@ export class FlatOwnerAddComponent implements OnInit {
   }
 
 }
+
