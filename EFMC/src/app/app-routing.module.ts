@@ -13,7 +13,8 @@ const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   {
     path: 'user',
-    loadChildren: () => import('./user/user.module').then(m => m.UserModule)
+    loadChildren: () => import('./user/user.module').then(m => m.UserModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'auth',
@@ -21,7 +22,8 @@ const routes: Routes = [
   },
   {
     path: 'building',
-    loadChildren: () => import('./building-master/building.module').then(m => m.BuildingModule)
+    loadChildren: () => import('./building-master/building.module').then(m => m.BuildingModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'flat-owners',

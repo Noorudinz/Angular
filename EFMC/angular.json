@@ -21,7 +21,7 @@
               "rxjs-compat",
               "crypto-js",
               "ngx-openlayers"
-           ],
+            ],
             "outputPath": "dist/adminLTE",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -32,6 +32,8 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css",
               "node_modules/admin-lte/plugins/fontawesome-free/css/all.min.css",
               "node_modules/admin-lte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css",
@@ -61,7 +63,7 @@
               "node_modules/admin-lte/dist/js/demo.js",
               "node_modules/admin-lte/plugins/sweetalert2/sweetalert2.min.js",
               "node_modules/datatables.net/js/jquery.dataTables.js"
-           ]
+            ]
           },
           "configurations": {
             "production": {
