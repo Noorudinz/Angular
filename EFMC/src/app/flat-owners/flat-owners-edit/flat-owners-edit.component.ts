@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { setDate } from 'ngx-bootstrap/chronos/utils/date-setters';
 import { Observable } from 'rxjs';
 import { Building } from 'src/app/building-master/building.model';
 import { loadBuilding } from 'src/app/building-master/store/building.actions';
@@ -38,13 +39,13 @@ export class FlatOwnersEditComponent implements OnInit {
   private fetchFlatOwner(flatNo: string){
     this.flatOwnerService.getFlatOwnersByFlatNo(flatNo).subscribe(data => {
       if(data['isUpdated']){
-        let mydate = new Date((data['flatOwners'][0].flatOwner.possesionDate));
         this.flatOwnerDetails = {
+          flatId: data['flatOwners'][0].flatOwner.flatId,
           flatNo: data['flatOwners'][0].flatOwner.flatNo,
           buildingType: data['flatOwners'][0].buildingType.buildingId,
           floorNo: data['flatOwners'][0].flatOwner.floorNo,
           area: data['flatOwners'][0].flatOwner.area,
-          possesionDate: formatDate((data['flatOwners'][0].flatOwner.possesionDate), 'yyyy-MM-dd', 'en_US'),
+          possesionDate: data['flatOwners'][0].flatOwner.possesionDate,
           bedRooms: data['flatOwners'][0].flatOwner.bedRooms,
           carParks: data['flatOwners'][0].flatOwner.carParks,
           familyName: data['flatOwners'][0].flatOwner.familyName,
@@ -57,7 +58,6 @@ export class FlatOwnersEditComponent implements OnInit {
           carNo: data['flatOwners'][0].flatOwner.carNo,
           carParkNos: data['flatOwners'][0].flatOwner.carParkNos
         }
-        console.log(this.flatOwnerDetails)
         this.flatOwnerForm.patchValue(this.flatOwnerDetails);
       }
       else {
@@ -78,7 +78,7 @@ export class FlatOwnersEditComponent implements OnInit {
     let buildingType = 0;
     let floorNo = '';
     let area = '';
-    let possessionDate = '';
+    let possesionDate = new Date();
     let bedRooms = '';
     let carParks = '';
     let telNumber = '';
@@ -97,7 +97,7 @@ export class FlatOwnersEditComponent implements OnInit {
       'buildingType': new FormControl(buildingType, [Validators.required]),
       'floorNo': new FormControl(floorNo, [Validators.required]),
       'area': new FormControl(area, [Validators.required]),
-      'possessionDate': new FormControl(possessionDate, [Validators.required]),
+      'possesionDate': new FormControl(possesionDate, [Validators.required]),
       'bedRooms': new FormControl(bedRooms, [Validators.required]),
       'carParks': new FormControl(carParks, [Validators.required]),
       'telNumber': new FormControl(telNumber, [Validators.required]),

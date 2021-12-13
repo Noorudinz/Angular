@@ -26,7 +26,6 @@ import { AngularOpenlayersModule } from 'ngx-openlayers';
 import { BuildingsEffects } from './building-master/store/building.effects';
 import { environment } from 'src/environments/environment';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { PriceFactorComponent } from './price-factor/price-factor.component';
 import { EmailSettingComponent } from './email-setting/email-setting.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -66,8 +65,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       apiKey: 'AIzaSyADGS9mCRZGa5TmtQqX1ZIU_spB-aGZKpI'
     }),
     AngularOpenlayersModule,
-    BrowserAnimationsModule,
-    BsDatepickerModule.forRoot()
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

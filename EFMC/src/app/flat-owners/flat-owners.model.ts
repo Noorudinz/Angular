@@ -2,11 +2,13 @@
 
 export class FlatOwners {
   public flatId: number;
-  public buildingId: number;
   public flatNo: string;
+  public buildingId: number;
+  public floorNo: number;
   public area: number;
   public possesionDate: Date;
   public bedRooms: string;
+  public carParks: number;
   public familyName: string;
   public firstName: string;
   public mobileNumber: string;
@@ -16,8 +18,16 @@ export class FlatOwners {
   public address: string;
   public carNo: string;
   public carParkNos : string;
-  public isdel: string;
+  public isdel: boolean;
 }
+
+
+
+
+
+
+
+
 
 
 export interface FlatList {

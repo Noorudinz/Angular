@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -9,6 +10,7 @@ import { getBuildings } from 'src/app/building-master/store/building.selector';
 import { AppState } from 'src/app/store/app.reducer';
 import { FlatOwnersService } from 'src/services/flat-owners.service';
 import * as Alert from '../../toster/alert';
+import { FlatOwners } from '../flat-owners.model';
 
 @Component({
   selector: 'app-flat-owner-add',
@@ -39,7 +41,7 @@ export class FlatOwnerAddComponent implements OnInit {
     let buildingType = 0;
     let floorNo = '';
     let area = '';
-    let possessionDate = '';
+    let possesionDate = '';
     let bedRooms = '';
     let carParks = '';
     let telNumber = '';
@@ -57,7 +59,7 @@ export class FlatOwnerAddComponent implements OnInit {
       'buildingType': new FormControl(buildingType, [Validators.required]),
       'floorNo': new FormControl(floorNo, [Validators.required]),
       'area': new FormControl(area, [Validators.required]),
-      'possessionDate': new FormControl(possessionDate, [Validators.required]),
+      'possesionDate': new FormControl(possesionDate, [Validators.required]),
       'bedRooms': new FormControl(bedRooms, [Validators.required]),
       'carParks': new FormControl(carParks, [Validators.required]),
       'telNumber': new FormControl(telNumber, [Validators.required]),
@@ -77,23 +79,25 @@ export class FlatOwnerAddComponent implements OnInit {
       return;
     }
 
-    const addFlatOwner = {
-     flatNo: this.flatOwnerForm.value.flatNo,
-     buildingId: this.flatOwnerForm.value.buildingType,
-     floorNo: this.flatOwnerForm.value.floorNo.toString(),
-     area: this.flatOwnerForm.value.area.toString(),
-     possessionDate: this.flatOwnerForm.value.possessionDate,
-     bedRooms: this.flatOwnerForm.value.bedRooms.toString(),
-     carParks: this.flatOwnerForm.value.carParks.toString(),
-     telNumber: this.flatOwnerForm.value.telNumber,
-     carParkNos: this.flatOwnerForm.value.carParkNos,
-     familyName: this.flatOwnerForm.value.familyName,
-     firstName: this.flatOwnerForm.value.firstName,
-     mobileNumber: this.flatOwnerForm.value.mobileNumber,
-     email1: this.flatOwnerForm.value.email1,
-     email2: this.flatOwnerForm.value.email2,
-     carNo: this.flatOwnerForm.value.carNo,
-     address: this.flatOwnerForm.value.address
+    const addFlatOwner: FlatOwners = {
+      flatNo: this.flatOwnerForm.value.flatNo,
+      buildingId: this.flatOwnerForm.value.buildingType,
+      floorNo: this.flatOwnerForm.value.floorNo.toString(),
+      area: this.flatOwnerForm.value.area.toString(),
+      possesionDate: this.flatOwnerForm.value.possesionDate,
+      bedRooms: this.flatOwnerForm.value.bedRooms.toString(),
+      carParks: this.flatOwnerForm.value.carParks.toString(),
+      telNumber: this.flatOwnerForm.value.telNumber,
+      carParkNos: this.flatOwnerForm.value.carParkNos,
+      familyName: this.flatOwnerForm.value.familyName,
+      firstName: this.flatOwnerForm.value.firstName,
+      mobileNumber: this.flatOwnerForm.value.mobileNumber,
+      email1: this.flatOwnerForm.value.email1,
+      email2: this.flatOwnerForm.value.email2,
+      carNo: this.flatOwnerForm.value.carNo,
+      address: this.flatOwnerForm.value.address,
+      flatId: 0,
+      isdel: false
     }
 
    this.flatOwnerService.addFlatOwner(addFlatOwner).subscribe(data => {

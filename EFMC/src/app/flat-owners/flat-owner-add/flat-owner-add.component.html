@@ -55,9 +55,10 @@
                 formControlName="area">
               </div>
               <div class="form-group">
-                <label for="possessionDate">Possession Date</label>
-                <input type="text" bsDatepicker id="possessionDate" class="form-control"
-                formControlName="possessionDate">
+                <label for="possesionDate">Possession Date</label>
+                <input type="text" bsDatepicker id="possesionDate" class="form-control"
+                [bsConfig]="{ containerClass: 'theme-dark-blue', showTodayButton: true, todayPosition: 'center' }"
+                formControlName="possesionDate">
               </div>
               <div class="form-group">
                 <label for="bedRooms">No of Bed rooms</label>
@@ -141,7 +142,8 @@
         <div class="col-12">
           <a routerLink="/flat-owners" class="btn btn-secondary">Back</a>&nbsp;
           <a class="btn btn-primary" (click)="onClear()">Clear</a>&nbsp;
-          <input type="submit" [disabled]="!flatOwnerForm.valid" value="Save changes" class="btn btn-success float-center">
+          <!-- <input type="submit" [disabled]="!flatOwnerForm.valid" value="Save changes" class="btn btn-success float-center"> -->
+          <input type="submit" value="Save changes" class="btn btn-success float-center">
         </div>
       </div>
     </form>

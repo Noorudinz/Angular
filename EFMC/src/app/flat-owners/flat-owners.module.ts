@@ -12,6 +12,7 @@ import { DataTablesModule } from "angular-datatables";
 import { FlatOwnerDetailComponent } from './flat-owner-detail/flat-owner-detail.component';
 import { FlatOwnerAddComponent } from './flat-owner-add/flat-owner-add.component';
 import { FlatOwnersEditComponent } from './flat-owners-edit/flat-owners-edit.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { FlatOwnersEditComponent } from './flat-owners-edit/flat-owners-edit.com
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}), //disappear warnings
     FlatOwnersRoutingModule,
     SharedModule,
-    DataTablesModule
+    DataTablesModule,
+    BsDatepickerModule.forRoot()
     //StoreModule.forFeature(BUILDING_STATE_NAME, buildingsReducer),
     //EffectsModule.forFeature([BuildingsEffects])
   ]

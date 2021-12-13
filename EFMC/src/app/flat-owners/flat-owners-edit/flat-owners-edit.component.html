@@ -57,8 +57,9 @@
               </div>
               <div class="form-group">
                 <label for="possessionDate">Possession Date</label>
-                <input type="date" id="possessionDate" class="form-control"
-                formControlName="possessionDate">
+                <input type="date" bsDatepicker id="possesionDate" class="form-control"
+                [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD', containerClass: 'theme-dark-blue', showTodayButton: true, todayPosition: 'center' }"
+                formControlName="possesionDate">
               </div>
               <div class="form-group">
                 <label for="bedRooms">No of Bed rooms</label>
