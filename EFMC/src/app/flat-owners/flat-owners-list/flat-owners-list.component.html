@@ -44,15 +44,18 @@
           <td>{{ flat.possesionDate | date: 'dd/MM/yyyy' }}</td>
           <td>
               <a style="cursor: pointer; color: black;"
+              tooltip="View details"
               [routerLink]="['details', flat.flatNo]">
               <i class="fas fa-info-circle"></i>
               </a>
             |
               <a style="cursor: pointer; color: blue;"
+              tooltip="Edit flat detail"
               [routerLink]="['edit', flat.flatNo]">
               <i class="fas fa-user-edit"></i></a>
             |
               <a style="cursor: pointer; color: red;"
+              tooltip="Delete flat detail"
               (click)="onDelete(flat.flatNo)"
               data-toggle="modal" data-target="#modal-delete-flat">
               <i class="fas fa-trash"></i></a>
