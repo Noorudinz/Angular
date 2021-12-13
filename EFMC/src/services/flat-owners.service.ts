@@ -48,18 +48,18 @@ export class FlatOwnersService {
   //   );
   // }
 
-  // addOrUpdateBuilding(building: Building){
-  //  return this.http.post<{ message: string, isUpdated: boolean }>(
-  //     `https://localhost:44357/api/Buildings/AddOrUpdateBuilding`,
-  //     building
-  //   );
-  // }
+  addFlatOwner(flatOwner){
+   return this.http.post<{ message: string, isUpdated: boolean }>(
+      `https://localhost:44357/api/FlatOwner/AddFlatOwner`,
+      flatOwner
+    );
+  }
 
 
-  // deleteBuilding(id: number, code: string): Observable<{id: string, message: string, isDeleted: boolean}>  {
-  //   return this.http.delete<{id: string, message: string, isDeleted: boolean}>(
-  //     `https://localhost:44357/api/Buildings/DeleteBuilding/`+id +`/`+code
-  //   );
-  // }
+  deleteFlatOwner(flatNo: string): Observable<{id: string, message: string, isDeleted: boolean}>  {
+    return this.http.delete<{id: string, message: string, isDeleted: boolean}>(
+      `https://localhost:44357/api/FlatOwner/DeleteFlat/`+flatNo
+    );
+  }
 
 }

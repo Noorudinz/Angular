@@ -31,6 +31,7 @@
               </div>
             </div>
             <div class="card-body">
+              <input formControlName="flatId" [hidden]="true">
               <div class="form-group">
                 <label for="flatNo">Flat No</label>
                 <input type="text" id="flatNo" class="form-control"
@@ -55,9 +56,9 @@
                 formControlName="area">
               </div>
               <div class="form-group">
-                <label for="possesionDate">Possession Date</label>
-                <input type="text" bsDatepicker id="possesionDate" class="form-control"
-                [bsConfig]="{ containerClass: 'theme-dark-blue', showTodayButton: true, todayPosition: 'center' }"
+                <label for="possessionDate">Possession Date</label>
+                <input type="date" bsDatepicker id="possesionDate" class="form-control"
+                [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD', containerClass: 'theme-dark-blue', showTodayButton: true, todayPosition: 'center' }"
                 formControlName="possesionDate">
               </div>
               <div class="form-group">
@@ -73,6 +74,7 @@
               <div class="form-group">
                 <label for="telNumber">Tel number</label>
                 <input type="text" id="telNumber" class="form-control"
+                value="2021-11-11"
                 formControlName="telNumber">
               </div>
               <div class="form-group">
@@ -142,13 +144,13 @@
         <div class="col-12">
           <a routerLink="/flat-owners" class="btn btn-secondary">Back</a>&nbsp;
           <a class="btn btn-primary" (click)="onClear()">Clear</a>&nbsp;
-          <!-- <input type="submit" [disabled]="!flatOwnerForm.valid" value="Save changes" class="btn btn-success float-center"> -->
-          <input type="submit" value="Save changes" class="btn btn-success float-center">
+          <input type="submit" [disabled]="!flatOwnerForm.valid" value="Save changes" class="btn btn-success float-center">
         </div>
       </div>
     </form>
     </section>
     <br><br>
     <!-- /.content -->
+
 
 

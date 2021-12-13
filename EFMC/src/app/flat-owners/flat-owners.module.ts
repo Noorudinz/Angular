@@ -11,6 +11,9 @@ import { FlatOwnersRoutingModule } from "./flat-owners-routing.module";
 import { DataTablesModule } from "angular-datatables";
 import { FlatOwnerDetailComponent } from './flat-owner-detail/flat-owner-detail.component';
 import { FlatOwnerAddComponent } from './flat-owner-add/flat-owner-add.component';
+import { FlatOwnersEditComponent } from './flat-owners-edit/flat-owners-edit.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 
 @NgModule({
@@ -19,6 +22,7 @@ import { FlatOwnerAddComponent } from './flat-owner-add/flat-owner-add.component
     FlatOwnersListComponent,
     FlatOwnerDetailComponent,
     FlatOwnerAddComponent,
+    FlatOwnersEditComponent,
   ],
   imports: [
     CommonModule,
@@ -26,7 +30,9 @@ import { FlatOwnerAddComponent } from './flat-owner-add/flat-owner-add.component
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}), //disappear warnings
     FlatOwnersRoutingModule,
     SharedModule,
-    DataTablesModule
+    DataTablesModule,
+    BsDatepickerModule.forRoot(),
+    TooltipModule.forRoot()
     //StoreModule.forFeature(BUILDING_STATE_NAME, buildingsReducer),
     //EffectsModule.forFeature([BuildingsEffects])
   ]

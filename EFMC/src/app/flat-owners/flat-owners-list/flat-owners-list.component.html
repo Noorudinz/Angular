@@ -44,16 +44,20 @@
           <td>{{ flat.possesionDate | date: 'dd/MM/yyyy' }}</td>
           <td>
               <a style="cursor: pointer; color: black;"
+              tooltip="View details"
               [routerLink]="['details', flat.flatNo]">
               <i class="fas fa-info-circle"></i>
               </a>
             |
               <a style="cursor: pointer; color: blue;"
-              data-toggle="modal" data-target="#modal-edit-email-setting">
+              tooltip="Edit flat detail"
+              [routerLink]="['edit', flat.flatNo]">
               <i class="fas fa-user-edit"></i></a>
             |
               <a style="cursor: pointer; color: red;"
-              data-toggle="modal" data-target="#modal-edit-email-setting">
+              tooltip="Delete flat detail"
+              (click)="onDelete(flat.flatNo)"
+              data-toggle="modal" data-target="#modal-delete-flat">
               <i class="fas fa-trash"></i></a>
           </td>
         </tr>
@@ -74,5 +78,28 @@
   </div>
 
 
+  <div class="modal fade" id="modal-delete-flat">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Delete Building</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure to confirm to delete ?</p>
+          <p style="color: red;">Flat No:  {{flatOwnerDetails?.flatNo}}</p>
+          <p style="color: red;">Owner Name:  {{flatOwnerDetails?.firstName}}</p>
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="closeBtn">Close</button>
+          <button type="button" class="btn btn-danger" (click)="onDeleteConfirm()">Delete</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
 
 

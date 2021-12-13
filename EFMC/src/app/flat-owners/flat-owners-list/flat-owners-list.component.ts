@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { FlatOwnersService } from 'src/services/flat-owners.service';
 import { FlatList } from '../flat-owners.model';
-declare var $;
+import * as Alert from '../../toster/alert';
 
 class DataTablesResponse {
   data: any[];
@@ -25,7 +25,7 @@ export class FlatOwnersListComponent implements OnInit, OnDestroy {
   flatOwnersList: any;
   flats: FlatList[] = [];
   dtTrigger: Subject<any> = new Subject<any>();
-  isLoading = false;
+  flatOwnerDetails: any;
 
   constructor(private flatOwnerService: FlatOwnersService) { }
 
@@ -47,6 +47,29 @@ export class FlatOwnersListComponent implements OnInit, OnDestroy {
       }
     });
 
+  }
+
+  onDelete(flatNo: string){
+  this.flatOwnerService.getFlatOwnersByFlatNo(flatNo).subscribe(data => {
+    if(data['isUpdated']){
+      this.flatOwnerDetails ={
+        flatNo: data['flatOwners'][0].flatOwner.flatNo,
+        firstName: data['flatOwners'][0].flatOwner.firstName
+      }
+     }
+    });
+  }
+
+  onDeleteConfirm(){
+    let flatNo = this.flatOwnerDetails.flatNo;
+    this.flatOwnerService.deleteFlatOwner(flatNo).subscribe(data => {
+      document.getElementById('closeBtn').click();
+      if(data.isDeleted){
+       Alert.tosterAlert(data.message, 'success');
+      } else {
+       Alert.tosterAlert(data.message, 'error');
+      }
+    });
   }
 
   ngOnDestroy(): void {
