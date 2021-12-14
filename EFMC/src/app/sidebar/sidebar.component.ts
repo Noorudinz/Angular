@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import * as fromApp from  '../store/app.reducer';
 import * as AuthActions from '../auth/store/auth.actions';
 import { map } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -16,7 +17,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
   isAuthenticate = false;
   userName: string;
 
-  constructor(private store: Store<fromApp.AppState>) {}
+  constructor(private store: Store<fromApp.AppState>,
+    private router: Router,
+    private route: ActivatedRoute) {}
 
   ngOnInit(): void {
 
@@ -37,6 +40,11 @@ export class SidebarComponent implements OnInit, OnDestroy {
            }
         }
       });
+  }
+
+  onBTU(){
+    //alert(1);
+    this.router.navigate(['/import-files', 'import-btu']);
   }
 
   ngOnDestroy(){

@@ -31,6 +31,7 @@ import { EmailSettingComponent } from './email-setting/email-setting.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
+
 @NgModule({
   schemas:  [ CUSTOM_ELEMENTS_SCHEMA ],
   declarations: [
@@ -62,7 +63,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SharedModule,
     CoreModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyADGS9mCRZGa5TmtQqX1ZIU_spB-aGZKpI'
+      apiKey: 'AIzaSyADGS9mCRZGa5TmtQqX1ZIU_spB-aGZKpI' //google map api key
     }),
     AngularOpenlayersModule,
     BrowserAnimationsModule
