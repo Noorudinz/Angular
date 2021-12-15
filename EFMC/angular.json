@@ -20,7 +20,8 @@
             "allowedCommonJsDependencies": [
               "rxjs-compat",
               "crypto-js",
-              "ngx-openlayers"
+              "ngx-openlayers",
+              "xlsx"
             ],
             "outputPath": "dist/adminLTE",
             "index": "src/index.html",

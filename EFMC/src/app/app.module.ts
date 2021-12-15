@@ -29,6 +29,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { PriceFactorComponent } from './price-factor/price-factor.component';
 import { EmailSettingComponent } from './email-setting/email-setting.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+
 
 
 @NgModule({
@@ -44,7 +46,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CompanyComponent,
     OsmViewComponent,
     PriceFactorComponent,
-    EmailSettingComponent
+    EmailSettingComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +65,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SharedModule,
     CoreModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyADGS9mCRZGa5TmtQqX1ZIU_spB-aGZKpI'
+      apiKey: 'AIzaSyADGS9mCRZGa5TmtQqX1ZIU_spB-aGZKpI' //google map api key
     }),
     AngularOpenlayersModule,
     BrowserAnimationsModule

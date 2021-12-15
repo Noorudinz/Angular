@@ -1,0 +1,102 @@
+
+<ng-template appPlaceholder></ng-template>
+
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Import BTU</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active">Import BTU</li>
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+
+<div *ngIf="isLoading" style="text-align: center;">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+
+<section class="content" *ngIf="!isLoading">
+  <div class="row">
+    <span class="col-12 float-sm-right"><a href="../../../assets/excel/formate.xlsx">Download formate</a></span>
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <form [formGroup]="importBTUForm" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group">
+                <label for="possesionDate">Import date</label>
+                <input type="text"
+                bsDatepicker class="form-control"
+                formControlName="importDate"
+                [bsConfig]="{ containerClass: 'theme-dark-blue', showTodayButton: true, todayPosition: 'center' }"
+                [maxDate]="maxDate"
+                >
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label for="exampleInputFile">File input</label>
+                <div class="input-group">
+                  <div class="custom-file">
+                    <input type="file"
+                    accept=".xlsx, .xls, .csv"
+                    multiple="false"
+                    #fileInput
+                    placeholder="Upload file..."
+                    (change)="addfile($event)"
+                    id="exampleInputFile" formControlName="importFile">
+                  </div>
+                  <div class="input-group-append">
+                    <button type="submit" [disabled]="!importBTUForm.valid"
+                    class="btn btn-success">Upload</button>
+                    <!-- <span class="input-group-text" id="">Upload</span> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+          <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered table-striped">
+            <thead>
+            <tr>
+              <th>FlatNo</th>
+              <th>Meter ID</th>
+              <th>Reading</th>
+              <th>Reading Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let btu of btuList">
+              <td>{{ btu.flatNo }}</td>
+              <td>{{ btu.meterID }}</td>
+              <td>{{ btu.reading }}</td>
+              <td>{{ btu.readingDate | date: 'dd/MMM/yyyy' }}</td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+              <th>FlatNo</th>
+              <th>Meter ID</th>
+              <th>Reading</th>
+              <th>Reading Date</th>
+            </tr>
+            </tfoot>
+          </table>
+        </div>
+        <!-- /.card-body -->
+      </div>
+    </div>
+    <!-- /.col -->
+  </div>
+  <!-- /.row -->
+</section>

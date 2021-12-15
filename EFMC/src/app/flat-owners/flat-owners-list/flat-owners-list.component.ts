@@ -5,13 +5,6 @@ import { FlatOwnersService } from 'src/services/flat-owners.service';
 import { FlatList } from '../flat-owners.model';
 import * as Alert from '../../toster/alert';
 
-class DataTablesResponse {
-  data: any[];
-  draw: number;
-  recordsFiltered: number;
-  recordsTotal: number;
-}
-
 
 @Component({
   selector: 'app-flat-owners-list',

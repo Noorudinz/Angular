@@ -2,6 +2,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Email } from 'src/app/email-setting/email.model';
+import * as env from 'src/environments/environment'
 
 @Injectable({
   providedIn: 'root',
@@ -12,13 +13,13 @@ export class EmailSettingService {
 
   getEmail(){
     return this.http.get<Email>(
-      `https://localhost:44357/api/Email/GetEmail`
+      env.environment.baserURL +`Email/GetEmail`
     );
   }
 
   updateEmailSetting(email: Email){
     return this.http.post<{ message: string, isUpdated: boolean }>(
-       `https://localhost:44357/api/Email/UpdateEmailSetting`,
+      env.environment.baserURL + `Email/UpdateEmailSetting`,
        email
      );
    }

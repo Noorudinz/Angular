@@ -1,8 +1,8 @@
-import { Observable } from 'rxjs';
+
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Dashboard } from 'src/app/dashboard/dashboard.model';
 import { PriceFactor } from 'src/app/price-factor/price-factor.model';
+import * as env from 'src/environments/environment'
 
 @Injectable({
   providedIn: 'root',
@@ -13,13 +13,13 @@ export class PriceFactorService {
 
   getPriceFactor(){
     return this.http.get<PriceFactor>(
-      `https://localhost:44357/api/PriceFactor/GetPriceFactor`
+      env.environment.baserURL +`PriceFactor/GetPriceFactor`
     );
   }
 
   updatePriceFactor(priceFactor: PriceFactor){
     return this.http.post<{ message: string, isUpdated: boolean }>(
-       `https://localhost:44357/api/PriceFactor/UpdatePriceFactor`,
+      env.environment.baserURL +`PriceFactor/UpdatePriceFactor`,
        priceFactor
      );
    }

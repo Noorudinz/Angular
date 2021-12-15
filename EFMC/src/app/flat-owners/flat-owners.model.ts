@@ -22,14 +22,6 @@ export class FlatOwners {
 }
 
 
-
-
-
-
-
-
-
-
 export interface FlatList {
   flatNo: string;
   buildingType: string;
