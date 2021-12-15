@@ -29,6 +29,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { PriceFactorComponent } from './price-factor/price-factor.component';
 import { EmailSettingComponent } from './email-setting/email-setting.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 
@@ -45,7 +46,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CompanyComponent,
     OsmViewComponent,
     PriceFactorComponent,
-    EmailSettingComponent
+    EmailSettingComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

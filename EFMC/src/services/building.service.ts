@@ -1,9 +1,10 @@
-import { Observable, throwError } from 'rxjs';
-import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Building } from 'src/app/building-master/building.model';
-import { catchError, map } from 'rxjs/operators';
-import { collectExternalReferences } from '@angular/compiler';
+import { map } from 'rxjs/operators';
+import * as env from 'src/environments/environment'
+
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +21,7 @@ export class BuildingService {
 
   getBuildings(): Observable<Building[]> {
     return this.http
-      .get<Building[]>(`https://localhost:44357/api/Buildings/GetBuildings`)
+      .get<Building[]>(env.environment.baserURL + `Buildings/GetBuildings`)
       .pipe(
         map((data) => {
           const buildings: Building[] = [];
@@ -44,7 +45,7 @@ export class BuildingService {
 
   addOrUpdateBuilding(building: Building){
    return this.http.post<{ message: string, isUpdated: boolean }>(
-      `https://localhost:44357/api/Buildings/AddOrUpdateBuilding`,
+    env.environment.baserURL + `Buildings/AddOrUpdateBuilding`,
       building
     );
   }
@@ -52,7 +53,7 @@ export class BuildingService {
 
   deleteBuilding(id: number, code: string): Observable<{id: string, message: string, isDeleted: boolean}>  {
     return this.http.delete<{id: string, message: string, isDeleted: boolean}>(
-      `https://localhost:44357/api/Buildings/DeleteBuilding/`+id +`/`+code
+      env.environment.baserURL + `Buildings/DeleteBuilding/`+id +`/`+code
     );
   }
 

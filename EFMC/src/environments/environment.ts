@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   firebaseAPIKey: 'AIzaSyDYVkQz3OpBseqeZHL7WA20nPGWx8IA0b4',
-  salt: '6d090796-ecdf-11ea-adc1-0242ac120003'
+  salt: '6d090796-ecdf-11ea-adc1-0242ac120003',
+  baserURL: 'https://localhost:44357/api/'
 };
 
 /*

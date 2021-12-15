@@ -1,10 +1,8 @@
-import { Observable, throwError } from 'rxjs';
-import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Building } from 'src/app/building-master/building.model';
-import { catchError, map, retry } from 'rxjs/operators';
-import { collectExternalReferences } from '@angular/compiler';
 import { BTU, Electricity, Water } from 'src/app/import-files/import-files.model';
+import * as env from 'src/environments/environment'
 
 @Injectable({
   providedIn: 'root',
@@ -15,19 +13,19 @@ export class ImportService {
 
   getBTUList(){
     return this.http.get<BTU[]>(
-       `https://localhost:44357/api/Imports/GetBTUList`
+      env.environment.baserURL +`Imports/GetBTUList`
      );
    }
 
    getWaterList(){
     return this.http.get<Water[]>(
-       `https://localhost:44357/api/Imports/GetWaterList`
+      env.environment.baserURL +`Imports/GetWaterList`
      );
    }
 
    getElectricityList(){
     return this.http.get<Electricity[]>(
-       `https://localhost:44357/api/Imports/GetElectricityList`
+      env.environment.baserURL +`Imports/GetElectricityList`
      );
    }
 
@@ -38,7 +36,7 @@ export class ImportService {
     formData.append('file', fileToUpload, fileToUpload.name);
 
     return this.http.post<{ message: string, isUpdated: boolean }>(
-      `https://localhost:44357/api/Imports/UploadBTU`,
+      env.environment.baserURL +`Imports/UploadBTU`,
       formData, {reportProgress: true, observe: 'events'}
     );
   }
@@ -50,7 +48,7 @@ export class ImportService {
     formData.append('file', fileToUpload, fileToUpload.name);
 
     return this.http.post<{ message: string, isUpdated: boolean }>(
-      `https://localhost:44357/api/Imports/UploadWater`,
+      env.environment.baserURL +`Imports/UploadWater`,
       formData, {reportProgress: true, observe: 'events'}
     );
   }
@@ -62,7 +60,7 @@ export class ImportService {
     formData.append('file', fileToUpload, fileToUpload.name);
 
     return this.http.post<{ message: string, isUpdated: boolean }>(
-      `https://localhost:44357/api/Imports/UploadElectricity`,
+      env.environment.baserURL +`Imports/UploadElectricity`,
       formData, {reportProgress: true, observe: 'events'}
     );
   }

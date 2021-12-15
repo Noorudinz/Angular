@@ -25,6 +25,7 @@ const routes: Routes = [
   component: ImportFilesComponent,
   canActivate: [AuthGuard],
   children: [
+    { path: '', component: ImportBtuComponent },
     { path: 'import-btu', component: ImportBtuComponent },
     { path: 'import-water', component: ImportWaterComponent },
     { path: 'import-electricity', component: ImportElectricityComponent }

@@ -5,6 +5,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { CompanyComponent } from './company/company.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EmailSettingComponent } from './email-setting/email-setting.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PriceFactorComponent } from './price-factor/price-factor.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 
@@ -61,6 +62,10 @@ const routes: Routes = [
   {
     path: 'email-setting',
     component: EmailSettingComponent
+  },
+  {
+    path: '**',
+    component: PageNotFoundComponent
   },
 
 ];

@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
-import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Building } from 'src/app/building-master/building.model';
+import * as env from 'src/environments/environment'
 import { FlatList, FlatOwners } from 'src/app/flat-owners/flat-owners.model';
 
 
@@ -14,13 +14,13 @@ export class FlatOwnersService {
 
   getFlatOwners(){
    return this.http.get<FlatList[]>(
-      `https://localhost:44357/api/FlatOwner/GetFlatOwners`
+    env.environment.baserURL +`FlatOwner/GetFlatOwners`
     );
   }
 
   getFlatOwnersByFlatNo(flatNo: string){
     return this.http.get(
-      `https://localhost:44357/api/FlatOwner/GetFlatOwnerByFlatNo/`+ flatNo
+      env.environment.baserURL +`FlatOwner/GetFlatOwnerByFlatNo/`+ flatNo
     );
   }
 
@@ -50,7 +50,7 @@ export class FlatOwnersService {
 
   addFlatOwner(flatOwner){
    return this.http.post<{ message: string, isUpdated: boolean }>(
-      `https://localhost:44357/api/FlatOwner/AddFlatOwner`,
+    env.environment.baserURL +`FlatOwner/AddFlatOwner`,
       flatOwner
     );
   }
