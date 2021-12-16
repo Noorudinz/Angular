@@ -5,6 +5,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { CompanyComponent } from './company/company.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EmailSettingComponent } from './email-setting/email-setting.component';
+import { InvoiceComponent } from './invoice/invoice.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PriceFactorComponent } from './price-factor/price-factor.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
@@ -35,10 +36,11 @@ const routes: Routes = [
     loadChildren: () => import('./import-files/import-files.module').then(m => m.ImportFilesModule),
     canActivate: [AuthGuard]
   },
-  // {
-  //   path: 'flat-owners/details/:id',
-  //   component: FlatOwnerDetailComponent
-  // },
+  {
+    path: 'invoice',
+    loadChildren: () => import('./invoice/invoice.module').then(m => m.InvoiceModule),
+    canActivate: [AuthGuard]
+  },
   {
     path: 'dashboard',
     component: DashboardComponent

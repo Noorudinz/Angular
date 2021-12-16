@@ -1,0 +1,184 @@
+
+
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Invoice</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active">Invoice</li>
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="callout callout-info">
+          <h5><i class="fas fa-info"></i> Note:</h5>
+          This page has been enhanced for printing. Click the print button at the bottom of the invoice to test.
+        </div>
+
+
+        <!-- Main content -->
+        <div class="invoice p-3 mb-3">
+          <!-- title row -->
+          <div class="row">
+            <div class="col-12">
+              <h4>
+                <i class="fas fa-globe"></i>
+                Elite Facilities Management Company, Inc.
+                <small class="float-right">Generated Date: {{ billDetails?.created_date | date: 'dd/MMM/yyyy'}}</small>
+              </h4>
+            </div>
+            <!-- /.col -->
+          </div>
+          <!-- info row -->
+          <div class="row invoice-info">
+            <div class="col-sm-4 invoice-col">
+              From
+              <address>
+                <strong>EFMC, Inc.</strong><br>
+                5133 Folsom Ave, Suite 600<br>
+                Seef, Manama 3153123<br>
+                Phone: (804) 175-985621<br>
+                Email: noorudeens@yahoo.in
+              </address>
+            </div>
+            <!-- /.col -->
+            <div class="col-sm-4 invoice-col">
+              To
+              <address>
+                <strong>{{ billDetails?.firstName }}</strong><br>
+                Address: {{ billDetails?.address }}<br>
+                Mobile: {{ billDetails?.mobileNumber }}<br>
+                Email: {{ billDetails?.email1 }}
+              </address>
+            </div>
+            <!-- /.col -->
+            <div class="col-sm-4 invoice-col">
+              <b>FlatNo #{{ billDetails?.flatNo }}</b><br>
+              <br>
+              <b>Bill No:</b> {{ billDetails?.billNo }}<br>
+              <b>Payment Due date:</b> {{ billDetails?.due_date | date: 'dd/MMM/yyyy' }}<br>
+              <b>Cycle :</b> From: {{ billDetails?.cycle_from | date: 'dd/MMM/yyyy' }} - To: {{ billDetails?.cycle_to | date: 'dd/MMM/yyyy' }}
+            </div>
+            <!-- /.col -->
+          </div>
+          <!-- /.row -->
+
+          <!-- Table row -->
+          <div class="row">
+            <div class="col-12 table-responsive">
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th>Utilities</th>
+                  <th>Current Reading</th>
+                  <th>Previous Reading</th>
+                  <th>Consumption</th>
+                  <th>Charges</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td>BTU</td>
+                  <td>{{ billDetails?.btu_current }}</td>
+                  <td>{{ billDetails?.btu_prev }}</td>
+                  <td>{{ billDetails?.btu_consum }}</td>
+                  <td>{{ billDetails?.btU_amount }}</td>
+                </tr>
+                <tr>
+                  <td>Water</td>
+                  <td>{{ billDetails?.water_current }}</td>
+                  <td>{{ billDetails?.water_prev }}</td>
+                  <td>{{ billDetails?.water_consum }}</td>
+                  <td>{{ billDetails?.water_amount }}</td>
+                </tr>
+                <tr>
+                  <td>Electricity</td>
+                  <td>{{ billDetails?.elec_current }}</td>
+                  <td>{{ billDetails?.elec_prev }}</td>
+                  <td>{{ billDetails?.elec_consum }}</td>
+                  <td>{{ billDetails?.electricity_amount }}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- /.col -->
+          </div>
+          <!-- /.row -->
+
+          <div class="row">
+            <!-- accepted payments column -->
+            <div class="col-6">
+              <p class="lead">Payment Methods:</p>
+              <img src="../../../assets/img/credit/visa.png" alt="Visa">&nbsp;
+              <img src="../../../assets/img/credit/mastercard.png" alt="Mastercard">&nbsp;
+              <img src="../../../assets/img/credit/american-express.png" alt="American Express">&nbsp;
+              <img src="../../../assets/img/credit/paypal2.png" alt="Paypal">
+
+              <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
+                Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem
+                plugg
+                dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
+              </p>
+            </div>
+            <!-- /.col -->
+            <div class="col-6">
+              <p class="lead">Amount Due: {{ billDetails?.due_date | date: 'dd/MMM/yyyy' }}</p>
+
+              <div class="table-responsive">
+                <table class="table">
+                  <tr>
+                    <th style="width:50%">Subtotal:</th>
+                    <td>{{ billDetails?.current_bill }}</td>
+                  </tr>
+                  <tr>
+                    <th>Service charges:</th>
+                    <td>{{ billDetails?.service_charge  }}</td>
+                  </tr>
+                  <tr>
+                    <th>Others charges:</th>
+                    <td>{{ billDetails?.other_charge }}</td>
+                  </tr>
+                  <tr>
+                    <th>Previous arrears:</th>
+                    <td>{{ billDetails?.previous_arrear }}</td>
+                  </tr>
+                  <tr>
+                    <th>Total:</th>
+                    <td>{{ billDetails?.amount }}</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <!-- /.col -->
+          </div>
+          <!-- /.row -->
+
+          <!-- this row will not appear when printing -->
+          <div class="row no-print">
+            <div class="col-12">
+              <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
+              <button type="button" class="btn btn-success float-right"><i class="far fa-credit-card"></i> Submit
+                Payment
+              </button>
+              <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
+                <i class="fas fa-download"></i> Generate PDF
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- /.invoice -->
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</section>
