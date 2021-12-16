@@ -32,7 +32,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
-
 @NgModule({
   schemas:  [ CUSTOM_ELEMENTS_SCHEMA ],
   declarations: [
@@ -48,6 +47,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     PriceFactorComponent,
     EmailSettingComponent,
     PageNotFoundComponent
+
   ],
   imports: [
     BrowserModule,
@@ -68,7 +68,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
       apiKey: 'AIzaSyADGS9mCRZGa5TmtQqX1ZIU_spB-aGZKpI' //google map api key
     }),
     AngularOpenlayersModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
