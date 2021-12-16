@@ -11,12 +11,14 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { InvoiceComponent } from "./invoice.component";
 import { InvoiceRoutingModule } from "./invoice.routing.module";
 import { InvoiceListComponent } from "./invoice-list/invoice-list.component";
+import { InvoiceViewComponent } from "./invoice-view/invoice-view.component";
 
 
 @NgModule({
   declarations: [
    InvoiceComponent,
-   InvoiceListComponent
+   InvoiceListComponent,
+   InvoiceViewComponent
   ],
   imports: [
     CommonModule,

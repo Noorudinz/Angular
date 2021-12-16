@@ -54,6 +54,7 @@ export class InvoiceListComponent implements OnInit, OnDestroy {
       pagingType: 'full_numbers',
       pageLength: 10,
       destroy: true,
+
     };
 
     this.loadBillData();

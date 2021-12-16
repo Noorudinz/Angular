@@ -14,6 +14,7 @@ import * as Alert from '../../toster/alert';
 export class FlatOwnersListComponent implements OnInit, OnDestroy {
 
   dtOptions: DataTables.Settings = {};
+  //dtOptions: any = {};
   private userSub: Subscription;
   flatOwnersList: any;
   flats: FlatList[] = [];
@@ -30,7 +31,10 @@ export class FlatOwnersListComponent implements OnInit, OnDestroy {
 
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 10
+      pageLength: 10,
+      // processing: true,
+      // dom: 'Bfrtip',
+      // buttons: ['print', 'excel']
     };
 
     this.userSub = this.flatOwnerService.getFlatOwners().subscribe(data => {

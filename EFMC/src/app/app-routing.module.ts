@@ -65,10 +65,6 @@ const routes: Routes = [
     path: 'email-setting',
     component: EmailSettingComponent
   },
-  // {
-  //   path: 'invoice',
-  //   component: InvoiceComponent
-  // },
   {
     path: '**',
     component: PageNotFoundComponent

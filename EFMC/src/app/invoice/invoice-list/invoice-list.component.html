@@ -73,6 +73,7 @@
                 <th>BTU Amount</th>
                 <th>Elect Amount</th>
                 <th>Water Amount</th>
+                <th>Current bill</th>
                 <th>Actions</th>
               </tr>
               </thead>
@@ -83,10 +84,11 @@
                 <td>{{ bill.btU_amount }}</td>
                 <td>{{ bill.electricity_amount }}</td>
                 <td>{{ bill.water_amount }}</td>
+                <td>{{ bill.current_bill }}</td>
                 <td>
                   <a style="cursor: pointer; color: black;"
-                  tooltip="View details"
-                  [routerLink]="['details', bill.flatNo]">
+                  tooltip="View invoice"
+                  [routerLink]="['view', bill.billNo]">
                   <i class="fas fa-info-circle"></i>
                   </a>
                 </td>
@@ -99,6 +101,7 @@
                 <th>BTU Amount</th>
                 <th>Elect Amount</th>
                 <th>Water Amount</th>
+                <th>Current bill</th>
                 <th>Actions</th>
               </tr>
               </tfoot>

@@ -27,4 +27,10 @@ export class InvoiceService {
     );
   }
 
+  getInvoiceByBillNo(billNo: string){
+    return this.http.get(
+      env.environment.baserURL +`Todo/InvoiceByBillNo/`+ billNo
+    );
+  }
+
 }
