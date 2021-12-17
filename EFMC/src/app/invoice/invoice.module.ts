@@ -12,13 +12,15 @@ import { InvoiceComponent } from "./invoice.component";
 import { InvoiceRoutingModule } from "./invoice.routing.module";
 import { InvoiceListComponent } from "./invoice-list/invoice-list.component";
 import { InvoiceViewComponent } from "./invoice-view/invoice-view.component";
+import { BillGenerationComponent } from "./bill-generation/bill-generation.component";
 
 
 @NgModule({
   declarations: [
    InvoiceComponent,
    InvoiceListComponent,
-   InvoiceViewComponent
+   InvoiceViewComponent,
+   BillGenerationComponent
   ],
   imports: [
     CommonModule,

@@ -100,13 +100,23 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item" *ngIf="isAuthenticate">
-          <a routerLink="/invoice" routerLinkActive="active" class="nav-link">
-            <i class="fas fa-file-invoice"></i>&nbsp;
+
+        <li class="nav-item has-treeview" *ngIf="isAuthenticate">
+          <a style="cursor: pointer;"  class="nav-link">
+            <i class="nav-icon fas fa-file-invoice"></i>&nbsp;
             <p>
               Invoice
+              <i class="right fas fa-angle-left"></i>
             </p>
           </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a routerLink="/invoice/bill-generate" routerLinkActive="active" class="nav-link">
+                <i class="nav-icon fas fa-file-invoice-dollar"></i>
+                <p>Bill Generation</p>
+              </a>
+            </li>
+          </ul>
         </li>
       </ul>
     </nav>

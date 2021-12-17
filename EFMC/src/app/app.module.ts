@@ -46,7 +46,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     OsmViewComponent,
     PriceFactorComponent,
     EmailSettingComponent,
-    PageNotFoundComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
