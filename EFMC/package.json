@@ -33,6 +33,7 @@
     "datatables.net-dt": "^1.11.3",
     "jszip": "^3.7.1",
     "leaflet": "^1.7.1",
+    "moment": "^2.29.1",
     "ngx-bootstrap": "^7.1.0",
     "ngx-openlayers": "^0.8.22",
     "openlayers": "^4.6.5",

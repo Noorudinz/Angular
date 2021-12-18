@@ -3,7 +3,7 @@ export interface Bills {
 	flatNo:  number;
 	cycle_from:  Date;
 	cycle_to:  number;
-	bTU_amount:  number;
+	btU_amount:  number;
 	electricity_amount:  number;
 	water_amount:  number;
 	service_charge:  number;

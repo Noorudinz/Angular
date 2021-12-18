@@ -6,20 +6,6 @@ import { ImportElectricityComponent } from "./import-electricity/import-electric
 import { ImportFilesComponent } from "./import-files.component";
 import { ImportWaterComponent } from "./import-water/import-water.component";
 
-// const routes: Routes = [
-//   { path: '',
-//   component: FlatOwnersComponent,
-//   canActivate: [AuthGuard],
-//   children: [
-//       { path: '', component: FlatOwnersListComponent },
-//       { path: 'add', component: FlatOwnerAddComponent },
-//       { path: 'details/:id', component: FlatOwnerDetailComponent },
-//       { path: 'edit/:id', component: FlatOwnersEditComponent}
-//  ]},
-
-// ];
-
-
 const routes: Routes = [
   { path: '',
   component: ImportFilesComponent,

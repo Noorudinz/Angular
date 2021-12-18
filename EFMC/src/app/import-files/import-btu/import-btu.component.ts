@@ -63,6 +63,7 @@ export class ImportBtuComponent implements OnInit, OnDestroy {
     };
 
     this.loadBTUData();
+
     this.isLoading = false;
   }
 
