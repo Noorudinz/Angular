@@ -1,4 +1,4 @@
-
+<ng-template appPlaceholder></ng-template>
 
 <section class="content-header">
   <div class="container-fluid">
@@ -16,8 +16,12 @@
   </div><!-- /.container-fluid -->
 </section>
 
+<div *ngIf="isLoading" style="text-align: center;">
+  <app-loading-spinner></app-loading-spinner>
+</div>
 
-<section class="content">
+
+<section class="content" *ngIf="!isLoading">
   <div class="row">
    <div class="col-12">
       <div class="card">
@@ -49,7 +53,7 @@
                 <div class="col-6" *ngIf="showGenerate">
                   <div class="form-group">
                     <label for="Generate">Generate bill</label>
-                    <button
+                    <button type="button"
                     (click)="onGenerate()"
                     class="btn btn-block bg-gradient-success form-control">
                     Generate</button>

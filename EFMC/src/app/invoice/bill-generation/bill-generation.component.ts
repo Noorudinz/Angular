@@ -6,6 +6,7 @@ import { PlaceholderDirective } from 'src/app/shared/placeholder/placeholder.dir
 import { InvoiceService } from 'src/services/invoice.service';
 import { Bills } from '../invoice.model';
 import { DataTableDirective } from 'angular-datatables';
+import { DateValidator } from 'src/app/shared/date.validator';
 
 
 
@@ -28,12 +29,13 @@ export class BillGenerationComponent implements OnInit, OnDestroy {
   showGenerate = false;
 
   billList: Bills[] = [];
-  isLoginMode = true;
+  isLoading = false;
 
 
   constructor(private invoiceService: InvoiceService) {}
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.initImportForm();
     this.initDataTable();
   }
@@ -43,7 +45,8 @@ export class BillGenerationComponent implements OnInit, OnDestroy {
     let selectMonth = null;
 
     this.billGenerateForm = new FormGroup({
-      'selectMonth': new FormControl(selectMonth, [Validators.required])
+      'selectMonth': new FormControl(selectMonth,
+        Validators.compose([Validators.required, DateValidator.dateVaidator]))
     });
 
   }
@@ -56,14 +59,16 @@ export class BillGenerationComponent implements OnInit, OnDestroy {
       destroy: true,
     };
 
-    this.loadData();
+    let dummyDate = new Date(1900,1,1);
+    this.loadData(dummyDate);
     //setTimeout(()=>this.showContent=true, 250);
     this.dtTrigger.next();
+    this.isLoading = false;
   }
 
-  private loadData(){
-    let dummyDate = new Date(1900,1,1);
-    this.userSub = this.invoiceService.getInvoiceByPeriods(dummyDate.toISOString()).subscribe(data => {
+  private loadData(loadDate: Date){
+     //dummy date
+    this.userSub = this.invoiceService.getInvoiceByPeriods(loadDate.toISOString()).subscribe(data => {
       if(data !== null){
         this.billList = data;
         this.dtTrigger.next();
@@ -93,16 +98,18 @@ export class BillGenerationComponent implements OnInit, OnDestroy {
     const findMonth = this.billGenerateForm.value.selectMonth;
 
     let selectedDate = this.addDays(findMonth);
-   //console.log(selectedDate)
+    //this.isLoading = true;
     this.userSub = this.invoiceService.getInvoiceByPeriods(selectedDate.toISOString())
     .subscribe(data => {
       if(data[0] !== undefined && data !== null){
         this.billList = data;
         Alert.tosterAlert('Bill already generated', 'warning');
         this.showGenerate = false;
+
       } else {
           this.showGenerate = true;
           this.billList = null;
+
       }
 
       this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
@@ -110,43 +117,44 @@ export class BillGenerationComponent implements OnInit, OnDestroy {
         dtInstance.destroy();
         // Call the dtTrigger to rerender again
         this.dtTrigger.next();
+
       });
 
     });
 
-    // try {
-    //   this.isLoading = true;
-
-    //   this.closeSub = this.importService.uploadBTU(fileBrowser)
-    //   .pipe(takeLast(1))
-    //   .subscribe((data: HttpResponse<any>) => {
-    //     console.log(data);
-    //    if(data.body?.isUpdated){
-    //     Alert.tosterAlert(data.body?.message, 'success');
-    //    } else {
-    //     Alert.tosterAlert(data.body?.message, 'error');
-    //    }
-    //    this.initDataTable();
-    //    window.location.reload();
-    //   },
-    //   (err: HttpErrorResponse)=>{ console.log(err.message) });
-    // }
-    // catch(error){
-    //   console.log(error);
-    // }
-
-  }
-
-  private convertToDate(dateString: string){
-    //  Convert a "dd/MM/yyyy" string into a Date object
-    let d = dateString.split("/");
-    let dat = new Date(d[2] + '/' + d[1] + '/' + d[0]);
-    return dat;
   }
 
   onGenerate(){
-    var str = '01/'+ (<HTMLInputElement>document.getElementById("selectDate")).value;
-    console.log(this.convertToDate(str));
+
+    var getDateString = (<HTMLInputElement>document.getElementById("selectDate")).value;
+
+    if(!DateValidator.dateFormat(getDateString)){
+      Alert.tosterAlert('Empty or invalid date format', 'error');
+      return;
+    }
+
+    const generateDate = DateValidator.convertToDate(getDateString);
+
+    this.isLoading = true;
+    this.userSub = this.invoiceService.generateBill(generateDate.toDateString())
+    .subscribe(data => {
+      if(data[0] !== undefined && data !== null){
+        this.billList = data;
+        Alert.tosterAlert('Bills prepared successfully!', 'success');
+        this.showGenerate = false;
+        this.isLoading = false;
+
+        this.userSub = this.invoiceService.getInvoiceByPeriods(generateDate.toISOString())
+        .subscribe(data => {
+          if(data !== null){
+            this.billList = data;
+            //this.dtTrigger.next();
+          }
+        });
+      }
+
+    });
+
   }
 
   ngOnDestroy(): void {

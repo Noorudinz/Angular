@@ -41,4 +41,10 @@ export class InvoiceService {
     );
   }
 
+  generateBill(selectedDate: string){
+    return this.http.get<Bills[]>(
+      env.environment.baserURL +`Todo/GenerateBill/`+ selectedDate
+    );
+  }
+
 }
