@@ -13,6 +13,7 @@ import { InvoiceRoutingModule } from "./invoice.routing.module";
 import { InvoiceListComponent } from "./invoice-list/invoice-list.component";
 import { InvoiceViewComponent } from "./invoice-view/invoice-view.component";
 import { BillGenerationComponent } from "./bill-generation/bill-generation.component";
+import { SendMailComponent } from "./send-mail/send-mail.component";
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { BillGenerationComponent } from "./bill-generation/bill-generation.compo
    InvoiceComponent,
    InvoiceListComponent,
    InvoiceViewComponent,
-   BillGenerationComponent
+   BillGenerationComponent,
+   SendMailComponent
   ],
   imports: [
     CommonModule,

@@ -4,12 +4,12 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Send mails</h1>
+        <h1>Bill generation</h1>
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <li class="breadcrumb-item active">Send mail</li>
+          <li class="breadcrumb-item active">Bill generate</li>
         </ol>
       </div>
     </div>
@@ -22,7 +22,7 @@
    <div class="col-12">
       <div class="card">
         <div class="card-header">
-          <form [formGroup]="billGenerateForm" (ngSubmit)="onSubmit()">
+          <form [formGroup]="sendMailForm" (ngSubmit)="onSubmit()">
           <div class="row">
             <div class="col-4">
               <div class="form-group">
@@ -42,17 +42,17 @@
                   <div class="form-group">
                     <label for="find">Find</label>
                     <button type="submit"
-                    [disabled]="!billGenerateForm.valid"
+                    [disabled]="!sendMailForm.valid"
                      class="btn btn-success form-control">Find</button>
                   </div>
                 </div>
                 <div class="col-6" *ngIf="showGenerate">
                   <div class="form-group">
-                    <label for="Generate">Generate bill</label>
+                    <label for="Generate">Send</label>
                     <button type="button"
                     (click)="onGenerate()"
                     class="btn btn-block bg-gradient-success form-control">
-                    Generate</button>
+                    Send mails</button>
                   </div>
                 </div>
               </div>
