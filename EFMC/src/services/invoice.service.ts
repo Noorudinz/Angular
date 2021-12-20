@@ -47,4 +47,16 @@ export class InvoiceService {
     );
   }
 
+  getSendMailList(selectedDate: string){
+    return this.http.get<Bills[]>(
+      env.environment.baserURL +`Todo/GetMailListToSendByPeriods/`+ selectedDate
+    );
+  }
+
+  sendGeneratedBills(selectedDate: string){
+    return this.http.get<Bills[]>(
+      env.environment.baserURL +`Todo/SendMailGeneratedBills/`+ selectedDate
+    );
+  }
+
 }

@@ -4,6 +4,8 @@ import { Subject, Subscription } from 'rxjs';
 import * as Alert from '../../toster/alert';
 import { PlaceholderDirective } from 'src/app/shared/placeholder/placeholder.directive';
 import { InvoiceService } from 'src/services/invoice.service';
+import { event } from 'jquery';
+import { DataTableDirective } from 'angular-datatables';
 
 @Component({
   selector: 'app-invoice-list',
@@ -13,6 +15,8 @@ import { InvoiceService } from 'src/services/invoice.service';
 export class InvoiceListComponent implements OnInit, OnDestroy {
 
   @ViewChild(PlaceholderDirective, { static: false }) alertHost: PlaceholderDirective;
+  @ViewChild(DataTableDirective)
+  dtElement: DataTableDirective;
 
   importBTUForm: FormGroup;
 
@@ -70,7 +74,33 @@ export class InvoiceListComponent implements OnInit, OnDestroy {
     });
   }
 
+  onOpenCalendar(container) {
+    container.monthSelectHandler = (event: any): void => {
+      container._store.dispatch(container._actions.select(event.date));
+      this.getOnChangeMonthData(event.date);
+    };
+    container.setViewMode('month');
+   }
 
+   private addDays(date: Date){
+    var result = new Date(date);
+    result.setDate(result.getDate() + 1);
+    return result;
+   }
+
+   getOnChangeMonthData(date: Date){
+
+     this.invoiceService.getInvoiceByPeriods(date.toDateString())
+     .subscribe(data => {
+      if(data !== null){
+        this.billList = data;
+        this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+          dtInstance.destroy();
+          this.dtTrigger.next();
+        });
+      }
+     });
+   }
 
   onSubmit(){
 

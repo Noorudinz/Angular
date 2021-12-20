@@ -30,5 +30,5 @@ export interface Bills {
 	email1:  string;
 	address:  string;
 	faxNumber: string;
-
+  isMailSend: boolean;
 }

@@ -27,41 +27,24 @@
       <div class="col-12">
         <div class="card">
           <div class="card-header">
-            <form [formGroup]="importBTUForm" (ngSubmit)="onSubmit()">
+
             <div class="row">
-              <div class="col-6">
-                <!-- <div class="form-group">
-                  <label for="possesionDate">Import date</label>
+              <div class="col-4">
+                <div class="form-group">
+                  <label for="month">Select Month</label>
                   <input type="text"
+                  id="selectDate"
                   bsDatepicker class="form-control"
-                  formControlName="importDate"
-                  [bsConfig]="{ containerClass: 'theme-dark-blue', showTodayButton: true, todayPosition: 'center' }"
-                  [maxDate]="maxDate"
+                  (onShown)="onOpenCalendar($event)"
+                  [bsConfig]="{ containerClass: 'theme-dark-blue', dateInputFormat: 'MM/YYYY' }"
                   >
-                </div> -->
+                </div>
               </div>
               <div class="col-6">
-                <!-- <div class="form-group">
-                  <label for="exampleInputFile">File input</label>
-                  <div class="input-group">
-                    <div class="custom-file">
-                      <input type="file"
-                      accept=".xlsx, .xls, .csv"
-                      multiple="false"
-                      #fileInput
-                      placeholder="Upload file..."
-                      (change)="addfile($event)"
-                      id="exampleInputFile" formControlName="importFile">
-                    </div>
-                    <div class="input-group-append">
-                      <button type="submit" [disabled]="!importBTUForm.valid"
-                      class="btn btn-success">Upload</button>
-                    </div>
-                  </div>
-                </div> -->
+
               </div>
             </div>
-          </form>
+
           </div>
           <!-- /.card-header -->
           <div class="card-body">

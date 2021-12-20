@@ -8,20 +8,18 @@ import { Bills } from '../invoice.model';
 import { DataTableDirective } from 'angular-datatables';
 import { DateValidator } from 'src/app/shared/date.validator';
 
-
-
-
 @Component({
-  selector: 'app-bill-generation',
-  templateUrl: './bill-generation.component.html',
-  styleUrls: ['./bill-generation.component.css']
+  selector: 'app-send-mail',
+  templateUrl: './send-mail.component.html',
+  styleUrls: ['./send-mail.component.css']
 })
-export class BillGenerationComponent implements OnInit, OnDestroy {
+export class SendMailComponent implements OnInit, OnDestroy {
+
   @ViewChild(PlaceholderDirective, { static: false }) alertHost: PlaceholderDirective;
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
 
-  billGenerateForm: FormGroup;
+  sendMailForm: FormGroup;
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
@@ -44,7 +42,7 @@ export class BillGenerationComponent implements OnInit, OnDestroy {
   private initImportForm(){
     let selectMonth = null;
 
-    this.billGenerateForm = new FormGroup({
+    this.sendMailForm = new FormGroup({
       'selectMonth': new FormControl(selectMonth,
         Validators.compose([Validators.required, DateValidator.dateVaidator]))
     });
@@ -76,6 +74,7 @@ export class BillGenerationComponent implements OnInit, OnDestroy {
   }
 
   onOpenCalendar(container) {
+    this.showGenerate = false;
     container.monthSelectHandler = (event: any): void => {
       container._store.dispatch(container._actions.select(event.date));
     };
@@ -90,22 +89,23 @@ export class BillGenerationComponent implements OnInit, OnDestroy {
 
   onSubmit(){
 
-    if(!this.billGenerateForm.valid){
+    if(!this.sendMailForm.valid){
       return
     }
 
-    const findMonth = this.billGenerateForm.value.selectMonth;
+    const findMonth = this.sendMailForm.value.selectMonth;
 
     let selectedDate = this.addDays(findMonth);
 
-    this.userSub = this.invoiceService.getInvoiceByPeriods(selectedDate.toISOString())
+    this.userSub = this.invoiceService.getSendMailList(selectedDate.toISOString())
     .subscribe(data => {
       if(data[0] !== undefined && data !== null){
         this.billList = data;
-        Alert.tosterAlert('Bill already generated', 'warning');
-        this.showGenerate = false;
+        Alert.tosterAlert('Ready to send mail(s)', 'info');
+        this.showGenerate = true;
       } else {
-          this.showGenerate = true;
+          Alert.tosterAlert('Not available', 'info');
+          this.showGenerate = false;
           this.billList = null;
         }
 
@@ -130,7 +130,7 @@ export class BillGenerationComponent implements OnInit, OnDestroy {
     const generateDate = DateValidator.convertToDate(getDateString);
 
     this.isLoading = true;
-    this.userSub = this.invoiceService.generateBill(generateDate.toDateString())
+    this.userSub = this.invoiceService.sendGeneratedBills(generateDate.toDateString())
     .subscribe(data => {
       if(data[0] !== undefined && data !== null){
         this.billList = data;
@@ -156,6 +156,4 @@ export class BillGenerationComponent implements OnInit, OnDestroy {
       this.userSub.unsubscribe();
     }
   }
-
-
 }

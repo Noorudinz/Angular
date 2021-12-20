@@ -30,6 +30,7 @@ import { PriceFactorComponent } from './price-factor/price-factor.component';
 import { EmailSettingComponent } from './email-setting/email-setting.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { SampleComponent } from './invoice/sample/sample.component';
 
 
 @NgModule({
@@ -46,8 +47,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     OsmViewComponent,
     PriceFactorComponent,
     EmailSettingComponent,
-    PageNotFoundComponent
-  ],
+    PageNotFoundComponent,
+    SampleComponent,
+   ],
   imports: [
     BrowserModule,
     CommonModule,
