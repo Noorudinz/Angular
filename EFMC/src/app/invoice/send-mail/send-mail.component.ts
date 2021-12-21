@@ -132,18 +132,16 @@ export class SendMailComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.userSub = this.invoiceService.sendGeneratedBills(generateDate.toDateString())
     .subscribe(data => {
-      if(data[0] !== undefined && data !== null){
-        this.billList = data;
-        Alert.tosterAlert('Bills prepared successfully!', 'success');
-        this.isLoading = false;
 
-        this.userSub = this.invoiceService.getInvoiceByPeriods(generateDate.toISOString())
-        .subscribe(data => {
-          if(data !== null){
-            this.billList = data;
-          }
-          this.onSubmit();
+      if(data.length === 0){
+        this.billList = null;
+        Alert.tosterAlert('Bills send successfully!', 'success');
+        this.isLoading = false;
+        this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+          dtInstance.destroy();
+          this.dtTrigger.next();
         });
+
       }
 
     });

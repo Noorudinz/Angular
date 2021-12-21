@@ -1,0 +1,181 @@
+
+<ng-template appPlaceholder></ng-template>
+
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Receipt</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active">Receipts</li>
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+
+<div *ngIf="isLoading" style="text-align: center;">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+
+
+  <section class="content" *ngIf="!isLoading">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+
+            <div class="row">
+              <div class="col-4">
+                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-receipt">
+                Create receipt
+                </button>
+                <!-- <div class="form-group">
+                  <label for="month">Select Month</label>
+                  <input type="text"
+                  id="selectDate"
+                  bsDatepicker class="form-control"
+                  (onShown)="onOpenCalendar($event)"
+                  [bsConfig]="{ containerClass: 'theme-dark-blue', dateInputFormat: 'MM/YYYY' }"
+                  >
+                </div> -->
+              </div>
+              <div class="col-6">
+
+              </div>
+            </div>
+
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered table-striped">
+              <thead>
+              <tr>
+                <th>FlatNo</th>
+                <th>PaymentMode</th>
+                <th>Bank</th>
+                <th>Amount Received</th>
+                <th>Received By</th>
+                <th>Date</th>
+                <th>Actions</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let receipt of receiptList">
+                <td>{{ receipt.flatNo }}</td>
+                <td>{{ receipt.paymentMode }}</td>
+                <td>{{ receipt.bank }}</td>
+                <td>{{ receipt.amountReceived }}</td>
+                <td>{{ receipt.receivedBy }}</td>
+                <td>{{ receipt.createdDate | date:  'dd/MMM/yyyy'}}</td>
+                <td>
+                  <a style="cursor: pointer; color: black;"
+                  tooltip="View receipt"
+                  [routerLink]="['view', receipt.flatNo]">
+                  <i class="fas fa-info-circle"></i>
+                  </a>
+                </td>
+              </tr>
+              </tbody>
+              <tfoot>
+              <tr>
+                <th>FlatNo</th>
+                <th>PaymentMode</th>
+                <th>Bank</th>
+                <th>Amount Received</th>
+                <th>Received By</th>
+                <th>Date</th>
+                <th>Actions</th>
+              </tr>
+              </tfoot>
+            </table>
+          </div>
+          <!-- /.card-body -->
+        </div>
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </section>
+
+
+    <div class="modal fade" id="modal-receipt">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Default Modal</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form [formGroup]="receiptForm" (ngSubmit)="onSubmit()">
+                <!-- <input formControlName="userId" [hidden]="true">
+                <input formControlName="buildingId" [hidden]="true"> -->
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="buildingname">Flat No</label>
+                    <input type="text" class="form-control" id="flatNo"
+                    formControlName="flatNo" placeholder="Enter Flat No">
+                  </div>
+                  <div class="form-group">
+                    <label>Payment Mode</label>
+                    <select class="form-control" formControlName="paymentMode">
+                      <option>Cash</option>
+                      <option>Credit Card</option>
+                      <option>Debit Card</option>
+                      <option>Cheque</option>
+                      <option>Bank Transfer</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="incharge">Cheque No</label>
+                    <input type="text" class="form-control" id="chequeNo"
+                    formControlName="chequeNo" placeholder="Enter cheque No">
+                  </div>
+                  <div class="form-group">
+                    <label for="chequeDate">Cheque Date</label>
+                    <input type="text" class="form-control" id="chequeDate"
+                    bsDatepicker class="form-control"
+                    formControlName="chequeDate"
+                    [bsConfig]="{ containerClass: 'theme-dark-blue', showTodayButton: true, todayPosition: 'center' }"
+                    placeholder="Enter cheque date">
+                  </div>
+                  <div class="form-group">
+                    <label for="bank">Bank</label>
+                    <input type="text" class="form-control" id="bank"
+                    formControlName="bank" placeholder="Enter Bank name">
+                  </div>
+                  <div class="form-group">
+                    <label for="arf">Amount Received</label>
+                    <input type="number" class="form-control" id="amountReceived"
+                    formControlName="amountReceived" placeholder="Enter ARF">
+                  </div>
+                  <div class="form-group">
+                    <label for="narration">Narration</label>
+                    <textarea rows="3" class="form-control" id="narration"
+                    formControlName="narration" placeholder="Enter narration">
+                    </textarea>
+                  </div>
+                </div>
+                <!-- /.card-body -->
+
+                <div class="card-footer">
+                  <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" id="close" data-dismiss="modal"
+                   >Close</button>
+                    <button type="submit" class="btn btn-success"
+                    [disabled]="!receiptForm.valid">Save changes</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>

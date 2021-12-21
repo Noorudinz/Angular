@@ -31,6 +31,7 @@ import { EmailSettingComponent } from './email-setting/email-setting.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { SampleComponent } from './invoice/sample/sample.component';
+import { ReceiptViewComponent } from './payments/receipt-view/receipt-view.component';
 
 
 @NgModule({
@@ -49,6 +50,7 @@ import { SampleComponent } from './invoice/sample/sample.component';
     EmailSettingComponent,
     PageNotFoundComponent,
     SampleComponent,
+    ReceiptViewComponent,
    ],
   imports: [
     BrowserModule,

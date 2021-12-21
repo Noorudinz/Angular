@@ -130,6 +130,37 @@
             </li>
           </ul>
         </li>
+
+        <li class="nav-item has-treeview" *ngIf="isAuthenticate">
+          <a style="cursor: pointer;"  class="nav-link">
+            <i class="nav-icon fas fa-comment-dollar"></i>&nbsp;
+            <p>
+              Payments
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a routerLink="/payments/receipts" routerLinkActive="active" class="nav-link">
+                <i class="nav-icon fas fa-receipt"></i>
+                <p>Receipt</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/payments/summary" routerLinkActive="active" class="nav-link">
+                <i class="nav-icon far fa-list-alt"></i>
+                <p>Summary</p>
+              </a>
+            </li>
+            <!-- <li class="nav-item">
+              <a routerLink="/invoice/send-mail" routerLinkActive="active" class="nav-link">
+                <i class="nav-icon fas fa-paper-plane"></i>
+                <p>Send mail</p>
+              </a>
+            </li> -->
+          </ul>
+        </li>
+
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

@@ -42,6 +42,11 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'payments',
+    loadChildren: () => import('./payments/payments.module').then(m => m.PaymentsModule),
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'dashboard',
     component: DashboardComponent
   },
