@@ -13,3 +13,16 @@ export interface Payments {
 	narration:  string;
 	createdDate:  Date;
 }
+
+export interface Summary {
+  accontNo: number;
+  flatNo: string;
+  narration: string;
+  transtype: number;
+  charge: number;
+  receipts: number;
+  amount: number;
+  created_date: Date;
+  charge_id: number;
+  receipt_id: number;
+}

@@ -39,4 +39,16 @@ export class PaymentsService {
     );
   }
 
+  getSummary(){
+    return this.http.get(
+      env.environment.baserURL +`Payments/GetLastSummaryDetail/`
+    );
+  }
+
+  getSummaryDetail(flatNo: string){
+    return this.http.get(
+      env.environment.baserURL +`Payments/GetSummaryByFlatNo/`+ flatNo
+    );
+  }
+
 }

@@ -41,7 +41,7 @@
           <div class="small-box bg-success">
             <div class="inner">
               <!-- <h3>53<sup style="font-size: 20px">%</sup></h3> -->
-              <h3>{{dashboard?.totalOutstandingPayments}}</h3>
+              <h3>{{dashboard?.totalOutstandingPayments[0].amount}}</h3>
 
               <p>Total outstanding Payments</p>
             </div>
@@ -56,9 +56,9 @@
           <!-- small box -->
           <div class="small-box bg-warning">
             <div class="inner">
-              <h3>44</h3>
+              <h3>{{dashboard?.lastMonthTotBills}}</h3>
 
-              <p>Last month revenue</p>
+              <p>Last month Generated Bills</p>
             </div>
             <div class="icon">
               <i class="fas fa-tag"></i>
@@ -71,9 +71,9 @@
           <!-- small box -->
           <div class="small-box bg-danger">
             <div class="inner">
-              <h3>65</h3>
+              <h3>{{dashboard?.lastMonthTotalRevenue}}</h3>
 
-              <p>Current month revenue</p>
+              <p>Last month Total revenue</p>
             </div>
             <div class="icon">
               <i class="ion ion-pie-graph"></i>

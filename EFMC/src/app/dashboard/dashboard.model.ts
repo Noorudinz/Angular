@@ -2,6 +2,8 @@
 export class Dashboard {
   public flatOwnersCount: number;
   public totalOutstandingPayments: number;
+  public lastMonthTotBills: number;
+  public lastMonthTotalRevenue: number;
   public topFiveOP: TopFiveOutstandings[];
 }
 
