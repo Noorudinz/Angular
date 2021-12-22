@@ -45,4 +45,10 @@ export class PaymentsService {
     );
   }
 
+  getSummaryDetail(flatNo: string){
+    return this.http.get(
+      env.environment.baserURL +`Payments/GetSummaryByFlatNo/`+ flatNo
+    );
+  }
+
 }

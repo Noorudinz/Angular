@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
 import * as Alert from '../../toster/alert';
 import { PlaceholderDirective } from 'src/app/shared/placeholder/placeholder.directive';

@@ -12,6 +12,8 @@ import { PaymentsComponent } from "./payments.component";
 import { PaymentsRoutingModule } from "./payments.routing.module";
 import { ReceiptsComponent } from "./receipts/receipts.component";
 import { SummaryComponent } from "./summary/summary.component";
+import { ReceiptViewComponent } from "./receipt-view/receipt-view.component";
+import { SummaryViewComponent } from "./summary-view/summary-view.component";
 
 
 
@@ -19,7 +21,9 @@ import { SummaryComponent } from "./summary/summary.component";
   declarations: [
    PaymentsComponent,
    ReceiptsComponent,
-   SummaryComponent
+   ReceiptViewComponent,
+   SummaryComponent,
+   SummaryViewComponent
   ],
   imports: [
     CommonModule,

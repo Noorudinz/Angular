@@ -1,0 +1,77 @@
+
+
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Summary view</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item">Accounts Summary</li>
+          <li class="breadcrumb-item active">Summary view</li>
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+
+
+
+
+
+  <!-- Main content -->
+<section class="content">
+  <div class="container-fluid">
+    <button class="btn btn-primary" (click)="onBack()">Back</button> &nbsp;
+    <button class="btn btn-default">Print</button>
+    <br><br>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Summary details for the flat:&nbsp; <b>{{flatNo}}</b></h3>
+
+            <div class="card-tools">
+              <div class="input-group input-group-sm" style="width: 150px;">
+                <h3 class="card-title">Amount due: <b>{{amountDue}}</b></h3>
+              </div>
+            </div>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body table-responsive p-0">
+            <table class="table table-head-fixed">
+              <thead>
+                <tr>
+                  <th>Trans Date</th>
+                  <th>Narration</th>
+                  <th>Charge Amount</th>
+                  <th>Receipt Amount</th>
+                  <th>Balance Amount</th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let summary of summaryDetails">
+                <tr>
+                  <td>{{summary.created_date | date: 'dd-MMM-yyyy hh:mm'}}</td>
+                  <td>{{summary.narration}}</td>
+                  <td>{{summary.charge}}</td>
+                  <td>{{summary.receipts}}</td>
+                  <td>{{summary.amount}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+    </div>
+
+    <button class="btn btn-primary" (click)="onBack()">Back</button>
+  </div>
+
+
+</section>
+<!-- /.content -->

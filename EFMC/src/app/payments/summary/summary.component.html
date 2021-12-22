@@ -17,12 +17,7 @@
   </div><!-- /.container-fluid -->
 </section>
 
-<div *ngIf="isLoading" style="text-align: center;">
-  <app-loading-spinner></app-loading-spinner>
-</div>
-
-
-  <section class="content" *ngIf="!isLoading">
+  <section class="content">
     <div class="row">
       <div class="col-12">
         <div class="card">
@@ -54,7 +49,10 @@
                 <th>Actions</th>
               </tr>
               </thead>
-              <tbody>
+              <div *ngIf="isLoading" style="text-align: center;">
+                <app-loading-spinner></app-loading-spinner>
+              </div>
+              <tbody *ngIf="!isLoading">
               <tr *ngFor="let summary of summaryList">
                 <td>{{ summary.flatNo }}</td>
                 <td>{{ summary.narration }}</td>
@@ -62,6 +60,13 @@
                 <td>{{ summary.receipts }}</td>
                 <td>{{ summary.amount }}</td>
                 <td>{{ summary.created_date | date:  'dd/MMM/yyyy hh:mm'}}</td>
+                <td>
+                  <a style="cursor: pointer; color: black;"
+                  tooltip="View summary"
+                  [routerLink]="['details', summary.flatNo]">
+                  <i class="fas fa-info-circle"></i>
+                  </a>
+                </td>
               </tr>
               </tbody>
               <tfoot>
