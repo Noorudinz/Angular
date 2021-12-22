@@ -20,7 +20,7 @@ export class FlatOwnersComponent implements OnInit, OnDestroy {
     .subscribe(user => {
       if(user.user !== null){
         for(var r in user.user._roles){
-          if(user.user._roles[r] !== 'admin'){
+          if(user.user._roles[r] !== 'admin' && user.user._roles[r] !== 'user'){
            this.route.navigate(['/dashboard']);
            Alert.tosterAlert('Access denied !', 'error');
           }

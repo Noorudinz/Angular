@@ -31,7 +31,8 @@
             </p>
           </a>
         </li>
-        <li class="nav-item" *ngIf="isAuthenticate">
+
+        <li class="nav-item" *ngIf="isAdminAuthenticate">
           <a routerLink="/user" routerLinkActive="active" class="nav-link">
             <i class="nav-icon fas fa-user"></i>
             <p>
@@ -39,7 +40,7 @@
             </p>
           </a>
         </li>
-        <li class="nav-item" *ngIf="isAuthenticate">
+        <li class="nav-item" *ngIf="isAdminAuthenticate">
           <a routerLink="/building" routerLinkActive="active" class="nav-link">
             <i class="nav-icon fas fa-building"></i>
             <p>
@@ -47,7 +48,7 @@
             </p>
           </a>
         </li>
-        <li class="nav-item" *ngIf="isAuthenticate">
+        <li class="nav-item" *ngIf="isAdminAuthenticate">
           <a routerLink="/price-factor" routerLinkActive="active" class="nav-link">
             <i class="nav-icon fas fa-tag"></i>
             <p>
@@ -55,15 +56,8 @@
             </p>
           </a>
         </li>
-        <li class="nav-item" *ngIf="isAuthenticate">
-          <a routerLink="/flat-owners" routerLinkActive="active" class="nav-link">
-            <i class="nav-icon fas fa-users"></i>
-            <p>
-              Flat owners master
-            </p>
-          </a>
-        </li>
-        <li class="nav-item" *ngIf="isAuthenticate">
+
+        <li class="nav-item" *ngIf="isAdminAuthenticate">
           <a routerLink="/email-setting" routerLinkActive="active" class="nav-link">
             <i class="nav-icon fas fa-at"></i>
             <p>
@@ -71,7 +65,17 @@
             </p>
           </a>
         </li>
-        <li class="nav-item has-treeview">
+
+        <li class="nav-item" *ngIf="isAdminAuthenticate || isUserAuthenticate">
+          <a routerLink="/flat-owners" routerLinkActive="active" class="nav-link">
+            <i class="nav-icon fas fa-users"></i>
+            <p>
+              Flat owners master
+            </p>
+          </a>
+        </li>
+
+        <li class="nav-item has-treeview" *ngIf="isAdminAuthenticate || isEngineerAuthenticate || isUserAuthenticate">
           <a style="cursor: pointer;"  class="nav-link">
             <i class="nav-icon fas fa-file-upload"></i>
             <p>
@@ -101,7 +105,7 @@
           </ul>
         </li>
 
-        <li class="nav-item has-treeview" *ngIf="isAuthenticate">
+        <li class="nav-item has-treeview" *ngIf="isAdminAuthenticate || isAccountsAuthenticate || isUserAuthenticate">
           <a style="cursor: pointer;"  class="nav-link">
             <i class="nav-icon fas fa-file-invoice"></i>&nbsp;
             <p>
@@ -131,7 +135,7 @@
           </ul>
         </li>
 
-        <li class="nav-item has-treeview" *ngIf="isAuthenticate">
+        <li class="nav-item has-treeview" *ngIf="isAdminAuthenticate || isAccountsAuthenticate || isUserAuthenticate">
           <a style="cursor: pointer;"  class="nav-link">
             <i class="nav-icon fas fa-comment-dollar"></i>&nbsp;
             <p>
@@ -152,12 +156,6 @@
                 <p>Summary</p>
               </a>
             </li>
-            <!-- <li class="nav-item">
-              <a routerLink="/invoice/send-mail" routerLinkActive="active" class="nav-link">
-                <i class="nav-icon fas fa-paper-plane"></i>
-                <p>Send mail</p>
-              </a>
-            </li> -->
           </ul>
         </li>
 

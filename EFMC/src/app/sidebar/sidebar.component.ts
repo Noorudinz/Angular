@@ -14,7 +14,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class SidebarComponent implements OnInit, OnDestroy {
 
   private userSub: Subscription;
-  isAuthenticate = false;
+  isAdminAuthenticate = false;
+  isEngineerAuthenticate = false;
+  isAccountsAuthenticate = false;
+  isUserAuthenticate = false;
   userName: string;
 
   constructor(private store: Store<fromApp.AppState>,
@@ -35,17 +38,22 @@ export class SidebarComponent implements OnInit, OnDestroy {
           this.userName = user.user.name;
           for(let r in user.user._roles){
             if(user.user._roles[r] === 'admin'){
-             this.isAuthenticate = true;
+             this.isAdminAuthenticate = true;
+            }
+            if(user.user._roles[r] === 'accountant'){
+              this.isAccountsAuthenticate = true;
+            }
+             if(user.user._roles[r] === 'engineer'){
+              this.isEngineerAuthenticate = true;
+            }
+             if(user.user._roles[r] === 'user'){
+              this.isUserAuthenticate = true;
             }
            }
         }
       });
   }
 
-  onBTU(){
-    //alert(1);
-    this.router.navigate(['/import-files', 'import-btu']);
-  }
 
   ngOnDestroy(){
     this.userSub.unsubscribe();
