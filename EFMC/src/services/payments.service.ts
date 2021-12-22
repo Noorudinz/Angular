@@ -39,4 +39,10 @@ export class PaymentsService {
     );
   }
 
+  getSummary(){
+    return this.http.get(
+      env.environment.baserURL +`Payments/GetLastSummaryDetail/`
+    );
+  }
+
 }

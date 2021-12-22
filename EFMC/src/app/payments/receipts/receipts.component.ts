@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
 import * as Alert from '../../toster/alert';
 import { PlaceholderDirective } from 'src/app/shared/placeholder/placeholder.directive';
-import { InvoiceService } from 'src/services/invoice.service';
 import { DataTableDirective } from 'angular-datatables';
 import { PaymentsService } from 'src/services/payments.service';
 import { Store } from '@ngrx/store';
