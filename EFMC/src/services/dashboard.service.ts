@@ -17,4 +17,16 @@ export class DashboardService {
     );
   }
 
+  getDashboardBarChartDetails(){
+    return this.http.get(
+     env.environment.baserURL +`Dashboard/FetchDataForBarCharts`
+     );
+   }
+
+   getDashboardPieChartDetails(){
+    return this.http.get(
+     env.environment.baserURL +`Dashboard/FetchDataForPieCharts`
+     );
+   }
+
 }

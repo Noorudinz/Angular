@@ -12,3 +12,9 @@ export class TopFiveOutstandings {
   public flatNo: string;
   public amount: number;
 }
+
+export interface BarChartData{
+  type: string;
+  name: string;
+  data: [];
+}
