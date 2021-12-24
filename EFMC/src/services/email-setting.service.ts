@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Email } from 'src/app/email-setting/email.model';
+import { Email, EmailData } from 'src/app/email-setting/email.model';
 import * as env from 'src/environments/environment'
 
 @Injectable({
@@ -23,5 +23,14 @@ export class EmailSettingService {
        email
      );
    }
+
+    //ngrx/store services
+   //--------------------
+
+   getEmailSettingStore(){
+    return this.http.get<EmailData[]>(
+      env.environment.baserURL +`Email/GetEmail`
+    );
+  }
 
 }

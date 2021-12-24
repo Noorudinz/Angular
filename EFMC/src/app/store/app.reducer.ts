@@ -6,10 +6,17 @@ import * as fromBuilding from '../building-master/store/building.reducer'
 import { BuildingState } from '../building-master/store/building.state';
 import { BUILDING_STATE_NAME } from '../building-master/store/building.selector';
 
-import * as fromFlatOwner from '../flat-owners/store/flat-owner.reducer'
+import * as fromFlatOwner from '../flat-owners/store/flat-owner.reducer';
 import { FlatsState } from '../flat-owners/store/flat-owner.state';
 import { FLATS_STATE_NAME } from '../flat-owners/store/flat-owner.selector';
 
+import * as fromPriceFactor from '../price-factor/store/price-factor.reducer';
+import { FactorsState } from '../price-factor/store/price-factor.state';
+import { FACTOR_STATE_NAME } from '../price-factor/store/price-factor.selector';
+
+import * as fromEmailSetting from '../email-setting/store/email-setting.reducer';
+import { EmailsState } from '../email-setting/store/email-setting.state';
+import { EMAIL_STATE_NAME } from '../email-setting/store/email-setting.selector';
 
 // import * as fromShoppingList from '../shopping-list/store/shopping-list.reducer';
 // import * as fromRecipes from '../recipes/store/recipe.reducer';
@@ -20,8 +27,9 @@ export interface AppState {
   role: fromUser.State;
   [BUILDING_STATE_NAME]: BuildingState;
   [FLATS_STATE_NAME]: FlatsState;
-  // shoppingList: fromShoppingList.State;
-  // recipes: fromRecipes.State;
+  [FACTOR_STATE_NAME]: FactorsState;
+  [EMAIL_STATE_NAME]: EmailsState;
+
 }
 
 export const appReducer: ActionReducerMap<AppState> = {
@@ -29,7 +37,8 @@ export const appReducer: ActionReducerMap<AppState> = {
   user: fromUser.userReducer,
   role: fromUser.roleReducer,
   [BUILDING_STATE_NAME]: fromBuilding.buildingsReducer,
-  [FLATS_STATE_NAME]: fromFlatOwner.flatsReducer
-  // shoppingList: fromShoppingList.shoppingListReducer,
-  // recipes: fromRecipes.recipeReducer
+  [FLATS_STATE_NAME]: fromFlatOwner.flatsReducer,
+  [FACTOR_STATE_NAME]: fromPriceFactor.factorsReducer,
+  [EMAIL_STATE_NAME]: fromEmailSetting.emailsReducer
+
 };

@@ -6,6 +6,8 @@ import { EmailSettingService } from 'src/services/email-setting.service';
 import * as Alert from '../toster/alert';
 import * as fromApp from  '../store/app.reducer';
 import { Router } from '@angular/router';
+import { getEmails } from './store/email-setting.selector';
+import { loadEmail } from './store/email-setting.actions';
 
 @Component({
   selector: 'app-email-setting',
@@ -38,6 +40,9 @@ export class EmailSettingComponent implements OnInit, OnDestroy {
 
    this.loadEmail();
    this.initEmailForm();
+
+   this.store.select(getEmails);
+   this.store.dispatch(loadEmail());
   }
 
   private loadEmail(){

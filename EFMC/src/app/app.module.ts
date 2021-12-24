@@ -31,8 +31,8 @@ import { EmailSettingComponent } from './email-setting/email-setting.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { SampleComponent } from './invoice/sample/sample.component';
-import { ReceiptViewComponent } from './payments/receipt-view/receipt-view.component';
-import { SummaryViewComponent } from './payments/summary-view/summary-view.component';
+import { PriceFactorEffects } from './price-factor/store/price-factor.effects';
+import { EmailSettingEffects } from './email-setting/store/email-setting.effects';
 
 
 @NgModule({
@@ -60,7 +60,13 @@ import { SummaryViewComponent } from './payments/summary-view/summary-view.compo
     HttpClientModule,
     AppRoutingModule,
     StoreModule.forRoot(fromApp.appReducer),
-    EffectsModule.forRoot([AuthEffects, UserEffects, BuildingsEffects]),
+    EffectsModule.forRoot(
+      [ AuthEffects,
+        UserEffects,
+        BuildingsEffects,
+        PriceFactorEffects,
+        EmailSettingEffects
+      ]),
     StoreDevtoolsModule.instrument({
       logOnly: environment.production,
     }),
