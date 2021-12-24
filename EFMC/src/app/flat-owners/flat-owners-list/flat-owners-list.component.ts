@@ -1,9 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Subject, Subscription } from 'rxjs';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { FlatOwnersService } from 'src/services/flat-owners.service';
 import { FlatList } from '../flat-owners.model';
 import * as Alert from '../../toster/alert';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/store/app.reducer';
+import { getFlats } from '../store/flat-owner.selector';
+import { loadFlats } from '../store/flat-owner.actions';
 
 
 @Component({
@@ -21,10 +25,15 @@ export class FlatOwnersListComponent implements OnInit, OnDestroy {
   dtTrigger: Subject<any> = new Subject<any>();
   flatOwnerDetails: any;
 
-  constructor(private flatOwnerService: FlatOwnersService) { }
+  flatList: Observable<FlatList[]>;
+
+  constructor(private flatOwnerService: FlatOwnersService,
+    private store: Store<AppState>) { }
 
   ngOnInit(): void {
     this.initDataTable();
+    this.store.select(getFlats);
+    this.store.dispatch(loadFlats());
   }
 
   private initDataTable(){
@@ -36,6 +45,10 @@ export class FlatOwnersListComponent implements OnInit, OnDestroy {
       // dom: 'Bfrtip',
       // buttons: ['print', 'excel']
     };
+
+    // this.flatList = this.store.select(getFlats);
+    // this.store.dispatch(loadFlats());
+    // this.dtTrigger.next();
 
     this.userSub = this.flatOwnerService.getFlatOwners().subscribe(data => {
       if(data !== null){
