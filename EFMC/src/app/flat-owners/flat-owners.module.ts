@@ -14,6 +14,9 @@ import { FlatOwnerAddComponent } from './flat-owner-add/flat-owner-add.component
 import { FlatOwnersEditComponent } from './flat-owners-edit/flat-owners-edit.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { FLATS_STATE_NAME } from "./store/flat-owner.selector";
+import { flatsReducer } from "./store/flat-owner.reducer";
+import { FlatsEffects } from "./store/flat-owner.effects";
 
 
 @NgModule({
@@ -32,9 +35,9 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     SharedModule,
     DataTablesModule,
     BsDatepickerModule.forRoot(),
-    TooltipModule.forRoot()
-    //StoreModule.forFeature(BUILDING_STATE_NAME, buildingsReducer),
-    //EffectsModule.forFeature([BuildingsEffects])
+    TooltipModule.forRoot(),
+    StoreModule.forFeature(FLATS_STATE_NAME, flatsReducer),
+    EffectsModule.forFeature([FlatsEffects])
   ]
 
 })
