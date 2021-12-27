@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { BuildingService } from 'src/services/building.service';
 import * as fromApp from  '../../store/app.reducer';
 import * as Alert from '../../toster/alert';
+import { addBuilding } from '../store/building.actions';
 
 @Component({
   selector: 'app-building-add',
@@ -91,6 +92,8 @@ export class BuildingAddComponent implements OnInit {
     err => {
       console.log(err);
     });
+
+    //this.store.dispatch(addBuilding({ addorUpdate }));
 
     this.buildingForm.reset();
 

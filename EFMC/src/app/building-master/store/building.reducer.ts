@@ -1,7 +1,7 @@
 import { createReducer, on } from "@ngrx/store";
 import { UserRegister } from "src/app/user/user-account.model";
 import { Building } from "../building.model";
-import { loadBuildingSuccess } from "./building.actions";
+import { addBuildingSuccess, loadBuildingSuccess } from "./building.actions";
 import { initialState } from "./building.state";
 
 export interface State {
@@ -11,6 +11,15 @@ export interface State {
 
 
 const _buildingsReducer = createReducer(initialState,
+  on(addBuildingSuccess, (state, action) => {
+    let building = { ...action.building };
+
+    return {
+      ...state,
+      buildings: [...state.buildings, building],
+    };
+  }),
+
   on(loadBuildingSuccess, (state, action) => {
     return {
       ...state,
