@@ -3,7 +3,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as env from 'src/environments/environment'
-import { Payments } from 'src/app/payments/payment.model';
+import { Payments, Summary } from 'src/app/payments/payment.model';
 
 
 @Injectable({
@@ -48,6 +48,14 @@ export class PaymentsService {
   getSummaryDetail(flatNo: string){
     return this.http.get(
       env.environment.baserURL +`Payments/GetSummaryByFlatNo/`+ flatNo
+    );
+  }
+
+  //--------ngrx/store---------------------
+
+  getSummaryStore(){
+    return this.http.get<Summary[]>(
+      env.environment.baserURL +`Payments/GetLastSummaryDetail/`
     );
   }
 
