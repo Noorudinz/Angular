@@ -23,9 +23,23 @@ export class FlatOwners {
 
 
 export interface FlatList {
+  flatId: number;
   flatNo: string;
+  buildingId: number;
   buildingType: string;
+  floorNo: number;
+  area: number;
+  possesionDate: Date;
+  bedRooms: string;
+  carParks: number;
+  familyName: string;
   firstName: string;
   mobileNumber: string;
-  possesionDate: Date;
+  telNumber: string;
+  email1: string;
+  email2: string;
+  address: string;
+  carNo: string;
+  carParkNos : string;
+  isdel: boolean;
 }

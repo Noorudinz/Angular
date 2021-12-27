@@ -62,4 +62,13 @@ export class FlatOwnersService {
     );
   }
 
+  //------ngrx/store--------------------
+  addFlatStore(flat: FlatList): Observable<{ message: string, isUpdated: boolean }> {
+    return this.http.post<{ message: string, isUpdated: boolean }>(
+      env.environment.baserURL + `Buildings/AddOrUpdateBuilding`,
+      flat
+    );
+  }
+
+
 }

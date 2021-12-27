@@ -1,16 +1,15 @@
 import { createReducer, on } from '@ngrx/store';
 import { initialState } from './flat-owner.state';
-import { loadFlatsSuccess } from './flat-owner.actions';
+import { addFlatSuccess, loadFlatsSuccess } from './flat-owner.actions';
 
 const _flatsReducer = createReducer(initialState,
-  // on(addPostSuccess, (state, action) => {
-  //   let post = { ...action.post };
-
-  //   return {
-  //     ...state,
-  //     posts: [...state.posts, post],
-  //   };
-  // }),
+  on(addFlatSuccess, (state, action) => {
+    let flat = { ...action.flat };
+    return {
+      ...state,
+      flats: [...state.flats, flat],
+    };
+  }),
 
   // on(updatePost, (state, action) => {
   //   const updatedPosts = state.posts.map((post) => {

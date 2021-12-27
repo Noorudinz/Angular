@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 
 import { FlatOwnersService } from 'src/services/flat-owners.service';
-import { loadFlats, loadFlatsSuccess } from './flat-owner.actions';
+import { addFlat, addFlatSuccess, loadFlats, loadFlatsSuccess } from './flat-owner.actions';
 
 @Injectable()
 export class FlatsEffects {
@@ -22,19 +22,19 @@ export class FlatsEffects {
     );
   });
 
-  // addPost$ = createEffect(() => {
-  //   return this.actions$.pipe(
-  //     ofType(addPost),
-  //     mergeMap((action) => {
-  //       return this.postsService.addPost(action.post).pipe(
-  //         map((data) => {
-  //           const post = { ...action.post, id: data.name };
-  //           return addPostSuccess({ post });
-  //         })
-  //       );
-  //     })
-  //   );
-  // });
+  addFlat$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(addFlat),
+      mergeMap((action) => {
+        return this.flatService.addFlatStore(action.addFlatOwner).pipe(
+          map((data) => {
+            const flat = { ...action.addFlatOwner };
+            return addFlatSuccess({ flat });
+          })
+        );
+      })
+    );
+  });
 
   // updatePost$ = createEffect(() => {
   //   return this.actions$.pipe(
