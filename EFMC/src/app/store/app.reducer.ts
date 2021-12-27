@@ -22,6 +22,10 @@ import * as fromInvoiceBills from '../invoice/store/invoice.reducer';
 import { InvoiceState } from '../invoice/store/invoice.state';
 import { INVOICES_STATE_NAME } from '../invoice/store/invoice.selector';
 
+import * as fromPaymentSummary from '../payments/store/payments.reducer';
+import { PaymentsState, SummarysState } from '../payments/store/payments.state';
+import { PAYMENT_STATE_NAME, SUMMARY_STATE_NAME } from '../payments/store/payments.selector';
+
 // import * as fromShoppingList from '../shopping-list/store/shopping-list.reducer';
 // import * as fromRecipes from '../recipes/store/recipe.reducer';
 
@@ -34,6 +38,8 @@ export interface AppState {
   [FACTOR_STATE_NAME]: FactorsState;
   [EMAIL_STATE_NAME]: EmailsState;
   [INVOICES_STATE_NAME]: InvoiceState;
+  [PAYMENT_STATE_NAME]: PaymentsState;
+  [SUMMARY_STATE_NAME]: SummarysState;
 
 }
 
@@ -45,5 +51,7 @@ export const appReducer: ActionReducerMap<AppState> = {
   [FLATS_STATE_NAME]: fromFlatOwner.flatsReducer,
   [FACTOR_STATE_NAME]: fromPriceFactor.factorsReducer,
   [EMAIL_STATE_NAME]: fromEmailSetting.emailsReducer,
-  [INVOICES_STATE_NAME]: fromInvoiceBills.invoicesReducer
+  [INVOICES_STATE_NAME]: fromInvoiceBills.invoicesReducer,
+  [PAYMENT_STATE_NAME]: fromPaymentSummary.paymentsReducer,
+  [SUMMARY_STATE_NAME]: fromPaymentSummary.summaryReducer
 };

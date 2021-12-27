@@ -7,6 +7,8 @@ import { DataTableDirective } from 'angular-datatables';
 import { PaymentsService } from 'src/services/payments.service';
 import { Store } from '@ngrx/store';
 import * as fromApp from  '../../store/app.reducer';
+import { getSummarys } from '../store/payments.selector';
+import { loadSummary } from '../store/payments.actions';
 
 @Component({
   selector: 'app-summary',
@@ -46,6 +48,8 @@ export class SummaryComponent implements OnInit {
     });
 
     this.initDataTable();
+    this.store.select(getSummarys);
+    this.store.dispatch(loadSummary());
   }
 
 

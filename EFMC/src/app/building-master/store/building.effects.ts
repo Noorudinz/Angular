@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, mergeMap } from "rxjs/operators";
 import { BuildingService } from "src/services/building.service";
-import { loadBuilding, loadBuildingSuccess } from "./building.actions";
+import { addBuilding, addBuildingSuccess, loadBuilding, loadBuildingSuccess } from "./building.actions";
 
 
 @Injectable()
@@ -16,6 +16,20 @@ export class BuildingsEffects {
         return this.buildingService.getBuildings().pipe(
           map((buildings) => {
             return loadBuildingSuccess({ buildings });
+          })
+        );
+      })
+    );
+  });
+
+  addBuilding$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(addBuilding),
+      mergeMap((action) => {
+        return this.buildingService.addBuilding(action.addorUpdate).pipe(
+          map((data) => {
+            const building = { ...action.addorUpdate };
+            return addBuildingSuccess({ building });
           })
         );
       })

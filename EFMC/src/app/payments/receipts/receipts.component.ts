@@ -7,6 +7,8 @@ import { DataTableDirective } from 'angular-datatables';
 import { PaymentsService } from 'src/services/payments.service';
 import { Store } from '@ngrx/store';
 import * as fromApp from  '../../store/app.reducer';
+import { getPayments } from '../store/payments.selector';
+import { loadPayment } from '../store/payments.actions';
 
 @Component({
   selector: 'app-receipts',
@@ -33,7 +35,6 @@ export class ReceiptsComponent implements OnInit {
   isLoading = false;
 
 
-
   constructor(private paymentsService: PaymentsService,
     private store: Store<fromApp.AppState>) {}
 
@@ -49,6 +50,9 @@ export class ReceiptsComponent implements OnInit {
 
     this.initReceiptForm();
     this.initDataTable();
+
+    this.store.select(getPayments);
+    this.store.dispatch(loadPayment());
   }
 
   private initReceiptForm(){

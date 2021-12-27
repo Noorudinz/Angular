@@ -9,7 +9,8 @@ import { getBuildings } from 'src/app/building-master/store/building.selector';
 import { AppState } from 'src/app/store/app.reducer';
 import { FlatOwnersService } from 'src/services/flat-owners.service';
 import * as Alert from '../../toster/alert';
-import { FlatOwners } from '../flat-owners.model';
+import { FlatList, FlatOwners } from '../flat-owners.model';
+import { addFlat } from '../store/flat-owner.actions';
 
 @Component({
   selector: 'app-flat-owner-add',
@@ -78,7 +79,7 @@ export class FlatOwnerAddComponent implements OnInit {
       return;
     }
 
-    const addFlatOwner: FlatOwners = {
+    const addFlatOwner: FlatList = {
       flatNo: this.flatOwnerForm.value.flatNo,
       buildingId: this.flatOwnerForm.value.buildingType,
       floorNo: this.flatOwnerForm.value.floorNo.toString(),
@@ -96,7 +97,8 @@ export class FlatOwnerAddComponent implements OnInit {
       carNo: this.flatOwnerForm.value.carNo,
       address: this.flatOwnerForm.value.address,
       flatId: 0,
-      isdel: false
+      isdel: false,
+      buildingType: ''
     }
 
    this.flatOwnerService.addFlatOwner(addFlatOwner).subscribe(data => {
@@ -107,6 +109,8 @@ export class FlatOwnerAddComponent implements OnInit {
       Alert.tosterAlert(data.message, 'error');
      }
    });
+
+  // this.store.dispatch(addFlat({ addFlatOwner }));
 
   }
 

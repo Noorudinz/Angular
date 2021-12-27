@@ -14,6 +14,9 @@ import { ReceiptsComponent } from "./receipts/receipts.component";
 import { SummaryComponent } from "./summary/summary.component";
 import { ReceiptViewComponent } from "./receipt-view/receipt-view.component";
 import { SummaryViewComponent } from "./summary-view/summary-view.component";
+import { PAYMENT_STATE_NAME, SUMMARY_STATE_NAME } from "./store/payments.selector";
+import { paymentsReducer, summaryReducer } from "./store/payments.reducer";
+import { PaymentsEffects, SummaryEffects } from "./store/payments.effects";
 
 
 
@@ -33,9 +36,10 @@ import { SummaryViewComponent } from "./summary-view/summary-view.component";
     SharedModule,
     DataTablesModule,
     BsDatepickerModule.forRoot(),
-    TooltipModule.forRoot()
-    //StoreModule.forFeature(BUILDING_STATE_NAME, buildingsReducer),
-    //EffectsModule.forFeature([BuildingsEffects])
+    TooltipModule.forRoot(),
+    StoreModule.forFeature(PAYMENT_STATE_NAME, paymentsReducer),
+    StoreModule.forFeature(SUMMARY_STATE_NAME, summaryReducer),
+    EffectsModule.forFeature([PaymentsEffects, SummaryEffects])
   ]
 
 })

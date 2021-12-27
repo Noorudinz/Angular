@@ -7,8 +7,6 @@ import * as AuthActions from '../auth/store/auth.actions';
 import { Subscription } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import * as Alert from '../toster/alert';
-import { google } from '@google/maps';
-import * as L from 'leaflet';
 
 
 @Component({
