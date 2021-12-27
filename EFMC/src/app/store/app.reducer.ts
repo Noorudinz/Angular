@@ -18,6 +18,10 @@ import * as fromEmailSetting from '../email-setting/store/email-setting.reducer'
 import { EmailsState } from '../email-setting/store/email-setting.state';
 import { EMAIL_STATE_NAME } from '../email-setting/store/email-setting.selector';
 
+import * as fromInvoiceBills from '../invoice/store/invoice.reducer';
+import { InvoiceState } from '../invoice/store/invoice.state';
+import { INVOICES_STATE_NAME } from '../invoice/store/invoice.selector';
+
 // import * as fromShoppingList from '../shopping-list/store/shopping-list.reducer';
 // import * as fromRecipes from '../recipes/store/recipe.reducer';
 
@@ -29,6 +33,7 @@ export interface AppState {
   [FLATS_STATE_NAME]: FlatsState;
   [FACTOR_STATE_NAME]: FactorsState;
   [EMAIL_STATE_NAME]: EmailsState;
+  [INVOICES_STATE_NAME]: InvoiceState;
 
 }
 
@@ -39,6 +44,6 @@ export const appReducer: ActionReducerMap<AppState> = {
   [BUILDING_STATE_NAME]: fromBuilding.buildingsReducer,
   [FLATS_STATE_NAME]: fromFlatOwner.flatsReducer,
   [FACTOR_STATE_NAME]: fromPriceFactor.factorsReducer,
-  [EMAIL_STATE_NAME]: fromEmailSetting.emailsReducer
-
+  [EMAIL_STATE_NAME]: fromEmailSetting.emailsReducer,
+  [INVOICES_STATE_NAME]: fromInvoiceBills.invoicesReducer
 };

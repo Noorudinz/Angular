@@ -14,6 +14,9 @@ import { InvoiceListComponent } from "./invoice-list/invoice-list.component";
 import { InvoiceViewComponent } from "./invoice-view/invoice-view.component";
 import { BillGenerationComponent } from "./bill-generation/bill-generation.component";
 import { SendMailComponent } from "./send-mail/send-mail.component";
+import { InvoiceEffects } from "./store/invoice.effects";
+import { INVOICES_STATE_NAME } from "./store/invoice.selector";
+import { invoicesReducer } from "./store/invoice.reducer";
 
 
 @NgModule({
@@ -32,9 +35,9 @@ import { SendMailComponent } from "./send-mail/send-mail.component";
     SharedModule,
     DataTablesModule,
     BsDatepickerModule.forRoot(),
-    TooltipModule.forRoot()
-    //StoreModule.forFeature(BUILDING_STATE_NAME, buildingsReducer),
-    //EffectsModule.forFeature([BuildingsEffects])
+    TooltipModule.forRoot(),
+    StoreModule.forFeature(INVOICES_STATE_NAME, invoicesReducer),
+    EffectsModule.forFeature([InvoiceEffects])
   ]
 
 })
