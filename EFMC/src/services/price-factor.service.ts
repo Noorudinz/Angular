@@ -24,4 +24,12 @@ export class PriceFactorService {
      );
    }
 
+   //ngrx/store services
+   //--------------------
+
+   getPriceFactorStore(){
+    return this.http.get<PriceFactor[]>(
+      env.environment.baserURL +`PriceFactor/GetPriceFactor`
+    );
+  }
 }

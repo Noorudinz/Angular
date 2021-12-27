@@ -6,6 +6,8 @@ import { PriceFactorService } from '../../services/price-factor.service';
 import * as Alert from '../toster/alert';
 import * as fromApp from  '../store/app.reducer';
 import { Router } from '@angular/router';
+import { getFactors } from './store/price-factor.selector';
+import { loadFactor } from './store/price-factor.actions';
 
 @Component({
   selector: 'app-price-factor',
@@ -23,6 +25,7 @@ export class PriceFactorComponent implements OnInit, OnDestroy {
     private route: Router) { }
 
   ngOnInit(): void {
+
     this.userSub = this.store.select('auth')
     .subscribe(user => {
       if(user.user !== null){
@@ -37,6 +40,9 @@ export class PriceFactorComponent implements OnInit, OnDestroy {
 
     this.loadPriceFactor();
     this.initPriceFactorForm();
+
+    this.store.select(getFactors);
+    this.store.dispatch(loadFactor());
   }
 
   private loadPriceFactor() {

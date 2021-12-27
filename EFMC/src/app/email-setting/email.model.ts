@@ -8,3 +8,13 @@ export class Email {
   public cc: string;
   public updated_Date: Date;
 }
+
+export interface EmailData {
+  id: number;
+  emailAddress: string;
+  password: string;
+  host: string;
+  port: string;
+  cc: string;
+  updated_Date: Date;
+}

@@ -9,3 +9,14 @@ export class PriceFactor {
   public created_date: Date;
   public updated_date: Date;
 }
+
+export interface PriceFactorData {
+  priceID: number;
+  btuFactor: number;
+  electricityFactor: number;
+  waterFactor: number;
+  serviceCharge: number;
+  otherCharges: number;
+  created_date: Date;
+  updated_date: Date;
+}

@@ -59,4 +59,12 @@ export class InvoiceService {
     );
   }
 
+  //----------ngrx store services ------------------------
+
+  getBillsStore(){
+    return this.http.get<Bills[]>(
+      env.environment.baserURL +`Todo/InvoiceByFlatNo`
+    );
+  }
+
 }

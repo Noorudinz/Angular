@@ -4,8 +4,11 @@ import { Subject, Subscription } from 'rxjs';
 import * as Alert from '../../toster/alert';
 import { PlaceholderDirective } from 'src/app/shared/placeholder/placeholder.directive';
 import { InvoiceService } from 'src/services/invoice.service';
-import { event } from 'jquery';
 import { DataTableDirective } from 'angular-datatables';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/store/app.reducer';
+import { getInvoices } from '../store/invoice.selector';
+import { loadInvoices } from '../store/invoice.actions';
 
 @Component({
   selector: 'app-invoice-list',
@@ -31,12 +34,16 @@ export class InvoiceListComponent implements OnInit, OnDestroy {
 
 
 
-  constructor(private invoiceService : InvoiceService) {}
+  constructor(private invoiceService : InvoiceService,
+    private store: Store<AppState>) {}
 
   ngOnInit(): void {
     this.isLoading = true;
     this.initImportForm();
     this.initDataTable();
+
+    this.store.select(getInvoices);
+    this.store.dispatch(loadInvoices());
   }
 
 
