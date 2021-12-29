@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { PaymentsService } from 'src/services/payments.service';
 import * as Alert from '../../toster/alert';
 import { Summary } from '../payment.model';
+import { AppState } from 'src/app/store/app.reducer';
+import { getSummaryById } from '../store/payments.selector';
 
 @Component({
   selector: 'app-summary-view',
@@ -17,11 +20,13 @@ export class SummaryViewComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private routeNav: Router,
-    private paymentsService: PaymentsService) { }
+    private paymentsService: PaymentsService,
+    private store: Store<AppState>) { }
 
   ngOnInit(): void {
     this.flatNo = this.route.snapshot.paramMap.get('flatNo');
     this.summaryDetailsList(this.flatNo);
+    //console.log(this.store.select(getSummaryById));
   }
 
   private summaryDetailsList(flatNo: string){

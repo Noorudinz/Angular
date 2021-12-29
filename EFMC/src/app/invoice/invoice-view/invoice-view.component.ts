@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { InvoiceService } from 'src/services/invoice.service';
 import * as Alert from '../../toster/alert';
 import { AppState } from 'src/app/store/app.reducer';
-import { geInvoiceById } from '../store/invoice.selector';
+
 
 @Component({
   selector: 'app-invoice-view',
@@ -25,7 +25,7 @@ export class InvoiceViewComponent implements OnInit {
   ngOnInit(): void {
     this.billNo = this.route.snapshot.paramMap.get('billNo');
     this.fetchBillDetails(this.billNo);
-    console.log(this.store.select(geInvoiceById));
+    //console.log(this.store.select(geInvoiceById));
   }
 
   private fetchBillDetails(billNo: string){
