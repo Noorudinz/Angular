@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { initialState } from './email-setting.state';
-import { loadEmailSuccess } from './email-setting.actions';
+import { loadEmailSuccess, updateEmail, updateEmailSuccess } from './email-setting.actions';
 
 const _emailsReducer = createReducer(initialState,
   // on(addPostSuccess, (state, action) => {
@@ -12,26 +12,29 @@ const _emailsReducer = createReducer(initialState,
   //   };
   // }),
 
-  // on(updatePost, (state, action) => {
-  //   const updatedPosts = state.posts.map((post) => {
-  //     return action.post.id === post.id ? action.post : post;
+  // on(updateEmail, (state, action) => {
+  //   const updatedEmail = state.emails.map((email) => {
+  //     return action.email.id === email.id ? action.email : email;
   //   });
 
   //   return {
   //     ...state,
-  //     posts: updatedPosts,
+  //     emails: updatedEmail,
   //   };
   // }),
 
-  // on(updatePostSuccess, (state, action) => {
-  //   const updatedPosts = state.posts.map((post) => {
-  //     return action.post.id === post.id ? action.post : post;
-  //   });
-  //   return {
-  //     ...state,
-  //     posts: updatedPosts,
-  //   };
-  // }),
+  on(updateEmailSuccess, (state, action) => {
+    let dataArr = Array.from(state.emails); //map error convert to data array
+    const updatedEmail = dataArr.map((email) => {
+      console.log(state.emails);
+      return action.email.id === email.id ? action.email : email;
+    });
+
+    return {
+      ...state,
+      emails: updatedEmail,
+    };
+  }),
 
   // on(deletePost, (state, { id }) => {
   //   const updatedPosts = state.posts.filter((post) => {

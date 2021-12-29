@@ -33,4 +33,11 @@ export class EmailSettingService {
     );
   }
 
+  updateEmailStore(email: Email) {
+    return this.http.post<{ message: string, isUpdated: boolean }>(
+      env.environment.baserURL + `Email/UpdateEmailSetting`,
+       email
+     );
+  }
+
 }

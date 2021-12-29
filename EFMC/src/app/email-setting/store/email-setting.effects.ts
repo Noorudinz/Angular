@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 
 import { EmailSettingService } from 'src/services/email-setting.service';
-import { loadEmail, loadEmailSuccess } from './email-setting.actions';
+import { loadEmail, loadEmailSuccess, updateEmail, updateEmailSuccess } from './email-setting.actions';
 
 @Injectable()
 export class EmailSettingEffects {
@@ -36,18 +36,18 @@ export class EmailSettingEffects {
   //   );
   // });
 
-  // updatePost$ = createEffect(() => {
-  //   return this.actions$.pipe(
-  //     ofType(updatePost),
-  //     switchMap((action) => {
-  //       return this.postsService.updatePost(action.post).pipe(
-  //         map((data) => {
-  //           return updatePostSuccess({ post: action.post });
-  //         })
-  //       );
-  //     })
-  //   );
-  // });
+  updateEmail$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(updateEmail),
+      switchMap((action) => {
+        return this.emailService.updateEmailStore(action.email).pipe(
+          map((data) => {
+            return updateEmailSuccess({ email: action.email });
+          })
+        );
+      })
+    );
+  });
 
   // deletePost$ = createEffect(() => {
   //   return this.actions$.pipe(

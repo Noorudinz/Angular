@@ -7,7 +7,8 @@ import * as Alert from '../toster/alert';
 import * as fromApp from  '../store/app.reducer';
 import { Router } from '@angular/router';
 import { getEmails } from './store/email-setting.selector';
-import { loadEmail } from './store/email-setting.actions';
+import { loadEmail, updateEmail } from './store/email-setting.actions';
+import { Email } from './email.model';
 
 @Component({
   selector: 'app-email-setting',
@@ -72,6 +73,7 @@ export class EmailSettingComponent implements OnInit, OnDestroy {
   }
 
   onEditEmail(){
+
     this.emailService.getEmail()
     .subscribe(data => {
       if(data !== null){
@@ -86,7 +88,28 @@ export class EmailSettingComponent implements OnInit, OnDestroy {
       return
     }
 
-     const updateEmail = {
+    //  const email = {
+    //   id: 1,
+    //   emailAddress: this.emailSettingForm.value.emailAddress,
+    //   password: this.emailSettingForm.value.password,
+    //   host: this.emailSettingForm.value.host,
+    //   port: this.emailSettingForm.value.port,
+    //   cc: this.emailSettingForm.value.cc,
+    //   updated_Date: null,
+    //  }
+
+    //  this.emailService.updateEmailSetting(email)
+    //  .subscribe(data => {
+    //    if(data.isUpdated){
+    //      document.getElementById('closeBtn').click();
+    //      Alert.tosterAlert(data.message, 'success');
+    //      this.loadEmail();
+    //    } else {
+    //     Alert.tosterAlert(data.message, 'error');
+    //    }
+    //  });
+
+    const email: Email = {
       id: 1,
       emailAddress: this.emailSettingForm.value.emailAddress,
       password: this.emailSettingForm.value.password,
@@ -96,16 +119,7 @@ export class EmailSettingComponent implements OnInit, OnDestroy {
       updated_Date: null,
      }
 
-     this.emailService.updateEmailSetting(updateEmail)
-     .subscribe(data => {
-       if(data.isUpdated){
-         document.getElementById('closeBtn').click();
-         Alert.tosterAlert(data.message, 'success');
-         this.loadEmail();
-       } else {
-        Alert.tosterAlert(data.message, 'error');
-       }
-     });
+     this.store.dispatch(updateEmail({ email }));
   }
 
   ngOnDestroy(): void {
