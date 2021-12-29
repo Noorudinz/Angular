@@ -70,5 +70,11 @@ export class FlatOwnersService {
     );
   }
 
+  getFlatById(id: string): Observable<FlatList> {
+    return this.http.get<FlatList>(
+      env.environment.baserURL +`FlatOwner/GetFlatOwnerByFlatNo/`+ id
+    );
+  }
+
 
 }

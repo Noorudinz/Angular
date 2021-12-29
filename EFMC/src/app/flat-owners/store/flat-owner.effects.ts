@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 
 import { FlatOwnersService } from 'src/services/flat-owners.service';
 import { addFlat, addFlatSuccess, loadFlats, loadFlatsSuccess } from './flat-owner.actions';
+import { RouterNavigatedAction, ROUTER_NAVIGATION } from '@ngrx/router-store';
 
 @Injectable()
 export class FlatsEffects {
@@ -64,24 +65,26 @@ export class FlatsEffects {
   //   );
   // });
 
-  // getSinglePost$ = createEffect(() => {
-  //   return this.actions$.pipe(
-  //     ofType(ROUTER_NAVIGATION),
-  //     filter((r: RouterNavigatedAction) => {
-  //       return r.payload.routerState.url.startsWith('/posts/details');
-  //     }),
-  //     map((r: RouterNavigatedAction) => {
-  //       return r.payload.routerState['params']['id'];
-  //     }),
-  //     switchMap((id) => {
-  //       return this.postsService.getPostById(id).pipe(
-  //         map((post) => {
-  //           const postData = [{ ...post, id }];
-  //           return loadPostsSuccess({ posts: postData });
-  //         })
-  //       );
-  //     })
-  //   );
-  // });
+  getSingleFlat$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ROUTER_NAVIGATION),
+      filter((r: RouterNavigatedAction) => {
+        return r.payload.routerState.url.startsWith('/flat-owners/details');
+      }),
+      map((r: RouterNavigatedAction) => {
+        let url = r.payload.routerState.url;
+        const param =  url.substring(url.lastIndexOf('/') + 1);
+        return param;
+      }),
+      switchMap((id) => {
+        return this.flatService.getFlatById(id).pipe(
+          map((flat) => {
+            const flatData = [{ ...flat, id }];
+            return loadFlatsSuccess({ flats: flatData });
+          })
+        );
+      })
+    );
+  });
 
 }
