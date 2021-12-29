@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { initialState } from './price-factor.state';
-import { loadFactorSuccess } from './price-factor.actions';
+import { loadFactorSuccess, updateFactorSuccess } from './price-factor.actions';
 
 const _factorsReducer = createReducer(initialState,
   // on(addPostSuccess, (state, action) => {
@@ -23,15 +23,16 @@ const _factorsReducer = createReducer(initialState,
   //   };
   // }),
 
-  // on(updatePostSuccess, (state, action) => {
-  //   const updatedPosts = state.posts.map((post) => {
-  //     return action.post.id === post.id ? action.post : post;
-  //   });
-  //   return {
-  //     ...state,
-  //     posts: updatedPosts,
-  //   };
-  // }),
+  on(updateFactorSuccess, (state, action) => {
+    let dataArr = Array.from(state.factors);
+    const updatedFactor = dataArr.map((factor) => {
+      return action.factor.priceID === factor.priceID ? action.factor : factor;
+    });
+    return {
+      ...state,
+      factors: updatedFactor,
+    };
+  }),
 
   // on(deletePost, (state, { id }) => {
   //   const updatedPosts = state.posts.filter((post) => {

@@ -88,28 +88,7 @@ export class EmailSettingComponent implements OnInit, OnDestroy {
       return
     }
 
-    //  const email = {
-    //   id: 1,
-    //   emailAddress: this.emailSettingForm.value.emailAddress,
-    //   password: this.emailSettingForm.value.password,
-    //   host: this.emailSettingForm.value.host,
-    //   port: this.emailSettingForm.value.port,
-    //   cc: this.emailSettingForm.value.cc,
-    //   updated_Date: null,
-    //  }
-
-    //  this.emailService.updateEmailSetting(email)
-    //  .subscribe(data => {
-    //    if(data.isUpdated){
-    //      document.getElementById('closeBtn').click();
-    //      Alert.tosterAlert(data.message, 'success');
-    //      this.loadEmail();
-    //    } else {
-    //     Alert.tosterAlert(data.message, 'error');
-    //    }
-    //  });
-
-    const email: Email = {
+     const email = {
       id: 1,
       emailAddress: this.emailSettingForm.value.emailAddress,
       password: this.emailSettingForm.value.password,
@@ -119,7 +98,28 @@ export class EmailSettingComponent implements OnInit, OnDestroy {
       updated_Date: null,
      }
 
-     this.store.dispatch(updateEmail({ email }));
+     this.emailService.updateEmailSetting(email)
+     .subscribe(data => {
+       if(data.isUpdated){
+         document.getElementById('closeBtn').click();
+         Alert.tosterAlert(data.message, 'success');
+         this.loadEmail();
+       } else {
+        Alert.tosterAlert(data.message, 'error');
+       }
+     });
+
+    // const email: Email = {
+    //   id: 1,
+    //   emailAddress: this.emailSettingForm.value.emailAddress,
+    //   password: this.emailSettingForm.value.password,
+    //   host: this.emailSettingForm.value.host,
+    //   port: this.emailSettingForm.value.port,
+    //   cc: this.emailSettingForm.value.cc,
+    //   updated_Date: null,
+    //  }
+
+    //this.store.dispatch(updateEmail({ email }));
   }
 
   ngOnDestroy(): void {

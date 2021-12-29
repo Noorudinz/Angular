@@ -32,4 +32,11 @@ export class PriceFactorService {
       env.environment.baserURL +`PriceFactor/GetPriceFactor`
     );
   }
+  updatePriceFactorStore(priceFactor: PriceFactor){
+    return this.http.post<{ message: string, isUpdated: boolean }>(
+      env.environment.baserURL +`PriceFactor/UpdatePriceFactor`,
+       priceFactor
+     );
+   }
+
 }
