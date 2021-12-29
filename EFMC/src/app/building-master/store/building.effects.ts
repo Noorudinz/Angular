@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, mergeMap } from "rxjs/operators";
+import { RouterNavigatedAction, ROUTER_NAVIGATION } from "@ngrx/router-store";
+import { filter, map, mergeMap, switchMap } from "rxjs/operators";
 import { BuildingService } from "src/services/building.service";
 import { addBuilding, addBuildingSuccess, loadBuilding, loadBuildingSuccess } from "./building.actions";
 

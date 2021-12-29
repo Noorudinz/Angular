@@ -33,6 +33,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { SampleComponent } from './invoice/sample/sample.component';
 import { PriceFactorEffects } from './price-factor/store/price-factor.effects';
 import { EmailSettingEffects } from './email-setting/store/email-setting.effects';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 
 @NgModule({
@@ -78,6 +79,7 @@ import { EmailSettingEffects } from './email-setting/store/email-setting.effects
     }),
     AngularOpenlayersModule,
     BrowserAnimationsModule,
+    StoreRouterConnectingModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

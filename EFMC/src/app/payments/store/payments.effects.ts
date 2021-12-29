@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 
 import { PaymentsService } from 'src/services/payments.service';
 import { loadPayment, loadPaymentSuccess, loadSummary, loadSummarySuccess } from './payments.actions';
+import { RouterNavigatedAction, ROUTER_NAVIGATION } from '@ngrx/router-store';
 
 
 @Injectable()
@@ -35,6 +36,50 @@ export class SummaryEffects {
         return this.paymentService.getSummaryStore().pipe(
           map((summary) => {
             return loadSummarySuccess({ summary });
+          })
+        );
+      })
+    );
+  });
+
+  getPaymentByFlatNo$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ROUTER_NAVIGATION),
+      filter((r: RouterNavigatedAction) => {
+        return r.payload.routerState.url.startsWith('/payments/receipts/view/');
+      }),
+      map((r: RouterNavigatedAction) => {
+        let url = r.payload.routerState.url;
+        const param =  url.substring(url.lastIndexOf('/') + 1);
+        return param;
+      }),
+      switchMap((id) => {
+        return this.paymentService.getReceiptDetailStore(id).pipe(
+          map((bill) => {
+            const billData = [{ ...bill, id }];
+            return loadPaymentSuccess({ payments: billData });
+          })
+        );
+      })
+    );
+  });
+
+  getSummaryDetail$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ROUTER_NAVIGATION),
+      filter((r: RouterNavigatedAction) => {
+        return r.payload.routerState.url.startsWith('/payments/summary/details');
+      }),
+      map((r: RouterNavigatedAction) => {
+        let url = r.payload.routerState.url;
+        const param =  url.substring(url.lastIndexOf('/') + 1);
+        return param;
+      }),
+      switchMap((id) => {
+        return this.paymentService.getSummaryDetailStore(id).pipe(
+          map((bill) => {
+            const billData = [{ ...bill, id }];
+            return loadSummarySuccess({ summary: billData });
           })
         );
       })

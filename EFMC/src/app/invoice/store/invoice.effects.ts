@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { FlatOwnersService } from 'src/services/flat-owners.service';
 import { InvoiceService } from 'src/services/invoice.service';
 import { loadInvoices, loadInvoicesSuccess } from './invoice.actions';
+import { RouterNavigatedAction, ROUTER_NAVIGATION } from '@ngrx/router-store';
 
 @Injectable()
 export class InvoiceEffects {
@@ -65,24 +66,26 @@ export class InvoiceEffects {
   //   );
   // });
 
-  // getSinglePost$ = createEffect(() => {
-  //   return this.actions$.pipe(
-  //     ofType(ROUTER_NAVIGATION),
-  //     filter((r: RouterNavigatedAction) => {
-  //       return r.payload.routerState.url.startsWith('/posts/details');
-  //     }),
-  //     map((r: RouterNavigatedAction) => {
-  //       return r.payload.routerState['params']['id'];
-  //     }),
-  //     switchMap((id) => {
-  //       return this.postsService.getPostById(id).pipe(
-  //         map((post) => {
-  //           const postData = [{ ...post, id }];
-  //           return loadPostsSuccess({ posts: postData });
-  //         })
-  //       );
-  //     })
-  //   );
-  // });
+  getSingleBill$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ROUTER_NAVIGATION),
+      filter((r: RouterNavigatedAction) => {
+        return r.payload.routerState.url.startsWith('/invoice/invoice-list/view');
+      }),
+      map((r: RouterNavigatedAction) => {
+        let url = r.payload.routerState.url;
+        const param =  url.substring(url.lastIndexOf('/') + 1);
+        return param;
+      }),
+      switchMap((id) => {
+        return this.invoiceService.getInvoiceByBillNoStore(id).pipe(
+          map((bill) => {
+            const billData = [{ ...bill, id }];
+            return loadInvoicesSuccess({ invoices: billData });
+          })
+        );
+      })
+    );
+  });
 
 }

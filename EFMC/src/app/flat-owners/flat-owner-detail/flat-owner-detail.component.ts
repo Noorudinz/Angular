@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { FlatOwnersService } from 'src/services/flat-owners.service';
 import * as Alert from '../../toster/alert';
+import { AppState } from 'src/app/store/app.reducer';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-flat-owner-detail',
@@ -13,13 +16,17 @@ export class FlatOwnerDetailComponent implements OnInit {
   public flatNo: string;
   flatOwnerDetails: any;
 
+  flatDet: Observable<any>;
+
   constructor(private route: ActivatedRoute,
     private flatOwnerService: FlatOwnersService,
-    private routeNav: Router) { }
+    private routeNav: Router,
+    private store: Store<AppState>) { }
 
   ngOnInit(): void {
     this.flatNo = this.route.snapshot.paramMap.get('id');
     this.fetchFlatOwner(this.flatNo);
+    //console.log(this.store.select(getFlatById));
   }
 
   private fetchFlatOwner(flatNo: string){

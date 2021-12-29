@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as env from 'src/environments/environment'
 import { Payments, Summary } from 'src/app/payments/payment.model';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -56,6 +57,18 @@ export class PaymentsService {
   getSummaryStore(){
     return this.http.get<Summary[]>(
       env.environment.baserURL +`Payments/GetLastSummaryDetail/`
+    );
+  }
+
+  getReceiptDetailStore(flatNo: string): Observable<Payments>{
+    return this.http.get<Payments>(
+      env.environment.baserURL +`Payments/GetReceiptByReceiptNo/`+ flatNo
+    );
+  }
+
+  getSummaryDetailStore(flatNo: string): Observable<Summary>{
+    return this.http.get<Summary>(
+      env.environment.baserURL +`Payments/GetSummaryByFlatNo/`+ flatNo
     );
   }
 

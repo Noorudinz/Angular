@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { InvoiceService } from 'src/services/invoice.service';
 import * as Alert from '../../toster/alert';
+import { AppState } from 'src/app/store/app.reducer';
+
 
 @Component({
   selector: 'app-invoice-view',
@@ -16,11 +19,13 @@ export class InvoiceViewComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private routeNav: Router,
-    private invoiceService: InvoiceService) { }
+    private invoiceService: InvoiceService,
+    private store: Store<AppState>) { }
 
   ngOnInit(): void {
     this.billNo = this.route.snapshot.paramMap.get('billNo');
     this.fetchBillDetails(this.billNo);
+    //console.log(this.store.select(geInvoiceById));
   }
 
   private fetchBillDetails(billNo: string){

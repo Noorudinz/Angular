@@ -67,4 +67,10 @@ export class InvoiceService {
     );
   }
 
+  getInvoiceByBillNoStore(billNo: string): Observable<Bills> {
+    return this.http.get<Bills>(
+      env.environment.baserURL +`Todo/InvoiceByBillNo/`+ billNo
+    );
+  }
+
 }
