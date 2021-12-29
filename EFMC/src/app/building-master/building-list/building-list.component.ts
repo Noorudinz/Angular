@@ -73,7 +73,6 @@ export class BuildingListComponent implements OnInit, OnDestroy {
 
         this.callModal = "#modal-editbuilding";
         this.buildingEdit =  patchBuilding;
-        console.log(this.buildingEdit)
       }
    });
 
