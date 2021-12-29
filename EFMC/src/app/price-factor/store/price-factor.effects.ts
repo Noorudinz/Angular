@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 
 
-import { loadFactor, loadFactorSuccess } from './price-factor.actions';
+import { loadFactor, loadFactorSuccess, updateFactor, updateFactorSuccess } from './price-factor.actions';
 import { PriceFactorService } from 'src/services/price-factor.service';
 
 @Injectable()
@@ -37,18 +37,18 @@ export class PriceFactorEffects {
   //   );
   // });
 
-  // updatePost$ = createEffect(() => {
-  //   return this.actions$.pipe(
-  //     ofType(updatePost),
-  //     switchMap((action) => {
-  //       return this.postsService.updatePost(action.post).pipe(
-  //         map((data) => {
-  //           return updatePostSuccess({ post: action.post });
-  //         })
-  //       );
-  //     })
-  //   );
-  // });
+  updateFactor$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(updateFactor),
+      switchMap((action) => {
+        return this.priceFactorService.updatePriceFactorStore(action.factor).pipe(
+          map((data) => {
+            return updateFactorSuccess({ factor: action.factor });
+          })
+        );
+      })
+    );
+  });
 
   // deletePost$ = createEffect(() => {
   //   return this.actions$.pipe(

@@ -7,7 +7,7 @@ import * as Alert from '../toster/alert';
 import * as fromApp from  '../store/app.reducer';
 import { Router } from '@angular/router';
 import { getFactors } from './store/price-factor.selector';
-import { loadFactor } from './store/price-factor.actions';
+import { loadFactor, updateFactor } from './store/price-factor.actions';
 
 @Component({
   selector: 'app-price-factor',
@@ -86,7 +86,7 @@ export class PriceFactorComponent implements OnInit, OnDestroy {
       return
     }
 
-     const updatePriceFactor = {
+     const factor = {
       priceID: 1,
       btuFactor: this.priceFactorForm.value.btuFactor,
       electricityFactor: this.priceFactorForm.value.electricityFactor,
@@ -97,16 +97,18 @@ export class PriceFactorComponent implements OnInit, OnDestroy {
       updated_date: null,
      }
 
-     this.priceFactorService.updatePriceFactor(updatePriceFactor)
-     .subscribe(data => {
-       if(data.isUpdated){
-         document.getElementById('closeBtn').click();
-         Alert.tosterAlert(data.message, 'success');
-         this.loadPriceFactor();
-       } else {
-        Alert.tosterAlert(data.message, 'error');
-       }
-     });
+    //  this.priceFactorService.updatePriceFactor(factor)
+    //  .subscribe(data => {
+    //    if(data.isUpdated){
+    //      document.getElementById('closeBtn').click();
+    //      Alert.tosterAlert(data.message, 'success');
+    //      this.loadPriceFactor();
+    //    } else {
+    //     Alert.tosterAlert(data.message, 'error');
+    //    }
+    //  });
+
+      this.store.dispatch(updateFactor({ factor }));
   }
 
   ngOnDestroy(): void {
