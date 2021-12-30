@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { Building, BuildingStore } from "../building.model";
+import { Building } from "../building.model";
 
 
 export const LOAD_BUILDINGS = '[building page] load building';
