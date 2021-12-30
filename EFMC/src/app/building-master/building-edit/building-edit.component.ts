@@ -93,7 +93,7 @@ export class BuildingEditComponent implements OnInit {
       timeStamp: null
     }
 
-   // this.store.dispatch(updateBuilding({ building }));
+    //this.store.dispatch(updateBuilding({ building }));
 
     this.buildingService.addOrUpdateBuilding(building).subscribe(data => {
       if(data.isUpdated){

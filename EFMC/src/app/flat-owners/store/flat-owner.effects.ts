@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 
 import { FlatOwnersService } from 'src/services/flat-owners.service';
-import { addFlat, addFlatSuccess, loadFlats, loadFlatsSuccess } from './flat-owner.actions';
+import { addFlat, addFlatSuccess, loadFlats, loadFlatsSuccess, updateFlat, updateFlatSuccess } from './flat-owner.actions';
 import { RouterNavigatedAction, ROUTER_NAVIGATION } from '@ngrx/router-store';
 
 @Injectable()
@@ -37,18 +37,18 @@ export class FlatsEffects {
     );
   });
 
-  // updatePost$ = createEffect(() => {
-  //   return this.actions$.pipe(
-  //     ofType(updatePost),
-  //     switchMap((action) => {
-  //       return this.postsService.updatePost(action.post).pipe(
-  //         map((data) => {
-  //           return updatePostSuccess({ post: action.post });
-  //         })
-  //       );
-  //     })
-  //   );
-  // });
+  updateFlat$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(updateFlat),
+      switchMap((action) => {
+        return this.flatService.updateFlatStore(action.flatsData).pipe(
+          map((data) => {
+            return updateFlatSuccess({ flatsData: action.flatsData });
+          })
+        );
+      })
+    );
+  });
 
   // deletePost$ = createEffect(() => {
   //   return this.actions$.pipe(
