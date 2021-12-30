@@ -5,7 +5,7 @@ import { AppState } from 'src/app/store/app.reducer';
 import { BuildingService } from 'src/services/building.service';
 import { BuildingEditComponent } from '../building-edit/building-edit.component';
 import { Building } from '../building.model';
-import { loadBuilding } from '../store/building.actions';
+import { getBuildingById, loadBuilding } from '../store/building.actions';
 import { getBuildings } from '../store/building.selector';
 import * as Alert from '../../toster/alert';
 import { take } from 'rxjs/operators';
@@ -51,6 +51,8 @@ export class BuildingListComponent implements OnInit, OnDestroy {
     Alert.tosterAlert('Invalid request !', 'error');
     return;
    }
+
+   //this.store.dispatch(getBuildingById({ id }));
 
     this.buildings.pipe(take(1)).subscribe(data => {
      const building = data.find(f => f.buildingId === id);
