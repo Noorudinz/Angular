@@ -84,4 +84,12 @@ export class BuildingService {
     );
   }
 
+  updateBuilding(building: Building): Observable<{ message: string, isUpdated: boolean }> {
+
+    return this.http.post<{ message: string, isUpdated: boolean }>(
+      env.environment.baserURL + `Buildings/AddOrUpdateBuilding`,
+      building
+    );
+  }
+
 }

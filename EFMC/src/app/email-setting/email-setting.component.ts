@@ -81,8 +81,8 @@ export class EmailSettingComponent implements OnInit, OnDestroy {
       }
     });
 
-    let id = 1;
-    this.store.dispatch(getEmailById({ id }));
+    // let id = 1;
+    // this.store.dispatch(getEmailById({ id }));
   }
 
   onSubmit(){
