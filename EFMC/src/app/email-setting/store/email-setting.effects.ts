@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 
 import { EmailSettingService } from 'src/services/email-setting.service';
-import { loadEmail, loadEmailSuccess, updateEmail, updateEmailSuccess } from './email-setting.actions';
+import { getEmailById, loadEmail, loadEmailSuccess, updateEmail, updateEmailSuccess } from './email-setting.actions';
 
 @Injectable()
 export class EmailSettingEffects {
@@ -64,24 +64,17 @@ export class EmailSettingEffects {
   //   );
   // });
 
-  // getSinglePost$ = createEffect(() => {
-  //   return this.actions$.pipe(
-  //     ofType(ROUTER_NAVIGATION),
-  //     filter((r: RouterNavigatedAction) => {
-  //       return r.payload.routerState.url.startsWith('/posts/details');
-  //     }),
-  //     map((r: RouterNavigatedAction) => {
-  //       return r.payload.routerState['params']['id'];
-  //     }),
-  //     switchMap((id) => {
-  //       return this.postsService.getPostById(id).pipe(
-  //         map((post) => {
-  //           const postData = [{ ...post, id }];
-  //           return loadPostsSuccess({ posts: postData });
-  //         })
-  //       );
-  //     })
-  //   );
-  // });
+  getEmailById$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(getEmailById),
+      mergeMap((action) => {
+        return this.emailService.getEmailByIdStore(action.id).pipe(
+          map((emails) => {
+            return loadEmailSuccess({ emails });
+          })
+        );
+      })
+    );
+  });
 
 }

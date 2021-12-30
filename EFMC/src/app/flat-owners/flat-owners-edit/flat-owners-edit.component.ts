@@ -11,6 +11,7 @@ import { getBuildings } from 'src/app/building-master/store/building.selector';
 import { AppState } from 'src/app/store/app.reducer';
 import { FlatOwnersService } from 'src/services/flat-owners.service';
 import * as Alert from '../../toster/alert';
+import { updateFlat } from '../store/flat-owner.actions';
 
 @Component({
   selector: 'app-flat-owners-edit',
@@ -117,7 +118,7 @@ export class FlatOwnersEditComponent implements OnInit {
       return;
     }
 
-    const addFlatOwner = {
+    const flatsData = {
      flatId: this.flatOwnerForm.value.flatId,
      flatNo: this.flatOwnerForm.value.flatNo,
      buildingId: this.flatOwnerForm.value.buildingType,
@@ -134,10 +135,15 @@ export class FlatOwnersEditComponent implements OnInit {
      email1: this.flatOwnerForm.value.email1,
      email2: this.flatOwnerForm.value.email2,
      carNo: this.flatOwnerForm.value.carNo,
-     address: this.flatOwnerForm.value.address
+     address: this.flatOwnerForm.value.address,
+     buildingType: null,
+     carParkNos: null,
+     isdel: false
     }
 
-   this.flatOwnerService.addFlatOwner(addFlatOwner).subscribe(data => {
+  //this.store.dispatch(updateFlat({ flatsData }));
+
+   this.flatOwnerService.addFlatOwner(flatsData).subscribe(data => {
      if(data.isUpdated){
        Alert.tosterAlert(data.message, 'success');
        this.route.navigate(['/flat-owners']);

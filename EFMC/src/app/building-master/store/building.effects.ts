@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { RouterNavigatedAction, ROUTER_NAVIGATION } from "@ngrx/router-store";
 import { filter, map, mergeMap, switchMap } from "rxjs/operators";
 import { BuildingService } from "src/services/building.service";
-import { addBuilding, addBuildingSuccess, loadBuilding, loadBuildingSuccess } from "./building.actions";
+import { addBuilding, addBuildingSuccess, getBuildingById, loadBuilding, loadBuildingSuccess, updateBuilding, updateBuildingSuccess } from "./building.actions";
 
 
 @Injectable()
@@ -31,6 +31,32 @@ export class BuildingsEffects {
           map((data) => {
             const building = { ...action.addorUpdate };
             return addBuildingSuccess({ building });
+          })
+        );
+      })
+    );
+  });
+
+  getBuildingById$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(getBuildingById),
+      mergeMap((action) => {
+        return this.buildingService.getBuildingByIdStore(action.id).pipe(
+          map((buildings) => {
+            return loadBuildingSuccess({ buildings });
+          })
+        );
+      })
+    );
+  });
+
+  updateBuilding$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(updateBuilding),
+      switchMap((action) => {
+        return this.buildingService.updateBuilding(action.building).pipe(
+          map((data) => {
+            return updateBuildingSuccess({ building: action.building });
           })
         );
       })

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Email, EmailData } from 'src/app/email-setting/email.model';
 import * as env from 'src/environments/environment'
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -38,6 +39,20 @@ export class EmailSettingService {
       env.environment.baserURL + `Email/UpdateEmailSetting`,
        email
      );
+  }
+
+  getEmailByIdStore(Id: number): Observable<EmailData[]>{
+    return this.http
+    .get<EmailData[]>(env.environment.baserURL + `Email/GetEmailById/`+Id)
+    .pipe(
+      map((data) => {
+        const emails: EmailData[] = [];
+        for (let key in data) {
+          emails.push({ ...data[key] });
+        }
+        return emails;
+      })
+    );
   }
 
 }

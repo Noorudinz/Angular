@@ -66,4 +66,29 @@ export class BuildingService {
     );
   }
 
+  getBuildingByIdStore(Id: number): Observable<Building[]>{
+    // return this.http.get<Building[]>(
+    //   env.environment.baserURL +`Buildings/GetBuildingById/`+Id
+    // );
+
+    return this.http
+    .get<Building[]>(env.environment.baserURL + `Buildings/GetBuildingById/`+Id)
+    .pipe(
+      map((data) => {
+        const buildings: Building[] = [];
+        for (let key in data) {
+          buildings.push({ ...data[key] });
+        }
+        return buildings;
+      })
+    );
+  }
+
+  updateBuilding(building: Building): Observable<{ message: string, isUpdated: boolean }> {
+    return this.http.post<{ message: string, isUpdated: boolean }>(
+      env.environment.baserURL + `Buildings/AddOrUpdateBuilding`,
+      building
+    );
+  }
+
 }

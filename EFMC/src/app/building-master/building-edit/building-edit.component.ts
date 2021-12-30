@@ -8,6 +8,7 @@ import { BuildingService } from 'src/services/building.service';
 import * as fromApp from  '../../store/app.reducer';
 import * as Alert from '../../toster/alert';
 import { Building } from '../building.model';
+import { updateBuilding } from '../store/building.actions';
 
 
 
@@ -77,7 +78,7 @@ export class BuildingEditComponent implements OnInit {
       return
     }
 
-    const addorUpdate = {
+    const building = {
       created_ByUserId: this.userId,
       updated_ByUserId: this.userId,
       buildingId: this.buildingForm.value.buildingId,
@@ -92,9 +93,9 @@ export class BuildingEditComponent implements OnInit {
       timeStamp: null
     }
 
-    //console.log(addorUpdate)
+    //this.store.dispatch(updateBuilding({ building }));
 
-    this.buildingService.addOrUpdateBuilding(addorUpdate).subscribe(data => {
+    this.buildingService.addOrUpdateBuilding(building).subscribe(data => {
       if(data.isUpdated){
         document.getElementById('closeEdit').click();
         Alert.tosterAlert(data.message, 'success');

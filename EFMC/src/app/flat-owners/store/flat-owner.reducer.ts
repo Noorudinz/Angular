@@ -1,8 +1,9 @@
 import { createReducer, on } from '@ngrx/store';
 import { initialState } from './flat-owner.state';
-import { addFlatSuccess, loadFlatsSuccess } from './flat-owner.actions';
+import { addFlatSuccess, loadFlatsSuccess, updateFlat, updateFlatSuccess } from './flat-owner.actions';
 
 const _flatsReducer = createReducer(initialState,
+
   on(addFlatSuccess, (state, action) => {
     let flat = { ...action.flat };
     return {
@@ -11,26 +12,16 @@ const _flatsReducer = createReducer(initialState,
     };
   }),
 
-  // on(updatePost, (state, action) => {
-  //   const updatedPosts = state.posts.map((post) => {
-  //     return action.post.id === post.id ? action.post : post;
-  //   });
+  on(updateFlatSuccess, (state, action) => {
+    const updatedFlat = state.flatsData.map((flatsData) => {
+      return action.flatsData.flatNo === flatsData.flatNo ? action.flatsData : flatsData;
+    });
 
-  //   return {
-  //     ...state,
-  //     posts: updatedPosts,
-  //   };
-  // }),
-
-  // on(updatePostSuccess, (state, action) => {
-  //   const updatedPosts = state.posts.map((post) => {
-  //     return action.post.id === post.id ? action.post : post;
-  //   });
-  //   return {
-  //     ...state,
-  //     posts: updatedPosts,
-  //   };
-  // }),
+    return {
+      ...state,
+      flatsData: updatedFlat,
+    };
+  }),
 
   // on(deletePost, (state, { id }) => {
   //   const updatedPosts = state.posts.filter((post) => {

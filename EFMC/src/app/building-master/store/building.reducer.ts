@@ -1,7 +1,7 @@
 import { createReducer, on } from "@ngrx/store";
 import { UserRegister } from "src/app/user/user-account.model";
 import { Building } from "../building.model";
-import { addBuildingSuccess, loadBuildingSuccess } from "./building.actions";
+import { addBuildingSuccess, loadBuildingSuccess, updateBuildingSuccess } from "./building.actions";
 import { initialState } from "./building.state";
 
 export interface State {
@@ -11,6 +11,7 @@ export interface State {
 
 
 const _buildingsReducer = createReducer(initialState,
+
   on(addBuildingSuccess, (state, action) => {
     let building = { ...action.building };
 
@@ -25,7 +26,17 @@ const _buildingsReducer = createReducer(initialState,
       ...state,
       buildings: action.buildings,
     };
-  })
+  }),
+
+  on(updateBuildingSuccess, (state, action) => {
+    const updatedBuilding = state.buildings.map((building) => {
+      return action.building.buildingId === building.buildingId ? action.building : building;
+    });
+    return {
+      ...state,
+      buildings: updatedBuilding,
+    };
+  }),
 
   );
 

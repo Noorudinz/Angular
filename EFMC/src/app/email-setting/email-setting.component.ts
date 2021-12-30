@@ -7,7 +7,7 @@ import * as Alert from '../toster/alert';
 import * as fromApp from  '../store/app.reducer';
 import { Router } from '@angular/router';
 import { getEmails } from './store/email-setting.selector';
-import { loadEmail, updateEmail } from './store/email-setting.actions';
+import { getEmailById, loadEmail, updateEmail } from './store/email-setting.actions';
 import { Email } from './email.model';
 
 @Component({
@@ -80,6 +80,9 @@ export class EmailSettingComponent implements OnInit, OnDestroy {
         this.emailSettingForm.patchValue(data);
       }
     });
+
+    // let id = 1;
+    // this.store.dispatch(getEmailById({ id }));
   }
 
   onSubmit(){

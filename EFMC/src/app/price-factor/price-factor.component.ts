@@ -97,18 +97,18 @@ export class PriceFactorComponent implements OnInit, OnDestroy {
       updated_date: null,
      }
 
-    //  this.priceFactorService.updatePriceFactor(factor)
-    //  .subscribe(data => {
-    //    if(data.isUpdated){
-    //      document.getElementById('closeBtn').click();
-    //      Alert.tosterAlert(data.message, 'success');
-    //      this.loadPriceFactor();
-    //    } else {
-    //     Alert.tosterAlert(data.message, 'error');
-    //    }
-    //  });
+     this.priceFactorService.updatePriceFactor(factor)
+     .subscribe(data => {
+       if(data.isUpdated){
+         document.getElementById('closeBtn').click();
+         Alert.tosterAlert(data.message, 'success');
+         this.loadPriceFactor();
+       } else {
+        Alert.tosterAlert(data.message, 'error');
+       }
+     });
 
-      this.store.dispatch(updateFactor({ factor }));
+    // this.store.dispatch(updateFactor({ factor }));
   }
 
   ngOnDestroy(): void {

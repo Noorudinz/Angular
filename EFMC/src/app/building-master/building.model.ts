@@ -38,5 +38,3 @@ export class Building {
   //   this.updated_ByUserId = updated_ByUserId || '';
   // }
 
-
-

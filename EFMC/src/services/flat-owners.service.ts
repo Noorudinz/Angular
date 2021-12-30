@@ -76,5 +76,12 @@ export class FlatOwnersService {
     );
   }
 
+  updateFlatStore(flat: FlatOwners): Observable<{ message: string, isUpdated: boolean }> {
+    return this.http.post<{ message: string, isUpdated: boolean }>(
+      env.environment.baserURL + `FlatOwner/AddFlatOwner`,
+      flat
+    );
+  }
+
 
 }
