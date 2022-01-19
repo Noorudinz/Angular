@@ -4,9 +4,11 @@ import { CompanyService } from 'src/services/company.service';
 import { Company } from './company.model';
 import * as fromApp from  '../store/app.reducer';
 import * as AuthActions from '../auth/store/auth.actions';
-import { Subscription } from 'rxjs';
+import { combineLatest, Observable, of, Subscription } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import * as Alert from '../toster/alert';
+import { ajax } from 'rxjs/ajax';
+import { map, mergeMap } from 'rxjs/operators';
 
 
 @Component({
@@ -30,6 +32,22 @@ export class CompanyComponent implements OnInit, OnDestroy {
     private store: Store<fromApp.AppState>) { }
 
   ngOnInit(): void {
+
+    let src1$ = new Observable(obs => {
+      setTimeout(() => {
+        obs.next(1);
+      }, 1000)
+    });
+
+    let src2$ = new Observable(obs => {
+      setTimeout(() => {
+        obs.next(2);
+      }, 5000)
+    });
+
+    combineLatest([src1$, src1$]).subscribe(data => {
+      console.log(data);
+    });
 
     this.GetCompanyDetails();
     this.initForm();
