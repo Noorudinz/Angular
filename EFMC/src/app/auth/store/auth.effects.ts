@@ -207,7 +207,7 @@ authLogin = this.actions$.pipe(
 
     if(loadedUser.token){
       const expirationDuration = new Date(userData._tokenExpirationDate).getTime() -
-                                new Date().getTime();
+        new Date().getTime();
       this.authService.setLogoutTimer(expirationDuration);
        return new AuthActions.AuthenticateSuccess({
         name: loadedUser.name,

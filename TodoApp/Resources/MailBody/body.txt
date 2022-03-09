@@ -1,0 +1,16 @@
+﻿
+Dear {{FirstName}},
+
+We have attached herewith your apartment/s Utility Bill/s for the month of {{Period}} along with your previous arrears, if any.
+
+Please ignore this mail if your bill has been paid in Advance.
+
+Thanking you and assuring you of our best services at all times.
+
+Accounts Department
+ELITE Facility Management Co.
+
+Level-M1, Black Pearl Tower,
+T +973 17 382228 | F +973 17 382226
+P.O. Box 21151
+Kingdom of Bahrain,
